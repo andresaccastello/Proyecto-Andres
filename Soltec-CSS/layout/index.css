@@ -1,0 +1,4904 @@
+/* ========================================================= 
+   CONFIGURACIÓN DE TIPOGRAFÍA (PEGAR AL INICIO)
+========================================================= */
+:root {
+    /* Definimos las fuentes aquí para fácil acceso */
+    --font-titulos: "Zalando Sans Expanded", sans-serif;
+    --font-botones: "Zalando Sans Expanded", sans-serif;
+    --font-cuerpo: "DM Sans", sans-serif;
+}
+
+/* 1. CUERPO (Texto general) -> DM Sans Regular */
+body {
+    font-family: var(--font-cuerpo);
+    font-weight: 400;
+}
+
+/* 2. TITULARES -> Zalando Sans ExtraBold (800) */
+/* Agregamos tus clases de títulos específicos también */
+h1, h2, h3, h4, h5, h6,
+.hero-soltec__title, 
+.sistemas-titulo,
+.ubicacion-card h2,
+.detalle-precio,
+.filtros-titulo {
+    font-family: var(--font-titulos);
+    font-weight: 800;
+}
+
+/* 3. BOTONES -> Zalando Sans Regular (400) */
+/* Detectamos etiquetas button y tus clases de botones */
+button,
+input[type="submit"],
+input[type="button"],
+.boton-consulta,
+.boton-agregar-carrito,
+.btn-carrito,
+.btn-soltec-primary,
+.btn-soltec-ghost,
+.chip,
+.nav-parent,
+.btn-footer-primary,
+.btn-footer-secondary {
+    font-family: var(--font-botones);
+    font-weight: 400;
+}
+
+/* ========================================================= 
+   AQUÍ SIGUE TU CÓDIGO ORIGINAL (VARIABLES, ETC...)
+   VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+========================================================= */
+/* ========================================================= 
+   VARIABLES 
+========================================================= */
+:root {
+    --azul: #0e3b6f;
+    --azul-oscuro: #0b2e55;
+    --azul-medio: #154a8f;
+    --violeta: #3b36b3;
+    --blanco: #ffffff;
+    --gris: #e9edf3;
+    --gris-texto: #2f3b4a;
+    --sombra: 0 6px 18px rgba(0,0,0,.12);
+    --max: 1100px;
+    /*--header-height: 72px;*/
+    --header-height: 82px;
+
+
+     /* NUEVO */
+    --header-gradient: linear-gradient(
+        90deg,
+        #04152d 0%,
+        #0b2e55 35%,
+        #0e3b6f 65%,
+        #1b6bb2 100%
+    );
+    --sombra-header: 0 10px 24px rgba(0,0,0,.35);
+}
+
+/* ========================================================= 
+   RESET 
+========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    padding-top: var(--header-height);
+    /* Fondo limpio original */
+    background: var(--gris); /* Si no te toma la variable, usa #f8fafc */
+    
+    /* Texto oscuro para leer bien */
+    color: var(--gris-texto); 
+    
+    line-height: 1.6;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+
+   HEADER FIJO
+
+========================================================= */
+
+  /* =========================================================
+   HEADER + COMPACT (SCROLL) + TRANSICIONES
+========================================================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  background: var(--header-gradient);
+  color: #fff;
+
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow: var(--sombra-header);
+
+  /* Importante: para que se anime cuando entra/sale compact */
+  height: 86px; /* ajustá si querés un header normal más alto/bajo */
+  transition: height .12s ease,
+              padding .12s ease,
+              box-shadow .2s ease,
+              background .3s ease;
+}
+
+/* Por si tenés otros <img> en el header */
+header img {
+  height: 70px;
+  width: auto;
+}
+
+/* Logo principal */
+#img-logo {
+  height: 78px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,.35));
+
+  /* Transición suave del logo */
+  transition: height .3s ease, filter .3s ease;
+}
+
+nav {
+  width: auto;
+}
+
+header nav ul {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+header nav a {
+  color: #fff;
+  font-weight: 550;
+  padding: 8px 0px;
+  border-radius: 0;
+  opacity: .95;
+  position: relative;
+
+  /* Centrado matemático (3px arriba + 3px abajo) */
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+
+  /* Transiciones suaves del texto */
+  transition: border-color .25s ease,
+              box-shadow .25s ease,
+              transform .15s ease,
+              font-size .3s ease,
+              padding .3s ease;
+}
+
+.nav-parent {
+  font-family: var(--font-cuerpo) !important;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 6px 10px;
+  position: relative;
+
+  transition: transform .15s ease,
+              font-size .3s ease,
+              padding .3s ease;
+}
+
+/* === BARRA DEGRADADA (SOLTEC) === */
+header nav a::after,
+.nav-parent::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+
+  background: linear-gradient(90deg, #ff7e2e, #ad52a3, #00d4e3);
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+header nav a:hover,
+.nav-parent:hover {
+  border-bottom-color: transparent;
+  transform: translateY(-1px);
+}
+
+header nav a:hover::after,
+.nav-parent:hover::after,
+.nav-item-sistemas:hover .nav-parent::after {
+  opacity: 1;
+}
+
+/* Página activa */
+header nav a.active {
+  font-weight: 700;
+  background: rgba(255,255,255,.18);
+  border-radius: 6px;
+}
+
+/* Efecto click */
+nav a.clicked {
+  transform: scale(.92);
+  transition: transform .1s ease;
+}
+
+/* Botón carrito (si existe) */
+button, .btn-carrito {
+  transition: transform .3s ease, padding .3s ease, font-size .3s ease;
+}
+
+/* =========================================================
+   ESTILOS DEL ESTADO COMPACTO (SCROLL)
+========================================================= */
+
+header.compact {
+  height: 55px;
+  padding: 0 4%;
+  background: rgba(14, 28, 54, 0.95);
+}
+
+/* Logo: control por height (no width) */
+header.compact #img-logo {
+  height: 50px;
+  width: auto;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,.3));
+}
+
+/* Texto de navegación */
+header.compact nav a,
+header.compact .nav-parent {
+  font-size: 0.9rem;
+  padding: 4px 8px;
+}
+
+/* Ajuste barra degradada en compacto */
+header.compact nav a::after,
+header.compact .nav-parent::after {
+  bottom: -2px;
+  height: 1.5px;
+}
+
+/* Botón carrito en compacto */
+header.compact button,
+header.compact .btn-carrito {
+  transform: scale(0.85);
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   MENU RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 4%;
+    row-gap: 6px;
+  }
+
+  header nav {
+    width: 100%;
+  }
+
+  header nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    justify-content: flex-end;
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+
+  header nav a {
+    padding: 4px 8px;
+    font-size: 0.9rem;
+  }
+
+  #img-logo {
+    height: 60px;
+    filter: drop-shadow(0 0 6px rgba(0,0,0,.35));
+  }
+
+  /* Evitamos que el compact rompa el header en móvil (por el wrap) */
+  header.compact {
+    height: auto;
+    padding: 8px 4%;
+  }
+
+  header.compact #img-logo {
+    height: 54px;
+  }
+}
+
+
+/* ========================================================= 
+   MAIN / HERO 
+========================================================= */
+main {
+    flex: 1;
+    padding: 0 6% 40px;
+    background: var(--gris); /* Igual que el body */
+}
+
+
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero img,
+.hero-img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+    margin: 0 auto 24px;
+}
+
+main p {
+    margin: 18px 0;
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.hero p {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+main h1,
+main h2 {
+    margin: 26px 0 12px;
+}
+
+
+
+/* === PAGINA PRODUCTOS - HEADER PRODUCTOS (TÍTULO + CONTROLES A LA DERECHA) === */
+
+.productos-main{
+  position: relative;
+  padding-top: 90px; /* evita que quede pegado al header */
+}
+.productos-toolbar{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.productos-heading h1{
+  margin: 0;
+  font-size: clamp(1.8rem, 2.6vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.productos-heading p{
+  margin: 10px 0 0;
+  color: #64748b;
+  max-width: 620px;
+  line-height: 1.4;
+}
+
+/* Controles derecha */
+.productos-controls{
+  transform: translateX(-19px); /* probá -12px a -24px */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+/* Botones tipo “control” */
+.control-btn{
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.control-btn:hover{
+  border-color: rgba(30, 197, 255, 0.45);
+  box-shadow: 0 10px 22px rgba(2, 6, 23, 0.10);
+  transform: translateY(-1px);
+}
+
+.control-btn:active{
+  transform: translateY(0);
+}
+
+/* Flechita */
+.control-btn .chev{
+  font-size: 0.99 rem;
+  opacity: .75;
+  transition: transform .2s ease;
+}
+
+/* Estado abierto (se lo vamos a poner con JS) */
+.control-btn.is-open .chev{
+  transform: rotate(180deg);
+}
+
+/* Alineación perfecta a la derecha para Filtros */
+#panel-filtros {
+  left: auto;       /* Ignora la izquierda */
+  right: 0;         /* Alineate al borde DERECHO exacto del botón */
+  min-width: 260px; /* Un poco más ancho para que entren los chips cómodos */
+  transform: translateX(-19px);
+}
+
+/* === DROPDOWNS ( FILTROS) === */
+.panel-dropdown{
+  display: none; /* arranca cerrado */
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.18);
+  padding: 10px;
+  margin: 10px 0 16px;
+  backdrop-filter: blur(10px);
+
+  /* Animación suave */
+  transform-origin: top;
+  animation: dropdownIn .18s ease-out;
+}
+
+
+@keyframes dropdownIn{
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Clase para mostrar (la activamos con JS) */
+.panel-dropdown.is-open{
+  display: block;
+}
+
+/* Items del ordenar */
+.panel-item{
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 10px 10px;
+  border-radius: 10px;
+  text-align: left;
+  font-weight: 800;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+
+.panel-item:hover{
+  background: rgba(30, 197, 255, 0.10);
+}
+
+
+/* Panel filtros: acomodar chips mejor */
+.panel-filtros .filtros-titulo{
+  margin: 4px 6px 10px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+/* Reutilizo tu contenedor actual pero lo ordeno */
+.panel-filtros .filtros-chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 6px;
+}
+
+/* Si tus chips actuales están muy “bordes duros”, esto los suaviza */
+.panel-filtros .filtros-chips button,
+.panel-filtros .filtros-chips .chip{
+  border-radius: 999px;
+}
+
+/* Menú de ORDENAR más compacto (tipo el ejemplo) */
+#panel-ordenar {
+  /* Estilos visuales */
+  width: 140px;
+  padding: 6px;
+
+  /* Lógica de Posicionamiento (Lo nuevo) */
+  position: absolute;   /* Lo saca del flujo normal */
+  top: 100%;            /* Lo ubica justo debajo del botón */
+  left: 0;              /* Lo alinea a la izquierda del botón */
+  
+  margin: 0;            /* Reseteamos márgenes viejos */
+  margin-top: 8px;      /* Pequeña separación visual */
+  z-index: 100;         /* Asegura que tape el contenido de abajo */
+}
+#panel-ordenar .panel-item{
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Seleccionado: azul + barrita a la izquierda */
+#panel-ordenar .panel-item.is-selected{
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.08);
+  box-shadow: inset 3px 0 0 #2563eb;
+  font-weight: 800;
+}
+
+
+/* === NUEVO: La "cajita" invisible que ancla el menú === */
+.menu-wrapper {
+  position: relative; /* CRUCIAL: Esto crea el punto de referencia */
+  display: inline-block;
+}
+
+
+/* === RESPONSIVE: en mobile, apilar === */
+@media (max-width: 820px){
+  .productos-toolbar{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .productos-controls{
+    justify-content: flex-start;
+  }
+}
+
+
+/* ========================================================= 
+   PRODUCTOS 
+========================================================= */
+#productos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.productos {
+    text-align: center;
+    /* Separación normal respecto al bloque de arriba */
+    margin-top: 40px; 
+    
+    /* Sin fondos ni degradados, limpio */
+    background: transparent; 
+    
+    padding-top: 0;
+    width: auto;
+}
+
+/* TÍTULO UNIFICADO (Estilo "Vení a conocer Soltec") */
+.productos h2 {
+    margin-top: 150px; 
+    color: #0b2e55;          /* El mismo azul oscuro del bloque de ubicación */
+    font-size: 2rem;         /* Tamaño aumentado (antes 1.8rem) */
+    font-weight: 800;        /* Más grueso (ExtraBold) */
+    letter-spacing: -0.02em; /* Un toque más apretado, más moderno */
+    margin-bottom: 25px;     /* Separación con las tarjetas */
+    text-shadow: none;
+}
+
+/* GRID 3 columnas */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* TARJETA PRODUCTO */
+.producto {
+    background: var(--blanco);
+    border: 1px solid var(--azul);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0,0,0,.1);
+    transition: transform .2s ease, box-shadow .2s ease;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.producto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0,0,0,.15);
+}
+
+.producto img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    background: #fff;
+    padding: 12px;
+    border-bottom: 1px solid var(--azul);
+}
+
+.producto h3 {
+    margin: 12px 0 6px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--azul-oscuro);
+}
+
+.producto .descripcion {
+    font-size: .92rem;
+    padding: 0 14px;
+    min-height: 46px;
+}
+
+.producto ul {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.producto ul li {
+    font-size: .95rem;
+}
+
+/* PRECIO */
+.producto .precio {
+    background: var(--azul);
+    color: #fff;
+    padding: 12px 0;
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-top: auto;
+}
+
+/* ==============================
+   BOTÓN CONSULTAR WHATSAPP
+   (pill más largo)
+============================== */
+.boton-consulta{
+  background: var(--azul);
+  color: #fff;
+  border: none;
+
+  /* más largo: padding horizontal + min-width */
+  padding: 10px 20px;
+  min-width: 190px;
+
+  margin: 0 14px 14px;
+  border-radius: 999px;
+  font-size: .95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.boton-consulta:hover{
+  background: var(--azul-medio);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(14,59,111,.35);
+}
+
+.boton-consulta:active{
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(14,59,111,.25);
+}
+
+
+/* Ajuste mobile para que no desborde */
+@media (max-width: 480px){
+  .boton-consulta{
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+/* ========================================================= 
+   FORMULARIO 
+========================================================= */
+/* =========================================
+   CONTACTO - FONDO DOBLE + FORM ENCIMA
+   ========================================= */
+
+   
+main.contacto-page {
+  position: relative;
+  
+  /* CAMBIO FUERTE: 200vh hará que la página sea MUY alta (doble pantalla) */
+  /* Si aún te parece poco, prueba con 250vh */
+  min-height: 100vh; 
+  
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Damos más aire arriba y abajo para que el scroll se sienta bien */
+  padding: 150px 20px; 
+  
+  /* IMPORTANTE: Quitamos overflow hidden para permitir el scroll */
+  background: #0b1220;
+}
+
+/* ===== Collage de fondo (2 imágenes APILADAS) ===== */
+.bg-collage {
+position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  /* USAMOS FLEXBOX: Es más estricto para dividir alturas */
+  display: flex;
+  flex-direction: column; /* Una arriba, otra abajo */
+  height: 100%; /* Asegura que ocupe todo el alto */
+  overflow: hidden;
+}
+
+.bg-collage img {
+width: 100%;
+  
+  /* ESTA ES LA CLAVE: */
+  height: 50%; /* Cada imagen ocupa EXACTAMENTE la mitad de la altura */
+  
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.04);
+  display: block; /* Evita espacios fantasma */
+}
+
+/* Ajuste de encuadre vertical */
+.bg-collage img:first-child { object-position: center 50%; } /* Foto de Arriba */
+.bg-collage img:last-child  { object-position: center 50%; } /* Foto de Abajo */
+
+
+/* ===== LÍNEA DIVISORA (AHORA HORIZONTAL) ===== */
+.bg-collage::after {
+  content: "";
+  position: absolute;
+  
+  /* CAMBIO CLAVE 3: Posición Horizontal */
+  top: 50%;
+  left: 0; 
+  width: 100%;      /* Ancho total */
+  height:200px;    /* Altura de la franja */
+  
+  transform: translateY(-50%); /* Centrado exacto */
+  
+  /* Degradado Vertical (Hacia abajo) */
+  background: linear-gradient(
+    to bottom,
+    rgba(2,31,70,0) 0%,
+    rgba(2,31,70,0.9) 50%, /* Color sólido en el medio */
+    rgba(2,31,70,0) 100%
+  );
+  pointer-events: none;
+}
+
+/* Overlay general (Degradado vertical) */
+.bg-overlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  /* CAMBIO CLAVE 4: Dirección del degradado */
+  background: linear-gradient(
+    to bottom,
+    rgba(2,31,70,0.55) 0%,
+    rgba(2,31,70,0.25) 50%,
+    rgba(2,31,70,0.55) 100%
+  );
+}
+
+/* ===== Tarjeta del formulario ===== */
+.contacto-card{
+  position: relative;
+  z-index: 3;
+  background: rgba(255,255,255,0.96);
+  width: 100%;
+  max-width: 480px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+/* ===== FORM: tu HTML usa .form-row, así que lo armamos así ===== */
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+
+.form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction: column;
+}
+
+.form-group.full-width{
+  width: 100%;
+}
+
+/* Inputs (lo tuyo está bien, lo dejo igual si ya lo tenés) */
+label{
+  font-family: var(--font-cuerpo);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 3px;
+}
+
+form input,
+form select,
+form textarea{
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: var(--font-cuerpo);
+  font-size: 0.9rem;
+  background-color: #f8fafc;
+  transition: all 0.2s;
+  outline: none;
+  box-sizing: border-box;
+}
+
+form textarea{
+  height: 60px;
+  resize: none;
+}
+
+.btn-submit{
+  background-color: var(--azul);
+  color: white;
+  font-family: var(--font-botones, sans-serif);
+  font-weight: 700;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.btn-submit:hover{
+  background-color: #0f172a;
+  transform: translateY(-1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px){
+  /* Mantenemos las dos fotos visibles */
+  .bg-collage {
+    /* En móvil aseguramos que sigan apiladas */
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  
+  /* Quitamos el display:none que tenías antes */
+  .bg-collage img:last-child {
+    display: block; 
+  }
+
+  main.contacto-page{
+    height: auto;
+    padding-top: 100px;
+    display: block;
+  }
+
+  .contacto-card{
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .form-row{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   FOOTER TECNOLÓGICO SOLTEC (Optimizado)
+========================================================= */
+
+footer.pie-principal {
+  margin-top: 0px;
+  position: relative;
+  overflow: hidden;
+  padding: 0 0 24px;
+  color: var(--soltec-text-main, #f5fbff);
+  font-family: var(--font-cuerpo, system-ui);
+  background: radial-gradient(140% 140% at 0% 0%, var(--soltec-bg-2, #013a6b) 0%, #020817 45%, #020617 100%);
+}
+
+/* BARRA DE ENERGÍA ANIMADA (CSS PURO) */
+.footer-gradient-bar {
+  width: 100%;
+  height: 4px; /* Un pelín más gruesa para que luzca */
+  
+  /* Definimos el degradado */
+  background: linear-gradient(
+    90deg,
+    #ff7e2e,
+    #ad52ff,
+    #1ec5ff,
+    #ff7e2e /* IMPORTANTE: Repetimos el primer color al final para el loop perfecto */
+  );
+  
+  /* Hacemos el fondo más grande que la caja para poder moverlo */
+  background-size: 300% 100%;
+  
+  /* ACTIVAMOS LA ANIMACIÓN */
+  /* nombre | duración | curva | repetición */
+  animation: mover-degradado 6s linear infinite;
+}
+
+/* DEFINICIÓN DE LA ANIMACIÓN */
+@keyframes mover-degradado {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 0;
+}
+
+/* --- CTA SUPERIOR --- */
+.footer-cta {
+  position: relative;
+  margin-bottom: 52px;
+  padding: 28px 32px;
+  border-radius: var(--soltec-radius-lg, 1.75rem);
+  background: linear-gradient(120deg, rgba(6, 35, 76, 0.96), rgba(4, 22, 58, 0.96));
+  box-shadow: var(--soltec-shadow-soft, 0 22px 45px rgba(0,0,0,0.45));
+  border: 1px solid rgba(30, 197, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  overflow: hidden;
+}
+
+.footer-cta::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -120px;
+  top: -120px;
+  background: radial-gradient(circle, rgba(30,197,255,0.32), transparent 60%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.footer-cta-text {
+  position: relative;
+  max-width: 580px;
+  z-index: 1;
+}
+
+.footer-cta-kicker {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--soltec-text-muted, #b7c7da);
+  margin-bottom: 6px;
+}
+
+.footer-cta h3 {
+  font-family: var(--font-titulos, system-ui);
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
+  margin: 0 0 8px;
+}
+
+.footer-cta-subtitle {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--soltec-text-muted, #b7c7da);
+  line-height: 1.6;
+}
+
+.footer-cta-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end; /* Alineados a la derecha */
+}
+
+/* NUEVO: Clase para igualar el ancho de los botones */
+.btn-equal-width {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 260px; /* Ancho fijo mínimo para que sean iguales */
+  text-align: center;
+  justify-content: center;
+}
+
+.btn-footer-primary {
+  display: inline-flex;
+  padding: 10px 22px;
+  border-radius: var(--soltec-radius-full, 999px);
+  background: var(--soltec-accent, #1ec5ff);
+  color: #02111f;
+  font-weight:400;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 12px 30px rgba(10, 130, 190, 0.55);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.btn-footer-primary:hover {
+  transform: translateY(-1px);
+  background: #4ad6ff;
+  box-shadow: 0 18px 38px rgba(10, 130, 190, 0.7);
+}
+
+.btn-footer-secondary {
+  display: inline-flex;
+  padding: 8px 18px;
+  border-radius: var(--soltec-radius-full, 999px);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: var(--soltec-text-main, #f5fbff);
+  font-size: 0.9rem;
+  text-decoration: none;
+  background: transparent;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.btn-footer-secondary:hover {
+  border-color: var(--soltec-accent, #1ec5ff);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* --- BLOQUE INFERIOR --- */
+.footer-main {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  margin-bottom: 36px;
+}
+
+.footer-brand {
+  flex: 0.8; /* Reducimos un poco el ancho ya que sacamos texto */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.img-logo-footer {
+  height: 70px;
+  width: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.55));
+}
+
+/* Estilos para los iconos sociales bajo el logo */
+.brand-socials {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.6);
+  transition: all 0.2s ease;
+}
+
+.social-circle img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.social-circle:hover {
+  border-color: var(--soltec-accent, #1ec5ff);
+  background: rgba(30, 197, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Columnas */
+.footer-columns {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+/* TÍTULOS ("Soluciones", "Contacto", "Ubicación & horarios") */
+/* 2px más chicos aprox: de 1.05rem → 0.925rem */
+.footer-col h4 {
+  font-family: var(--font-titulos, system-ui);
+  font-weight: 600;
+  font-size: 0.925rem;
+  margin: 0 0 14px;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+/* ÍTEMS debajo de los títulos */
+/* 2px más chicos aprox: de 0.95rem → 0.825rem */
+/* y un gris más apagado para no llamar tanto la atención */
+.footer-col p,
+.footer-col address,
+.footer-col li,
+.footer-col a {
+  font-size: 0.825rem;
+  line-height: 1.6;
+  color: #9ca3af; /* más gris que el texto principal */
+  font-style: normal;
+}
+
+.footer-links,
+.datos-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li,
+.datos-lista li {
+  margin-bottom: 6px;
+}
+
+/* Enlaces: base gris suave, y celeste solo al hover */
+.footer-links a,
+.datos-lista a,
+.ver-mapa-link {
+  color: #9ca3af;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.18s ease;
+}
+
+.footer-links a:hover,
+.datos-lista a:hover,
+.ver-mapa-link:hover {
+  color: var(--soltec-accent, #1ec5ff);
+}
+
+.footer-horarios p {
+  margin: 3px 0;
+}
+
+/* Franja final */
+/* ~3px más chico que antes: de 0.85rem → 0.7rem aprox */
+.footer-bottom {
+  border-top: 1px solid rgba(148, 163, 184, 0.22);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .footer-cta { flex-direction: column; align-items: flex-start; }
+  .footer-cta-actions { align-items: stretch; width: 100%; }
+  .btn-equal-width { width: 100%; min-width: auto; }
+  .footer-main { flex-direction: column; }
+  .footer-brand { margin-bottom: 30px; }
+}
+
+@media (max-width: 640px) {
+  .footer-columns { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 10px; }
+}
+
+/* ========================================================= 
+   BOTÓN WHATSAPP 
+========================================================= */
+/* Contenedor del botón */
+/* Botón flotante de WhatsApp */
+.btn-wsp {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;                 /* círculo verde de fondo */
+  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* Imagen del logo */
+.btn-wsp img {
+  width: 70%;      /* ajustá 65–75% si querés más grande o más chico */
+  height: 70%;
+  display: block;
+}
+
+.btn-wsp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+}
+
+
+
+/* CENTRAR INSTAGRAM */
+.pie-principal .redes {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.pie-principal .redes img {
+    width: 34px;
+    height: 34px;
+}
+
+/* ========================================================= 
+   ABOUT US - REDISEÑO "CLEAN TECH" (AJUSTADO)
+========================================================= */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* CAMBIO: Aumentamos el hueco de 20px a 32px para que respiren */
+  gap: 32px; 
+  max-width: 1100px;
+  margin: 60px auto; /* Más margen arriba/abajo */
+  padding: 0 20px;
+}
+
+/* 2. LA TARJETA (CARTA BLANCA LIMPIA) */
+.about-bloque {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px; /* Bordes un poco más suaves */
+  
+  box-shadow: 0 10px 30px rgba(11, 46, 85, 0.05);
+  
+  /* CAMBIO CLAVE: De 24px a 40px. 
+     Esto es lo que hace que se vea "High-End" y no apretado */
+  padding: 40px; 
+  
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Línea superior Cyan */
+.about-bloque::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #1ec5ff, #0b2e55);
+}
+
+/* TÍTULOS */
+.about-bloque h2 {
+  font-size: 1.7rem; /* Un pelín más grande */
+  color: #030d49;
+  
+  margin-top: 0;
+  /* CAMBIO: Más espacio entre el título y el texto (antes 15px) */
+  margin-bottom: 24px; 
+  
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Línea decorativa al lado del título */
+.about-bloque h2::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(30, 197, 255, 0.2);
+  max-width: 80px;
+}
+
+.about-bloque p {
+  font-size: 1rem;
+  /* CAMBIO: Más altura de línea para lectura cómoda */
+  line-height: 1.8; 
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+.about-bloque strong {
+  color: #0b2e55;
+  font-weight: 700;
+}
+
+/* =========================
+   SECCIÓN EMPRESAS (TARJETAS IDÉNTICAS)
+   ========================= */
+
+.about-bloque.empresas {
+  grid-column: 1 / -1; 
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 30px; 
+}
+
+.empresas-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 20px;
+  margin-top: 20px;
+  
+  /* CLAVE: 'stretch' estira todas las cajas a la misma altura */
+  align-items: stretch; 
+}
+
+.empresa-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 15px;
+  
+  /* Flexbox para distribuir espacio */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Manda el texto al fondo si sobra espacio */
+  gap: 12px;
+  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  transition: transform 0.2s, border-color 0.2s;
+  
+  /* CLAVE: Altura total y mínima para uniformidad */
+  height: 100%;
+  min-height: 160px; 
+}
+
+.empresa-card:hover {
+    transform: translateY(-2px);
+    border-color: #1ec5ff;
+}
+
+/* LOGOS: CAJA FIJA PARA ALINEACIÓN PERFECTA */
+.empresa-logo {
+  /* Usamos width 100% de su contenedor y altura fija para que no bailen */
+  width: 100%;
+  height: 90px;        /* Altura reservada (grande como pediste) */
+  object-fit: contain; /* La imagen se ajusta sin deformarse */
+  display: block;
+}
+
+.empresa-desc {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+  
+  /* CLAVE: Empuja el texto siempre hacia abajo */
+  margin-top: auto; 
+}
+
+
+.timeline{
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color:#475569;
+}
+.timeline li{ margin: 10px 0; }
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  
+  /* CAMBIO: Separamos más las cajitas de valores (antes 14px) */
+  gap: 20px; 
+  margin-top: 24px;
+}
+
+.valor-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  
+  /* CAMBIO: Más relleno (antes 16px) */
+  padding: 24px; 
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+.valor-card h3{
+  margin: 0 0 6px;
+  color:#0b2e55;
+  font-size: 1.05rem;
+}
+
+.pasos{
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color:#475569;
+}
+.pasos li{ margin: 10px 0; }
+
+.faq details {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  
+  /* CAMBIO: Más padding interno */
+  padding: 18px 20px; 
+  background: #fff;
+  
+  /* CAMBIO: Separación entre preguntas (antes 10px) */
+  margin-top: 16px; 
+}
+.faq summary{
+  cursor:pointer;
+  font-weight: 800;
+  color:#0b2e55;
+}
+
+.cta-final{
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+.cta-actions{
+  display:flex;
+  gap: 14px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* Base pill */
+.cta-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  user-select: none;
+}
+
+
+.timeline-v2 {
+  position: relative;
+  margin-top: 24px; /* Más espacio con el título */
+  padding-left: 22px;
+}
+
+.timeline-v2::before{
+  content:"";
+  position:absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(30,197,255,0.55), rgba(11,46,85,0.20));
+}
+
+.t-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 20px; /* Más separación entre el punto y el texto */
+  
+  /* CAMBIO: Más espacio vertical entre cada hito del año */
+  padding: 0 0 24px; 
+}
+
+.t-dot{
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #1ec5ff;
+  box-shadow: 0 0 0 4px rgba(30,197,255,0.18);
+  margin-top: 6px;
+}
+
+.t-content {
+  background: #f8fafc; /* Un fondo sutil ayuda a separar visualmente */
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  
+  /* CAMBIO: Más aire dentro de cada cajita de año */
+  padding: 20px 24px; 
+}
+
+.t-year{
+  display: inline-block;
+  font-weight: 900;
+  color: #0b2e55;
+  margin-bottom: 6px;
+}
+
+.t-content h3{
+  margin: 0 0 6px;
+  color: #030d49;
+  font-size: 1.05rem;
+}
+
+.t-content p{
+  margin: 0;
+  color: #475569;
+  line-height: 1.55;
+}
+
+
+
+/* Primario (celeste) */
+.cta-btn--primary{
+  background: linear-gradient(90deg, #1ec5ff, #12b8ff);
+  color: #06152f;
+  border: 1px solid rgba(30,197,255,0.35);
+  box-shadow: 0 12px 28px rgba(30,197,255,0.18);
+}
+
+.cta-btn--primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(30,197,255,0.22);
+}
+
+/* Secundario (outline oscuro) */
+.cta-btn--ghost{
+  background: transparent;
+  color: #0b2e55;
+  border: 1.5px solid rgba(11,46,85,0.45);
+}
+
+.cta-btn--ghost:hover{
+  transform: translateY(-1px);
+  border-color: rgba(30,197,255,0.75);
+  box-shadow: 0 10px 24px rgba(11,46,85,0.12);
+}
+@media (max-width: 520px){
+  .cta-btn{ width: 100%; }
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .empresas-grid {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+@media (max-width: 600px) {
+  .about-bloque {
+    padding: 20px;
+  }
+  .empresas-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+
+/* ========================================================= 
+   RESPONSIVE 
+========================================================= */
+@media (max-width: 900px) {
+    .producto {
+        width: 45%;
+    }
+}
+
+@media (max-width: 992px) {
+    #productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .producto {
+        width: 90%;
+    }
+
+    .producto img {
+        height: 180px;
+    }
+
+    .btn-wsp {
+        width: 52px;
+        height: 52px;
+    }
+}
+
+@media (max-width: 950px) {
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    #productos-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* === Botón del carrito en el header === */
+/* === Botón del carrito en el header === */
+.btn-carrito {
+  /* ESTADO NORMAL: Oscuro para seguir la línea del menú */
+  background: linear-gradient(135deg, #032d5c, #03465a);
+  
+  /* Texto BLANCO (importante para que se lea sobre el oscuro) */
+  color: #ffffff;
+  
+  /* Le agregamos un borde sutil para que se note donde empieza */
+  border: 1px solid rgba(30, 197, 255, 0.3);
+  
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  /* Sombra apagada */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
+  transition: all 0.3s ease;
+}
+
+/* EFECTO HOVER: Se transforma en el botón "Cyan" */
+.btn-carrito:hover {
+  /* Cambio de fondo al Cyan brillante */
+  background: linear-gradient(135deg, #1ec5ff, #4ad4ff);
+  
+  /* Cambio de texto a OSCURO (para leerse sobre el cyan) */
+  color: hsl(213, 90%, 8%);
+  
+  /* Quitamos el borde porque el color ya destaca */
+  border-color: transparent;
+  
+  /* Elevación y Sombra Brillante (Glow) */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(12, 159, 232, 0.6);
+}
+
+/* La bolita del número */
+#carrito-cantidad {
+  /* NORMAL: Cyan para destacar sobre el botón oscuro */
+  background: #1ec5ff; 
+  color: #021225;
+  
+  padding: 2px 7px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Cuando pasas el mouse sobre el BOTÓN, la bolita cambia para contrastar */
+.btn-carrito:hover #carrito-cantidad {
+  background: #021f46; /* Se vuelve oscura */
+  color: #ffffff;      /* Letra blanca */
+}
+
+/* === Botón "Agregar al carrito" === */
+.boton-agregar-carrito {
+  background: #006eff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 0 px 6px 0px 6px;
+  cursor: pointer;
+  font-weight: bold;
+  /*margin-top: 5px;*/
+}
+
+.boton-agregar-carrito:hover {
+  background: #0054c4;
+}
+
+
+/* === AJUSTES PARA LA IMAGEN PNG === */
+.btn-carrito img {
+  width: 22px;        /* Tamaño del icono */
+  height: auto;
+  display: block;
+  transition: filter 0.3s ease; /* Suaviza el cambio de color */
+  
+  /* IMPORTANTE: Si tu imagen original NO es blanca pura, 
+     descomenta la siguiente línea para forzarla a ser blanca por defecto: */
+  /* filter: brightness(0) invert(1); */
+}
+
+/* === EFECTO HOVER PARA PNG === */
+/* Al pasar el mouse, aplicamos un filtro que "tiñe" la imagen al azul #021f46 */
+.btn-carrito:hover img {
+  filter: brightness(0) saturate(100%) invert(9%) sepia(35%) saturate(6669%) hue-rotate(205deg) brightness(96%) contrast(98%);
+}
+
+/* Mantenemos el cambio de color del texto del botón */
+.btn-carrito:hover {
+  color: #021225; 
+}
+
+/* === MINI CARRITO (flotante fijo) === */
+/* === MINI CARRITO (Variante Dark Glass) === */
+.carrito-mini {
+
+  position: fixed;
+
+  top: calc(var(--header-height) + 10px); /* Ajusta según tu header */
+
+  right: 20px;
+
+  width: 340px;
+
+ 
+
+  /* LÓGICA FLEXBOX VERTICAL (SÁNDWICH) */
+
+  display: flex;
+
+  flex-direction: column;
+
+ 
+
+  /* Altura máxima: Nunca pasa del 80% de la pantalla */
+
+  max-height: 80vh;
+
+ 
+
+  /* Estilos Visuales (Dark Glass) */
+
+  background: rgba(3, 15, 30, 0.95);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(30, 197, 255, 0.2);
+
+  border-radius: 16px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+
+ 
+
+  padding: 20px;
+
+  padding-bottom: 0; /* Abajo 0 para que el footer se pegue bien */
+
+ 
+
+  z-index: 1500;
+
+ 
+
+  /* Estado oculto inicial */
+
+  display: none;
+
+  opacity: 0;
+
+  transform: translateY(-10px);
+
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+}
+
+
+
+.carrito-mini.visible {
+
+  display: flex; /* IMPORTANTE: flex, no block */
+
+  opacity: 1;
+
+  transform: translateY(0);
+
+}
+
+
+
+/* Triangulito decorativo (oscuro para coincidir) */
+
+.carrito-mini::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: -6px;
+
+  right: 20px;
+
+  width: 12px;
+
+  height: 12px;
+
+  background: rgba(3, 15, 30, 0.95); /* Mismo fondo */
+
+  border-left: 1px solid rgba(30, 197, 255, 0.2); /* Borde solo en los lados visibles */
+
+  border-top: 1px solid rgba(30, 197, 255, 0.2);
+
+  transform: rotate(45deg);
+
+}
+
+
+
+.carrito-mini h3 {
+
+  flex-shrink: 0;
+
+  margin-bottom: 15px;
+
+  font-size: 1.1rem;
+
+  color: #fff;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  padding-bottom: 10px;
+
+}
+
+
+
+.carrito-body {
+
+  flex-grow: 1;         /* Ocupa todo el espacio disponible */
+
+  overflow-y: auto;     /* Activa el scroll ÚNICO aquí */
+
+  min-height: 0;        /* Evita desbordes */
+
+  padding-right: 5px;   /* Espacio para la barra */
+
+  margin-bottom: 10px;  /* Separación con el footer */
+
+}
+
+.carrito-vacio {
+
+  color: #b7c7da; /* Texto gris azulado */
+
+  text-align: center;
+
+  padding: 20px 0;
+
+}
+
+
+
+.carrito-items {
+
+  max-height: none;
+
+  overflow: visible;
+
+  /* Ahora fluye libremente dentro del body */
+
+}
+
+
+
+/* Estilo del Scrollbar */
+
+.carrito-body::-webkit-scrollbar { width: 4px; }
+
+.carrito-body::-webkit-scrollbar-thumb { background: rgba(30, 197, 255, 0.3); border-radius: 4px; }
+
+.carrito-body::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+
+
+
+.carrito-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Separadores muy sutiles */
+
+}
+
+
+
+/* === CONTENEDOR PRINCIPAL (MINI CARRITO) === */
+
+.carrito-mini {
+
+  position: fixed;
+
+  top: calc(var(--header-height) + 10px); /* Ajusta según tu header */
+
+  right: 20px;
+
+  width: 340px;
+
+ 
+
+  /* LÓGICA FLEXBOX VERTICAL (SÁNDWICH) */
+
+  display: flex;
+
+  flex-direction: column;
+
+ 
+
+  /* Altura máxima: Nunca pasa del 80% de la pantalla */
+
+  max-height: 80vh;
+
+ 
+
+  /* Estilos Visuales (Dark Glass) */
+
+  background: rgba(3, 15, 30, 0.95);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(30, 197, 255, 0.2);
+
+  border-radius: 16px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+
+ 
+
+  padding: 20px;
+
+  padding-bottom: 0; /* Abajo 0 para que el footer se pegue bien */
+
+ 
+
+  z-index: 1500;
+
+ 
+
+  /* Estado oculto inicial */
+
+  display: none;
+
+  opacity: 0;
+
+  transform: translateY(-10px);
+
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+}
+
+
+
+/* Estado visible (se activa con JS) */
+
+.carrito-mini.visible {
+
+  display: flex; /* IMPORTANTE: flex, no block */
+
+  opacity: 1;
+
+  transform: translateY(0);
+
+}
+
+
+
+/* Header Fijo */
+
+.carrito-mini h3 {
+
+  flex-shrink: 0;
+
+  margin-bottom: 15px;
+
+  font-size: 1.1rem;
+
+  color: #fff;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  padding-bottom: 10px;
+
+}
+
+
+
+/* === EL CUERPO UNIFICADO (SCROLL MÁGICO) === */
+
+/* Esta clase envuelve items + opciones */
+
+.carrito-body {
+
+  flex-grow: 1;         /* Ocupa todo el espacio disponible */
+
+  overflow-y: auto;     /* Activa el scroll ÚNICO aquí */
+
+  min-height: 0;        /* Evita desbordes */
+
+  padding-right: 5px;   /* Espacio para la barra */
+
+  margin-bottom: 10px;  /* Separación con el footer */
+
+}
+
+
+
+/* Estilo del Scrollbar */
+
+.carrito-body::-webkit-scrollbar { width: 4px; }
+
+.carrito-body::-webkit-scrollbar-thumb { background: rgba(30, 197, 255, 0.3); border-radius: 4px; }
+
+.carrito-body::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+
+
+
+/* === ITEMS (SIN SCROLL PROPIO) === */
+
+.carrito-items {
+
+  max-height: none;
+
+  overflow: visible;
+
+  /* Ahora fluye libremente dentro del body */
+
+}
+
+
+
+/* === FOOTER (FIJO AL FONDO) === */
+
+.carrito-footer {
+
+  flex-shrink: 0;
+
+  background: transparent;
+
+  padding-bottom: 20px;
+
+  z-index: 2;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  padding-top: 15px;
+
+}
+
+.carrito-item-info {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+}
+
+
+
+.carrito-item-info strong {
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+
+  color: #f4f7ff;           /* casi blanco, buen contraste */
+
+}
+
+
+
+/* Línea secundaria (precio, total, etc.): más clara que antes */
+
+.carrito-item-info span {
+
+  font-size: 0.84rem;
+
+  color: #c1d4ea;           /* gris azulado clarito */
+
+}
+
+
+
+/* Controles Dark */
+
+/* Contenedor de la cantidad: Estilo "Ghost" (Sutil) */
+
+.carrito-item-controles {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+ 
+
+  /* FONDO: Casi transparente, para no llamar la atención */
+
+  background: rgba(255, 255, 255, 0.03);
+
+ 
+
+  /* BORDE: Muy fino y delicado, solo para enmarcar */
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 99px; /* Forma de pastilla */
+
+  padding: 2px 8px;
+
+ 
+
+  /* El número: Blanco grisáceo (buen contraste, pero no encandila) */
+
+  color: #e0e6ed;
+
+  font-weight: 500;
+
+  font-size: 0.9rem;
+
+}
+
+
+
+/* Los botones + y - */
+
+.carrito-item-controles button {
+
+  border: none;
+
+  background: transparent;
+
+  width: 20px;
+
+  height: 20px;
+
+  cursor: pointer;
+
+ 
+
+  /* Color: Cyan para indicar que es clickeable, pero fino */
+
+  color: #1ec5ff;
+
+  font-size: 1rem;
+
+ 
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition: color 0.2s, text-shadow 0.2s;
+
+}
+
+
+
+/* Efecto hover solo en los botoncitos */
+
+.carrito-item-controles button:hover {
+
+  color: #ffffff;
+
+  /* Pequeño brillo al querer interactuar */
+
+  text-shadow: 0 0 8px rgba(30, 197, 255, 0.8);
+
+}
+
+
+
+.carrito-eliminar {
+
+  background: transparent !important;
+
+  color: #ff5c5c !important; /* Rojo un poco más pastel */
+
+  font-size: 0.85rem !important;
+
+  opacity: 0.8;
+
+  transition: opacity 0.2s;
+
+}
+
+
+
+.carrito-eliminar:hover {
+
+  opacity: 1;
+
+  text-decoration: underline;
+
+}
+
+
+
+.carrito-total {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  font-size: 1.15rem;
+
+  font-weight: 700;
+
+  color: #fff;
+
+  margin: 15px 0;
+
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+}
+
+
+
+/* El botón de finalizar sigue siendo el protagonista */
+
+.carrito-finalizar-mini {
+
+  width: 100%;
+
+  background: linear-gradient(135deg, #1ec5ff, #4ad4ff);
+
+  color: #021225;
+
+  border: none;
+
+  padding: 12px;
+
+  border-radius: 999px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+
+  box-shadow: 0 0 20px rgba(30, 197, 255, 0.25); /* Glow cyan */
+
+  transition: all 0.2s ease;
+
+}
+
+
+
+.carrito-finalizar-mini:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 0 30px rgba(30, 197, 255, 0.45);
+
+}
+
+
+
+/* ===== Opciones dentro del mini carrito ===== */
+
+.carrito-opciones{
+
+  margin-top: 10px;
+
+  padding-top: 12px;
+
+  border-top: 1px solid rgba(255,255,255,0.12);
+
+  display: grid;
+
+  gap: 10px;
+
+}
+
+
+
+.opcion-group{
+
+  display: grid;
+
+  gap: 8px;
+
+}
+
+
+
+.opcion-title{
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+
+  color: #e9f3ff;
+
+  letter-spacing: .02em;
+
+}
+
+
+
+.opcion-pills{
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+}
+
+
+
+.pill{
+
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  cursor: pointer;
+
+}
+
+
+
+.pill input{
+
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+}
+
+
+
+.pill span{
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 7px 10px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  background: rgba(255,255,255,0.04);
+
+  color: #cfe2ff;
+
+  font-size: 0.84rem;
+
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+
+}
+
+
+
+.pill input:checked + span{
+
+  border-color: rgba(30,197,255,0.55);
+
+  background: rgba(30,197,255,0.10);
+
+  color: #f4fbff;
+
+}
+
+
+
+.pill:hover span{
+
+  transform: translateY(-1px);
+
+  border-color: rgba(30,197,255,0.35);
+
+}
+
+
+
+/* Totales extra (recargo) */
+
+.carrito-totales{
+
+  margin-top: 10px;
+
+  display: grid;
+
+  gap: 6px;
+
+}
+
+
+
+.carrito-linea{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  font-size: 0.9rem;
+
+  color: #c1d4ea;
+
+}
+
+
+
+.carrito-linea strong{
+
+  color: #fff;
+
+}
+
+
+
+.carrito-recargo{
+
+  color: #ffd08a;
+
+}
+
+/* ===== DETALLE PRODUCTO ===== */
+.detalle-wrap{
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+}
+
+.detalle-img-grande{
+  width: 100%;
+  height: 420px;
+  object-fit: contain;
+  background: #fff;
+  /*border: 2px solid var(--azul);*/
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.detalle-miniaturas{
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.detalle-thumb{
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+  padding: 4px;
+  transition: border .15s ease, transform .1s ease;
+}
+
+.detalle-thumb:hover{
+  transform: translateY(-2px);
+}
+
+.detalle-thumb.active{
+  border-color: var(--azul);
+}
+
+.detalle-info h1{
+  color: var(--azul-oscuro);
+  margin-bottom: 8px;
+}
+
+.detalle-precio{
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--azul);
+  margin-bottom: 12px;
+}
+
+.detalle-desc{
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.detalle-caract{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.detalle-botones{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.detalle-volver{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--azul-oscuro);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background .2s ease, border-color .2s ease, transform .15s ease;
+}
+
+.detalle-volver:hover{
+  background: rgba(14,59,111,.08);      
+  border-color: rgba(14,59,111,.20);    
+  transform: translateX(-2px);          
+}
+
+/* responsive detalle */
+@media (max-width: 850px){
+  .detalle-wrap{
+    grid-template-columns: 1fr;
+  }
+  .detalle-img-grande{
+    height: 300px;
+  }
+  .detalle-miniaturas{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+}
+
+/* ================================
+   FIX: Botones mismo alto en detalle
+   ================================ */
+.detalle-botones{
+  display: flex;
+  gap: 12px;
+  align-items: stretch; /* obligo a que ambos ocupen el mismo alto */
+}
+
+/* Base común SOLO en detalle */
+.detalle-botones .boton-agregar-carrito,
+.detalle-botones .boton-consulta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;      /* <- mismo alto visual */
+  line-height: 1.1;
+  padding-top: 0;        /* el alto lo define min-height */
+  padding-bottom: 0;
+  white-space: nowrap;
+}
+
+/* Respetamos estilo “viejo” del agregar */
+.detalle-botones .boton-agregar-carrito{
+  padding-inline: 18px;
+  border-radius: 8px;
+}
+
+/* Hacemos el consultar un poco más largo */
+.detalle-botones .boton-consulta{
+  padding-inline: 26px;  /* más ancho sin afectar altura */
+  border-radius: 999px;
+}
+
+/* ===== FILTROS POR CATEGORÍA ===== */
+.filtros{
+  max-width: var(--max);
+  margin: 14px auto 8px;
+  padding: 0 20px;
+}
+
+.filtros-titulo{
+  font-weight: 700;
+  color: var(--azul-oscuro);
+  margin-bottom: 8px;
+}
+
+.filtros-chips{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip{
+  border: 1px solid var(--azul);
+  background: #fff;
+  color: var(--azul-oscuro);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .92rem;
+  cursor: pointer;
+  transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
+}
+
+.chip:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,.12);
+}
+
+.chip.active{
+  background: #ffbc00;          /* amarillo carrito */
+  color: #0b1b2b;
+  border-color: #ffbc00;
+  box-shadow: 0 6px 12px rgba(0,0,0,.18);
+}
+
+/* mobile: una fila con scroll */
+@media (max-width: 600px){
+  .filtros-chips{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+  .chip{
+    white-space: nowrap;
+  }
+}
+
+/* ===== DETALLE: AJUSTES SOLO MOBILE ===== */
+@media (max-width: 600px){
+  .detalle-wrap{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .detalle-img-grande{
+    height: 260px;
+    margin-bottom: 8px;
+  }
+
+  .detalle-miniaturas{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  /* título un poco más chico */
+  .detalle-info h1{
+    font-size: 1.25rem;
+  }
+
+  /* BOTONES: columna, pero más angostos y centrados */
+  .detalle-botones{
+    flex-direction: column;
+    align-items: center;   /* centra el stack */
+    gap: 10px;
+  }
+
+  .detalle-botones .boton-agregar-carrito,
+  .detalle-botones .boton-consulta{
+    width: 85%;           /* ya no ocupan el 100% */
+    max-width: 280px;     /* para que no se hagan gigantes en pantallas grandes */
+    justify-content: center;
+  }
+}
+
+  /* el de WhatsApp sin min-width fijo para que no rompa en cel */
+  .detalle-botones .boton-consulta{
+    min-width: 0;
+ }
+
+
+/*LINEA DIVISORIA*/
+
+/* =========================
+   BRIDGE: separa “ERP integral” vs “pequeños negocios”
+========================= */
+/* =========================
+   BRIDGE PRO: sin franja blanca, tipo “horizonte”
+========================= */
+.hero-bridge{
+  display:block;
+  height: 140px; /* más compacto */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  position: relative;
+  overflow: hidden;
+
+  /* base oscura (continúa el hero) */
+  background: linear-gradient(180deg, #07233d 0%, #061a2e 100%);
+}
+
+/* horizonte (glow) suave, NO una franja blanca */
+.hero-bridge::before{
+  content:"";
+  position:absolute;
+  left: -10%;
+  right: -10%;
+  top: 50%;
+  height: 140px;
+  transform: translateY(-50%);
+  pointer-events:none;
+
+  background: radial-gradient(
+    60% 65% at 50% 50%,
+    rgba(255,255,255,0.18) 0%,
+    rgba(30,197,255,0.18) 22%,
+    rgba(30,197,255,0.08) 40%,
+    transparent 65%
+  );
+  filter: blur(1px);
+  opacity: 1;
+}
+
+/* oscurece un toque arriba y abajo para que el centro no “reviente” */
+.hero-bridge::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(
+    180deg,
+    rgba(7,35,61,0.65) 0%,
+    transparent 45%,
+    transparent 55%,
+    rgba(7,35,61,0.65) 100%
+  );
+}
+
+/* Texto siempre legible */
+.hero-bridge__inner{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align:center;
+  width: min(900px, calc(100% - 40px));
+  z-index: 2;
+}
+
+.hero-bridge__pill{
+  display:inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 900;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 30px rgba(2,8,23,0.35);
+}
+
+.hero-bridge__text{
+  margin: 10px 0 0;
+  color: rgba(255,255,255,0.80);
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+
+
+
+
+
+
+/* ========================================================= 
+   BLOQUE SISTEMAS: FULL WIDTH REAL (De borde a borde)
+========================================================= */
+
+.sistemas-section {
+    position: relative;
+    
+    /* 1. EL TRUCO FULL BLEED: Rompe el contenedor padre */
+    width: 100vw;              /* Ancho total de la ventana */
+    margin-left: calc(50% - 50vw); /* Se mueve a la izquierda para tocar el borde */
+    margin-right: calc(50% - 50vw);/* Se mueve a la derecha para tocar el borde */
+    
+    /* 2. ESPACIADO */
+   /* margin-top: 350px;      */    /* Separación con el bloque de arriba */
+    padding: 80px 0 140px 0;   /* Padding vertical (horizontal 0 porque usamos container) */
+    
+    /* 3. ESTÉTICA */
+    background-color: #020617; /* Fondo oscuro */
+    border-radius: 0;          /* Sin bordes redondeados */
+    overflow: hidden;          /* Corta la luz que sobra */
+    
+    /* Borde sutil arriba */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+
+    
+}
+
+/* === LA CURVA DE LUZ (HORIZONTE) === */
+.sistemas-section::after {
+    content: "";
+    position: absolute;
+    
+    /* Para que la curva sea suave en pantalla completa, 
+       el círculo debe ser MUY grande (140% de la pantalla) */
+    width: 140%;    
+    height: 400px;
+    
+    /* Centrado */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Posición vertical: Lo escondemos abajo para que solo asome el brillo */
+    bottom: -320px; 
+    
+    border-radius: 50%; /* Crea el óvalo */
+    background: transparent;
+    
+    /* EL GLOW NEÓN (Intenso) */
+    box-shadow: 
+        0 -4px 20px rgba(255, 255, 255, 0.6),  /* Núcleo blanco */
+        0 -20px 60px rgba(30, 197, 255, 0.5),  /* Cuerpo cyan */
+        0 -50px 150px rgba(0, 100, 255, 0.4);  /* Ambiente azul */
+        
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* === CONTENEDOR INTERNO === 
+   (Esto asegura que tu texto y tarjetas NO se peguen a los bordes,
+   sino que se mantengan centrados igual que el resto de la web) */
+.container-sistemas {
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo del contenido */
+    margin: 0 auto;    /* Centrado */
+    padding: 0 20px;   /* Margen de seguridad en móviles */
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+/* Ajuste Responsive: En celular sí dejamos que toque los bordes para ganar espacio */
+@media (max-width: 768px) {
+    .sistemas-section {
+        width: 100%;
+        border-radius: 0;
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+}
+
+
+/* === HEADER (Más compacto) === */
+.sistemas-header {
+  /* 3. COMPACTACIÓN: Menos margen abajo (antes 40px) */
+  margin-bottom: 55px; 
+}
+
+.sistemas-header h2 {
+  /* 3. COMPACTACIÓN: Fuente un poco más chica (antes 2rem) */
+  font-size: 1.8rem; 
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.1;
+  /* Sombra para que destaque sobre el fondo nuevo */
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #1ec5ff, #4ad4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block; 
+}
+
+.sistemas-header p {
+  font-size: 0.95rem; /* Letra un pelín más chica */
+  color: #cbd5e1; /* Texto más claro para contrastar con el fondo azulado */
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+/* === BENTO GRID (Más ajustado) === */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  /* 3. COMPACTACIÓN: Menos hueco entre tarjetas (antes 25px) */
+  gap: 20px; 
+  /* 3. COMPACTACIÓN: Menos espacio antes del botón (antes 50px) */
+  margin-bottom: 30px;
+}
+
+/* === TARJETAS === */
+.bento-card {
+  position: relative;
+  background: transparent; 
+  border-radius: 16px;
+  padding: 2px; /* Grosor del borde de luz */
+  
+  display: flex;
+  overflow: hidden; 
+  /* 3. COMPACTACIÓN: Altura reducida (antes 200px). Ahorra mucho espacio vert. */
+  min-height: 170px;
+  
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* CAPA 1: Luz Giratoria (Se mantiene igual, funciona perfecto) */
+.bento-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 0;
+  animation: rotate-border 4s linear infinite;
+}
+
+.bento-card.border-cyan::before {
+  background: conic-gradient(transparent 270deg, #00d2ff 320deg, transparent 360deg);
+}
+
+.bento-card.border-green::before {
+  background: conic-gradient(transparent 270deg, #00098d 320deg, transparent 360deg);
+}
+
+/* CAPA 2: Máscara oscura */
+.card-bg-mask {
+  position: absolute;
+  inset: 1px; 
+  /* Ajustamos el fondo de la tarjeta para que se funda con el nuevo fondo de sección */
+  background: #020617; 
+  border-radius: 15px; 
+  z-index: 1;
+}
+
+/* CONTENIDO */
+.card-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* 3. COMPACTACIÓN: Padding interno reducido (antes 25px) */
+  padding: 20px; 
+}
+
+.card-content h3 {
+  flex-basis: 50%;
+  /* Texto un poco más chico para equilibrar la altura reducida */
+  font-size: 1.2rem; 
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.25;
+}
+
+/* IMÁGENES */
+.card-image-wrapper {
+  flex-basis: 45%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.card-image-wrapper img {
+  width: 130%; /* Ajustado levemente para la nueva altura */
+  max-width: none;
+  transform: scale(1);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5)); 
+  transition: transform 0.4s ease;
+}
+
+.bento-card:hover .card-image-wrapper img {
+  transform: scale(1.1) translateY(-5px);
+}
+
+/* Brillo ambiental (Glow) */
+.glow-internal {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  z-index: 5;
+  top: 20%;
+  right: 10%;
+  pointer-events: none;
+}
+.glow-internal.cyan { background: #00d2ff; }
+.glow-internal.green { background: #22c55e; }
+
+
+/* === CTA (BOTÓN) === */
+.sistemas-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; /* Gap reducido */
+}
+
+/* === CTA (BOTÓN ESTILO "GHOST" NEÓN) === */
+.sistemas-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-rectangular {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 1. ESTILO GHOST (Transparente con Borde) */
+  background: transparent; 
+  border: 1px solid #1ec5ff; /* Borde Cyan Brillante */
+  color: #1ec5ff;            /* Texto Cyan Brillante */
+  
+  /* 2. FORMA Y TAMAÑO */
+  border-radius: 999px;      /* Pill shape */
+  padding: 12px 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  
+  /* 3. GLOW INICIAL (Sutil) */
+  box-shadow: 0 0 15px rgba(30, 197, 255, 0.15);
+  
+  /* Transición suave */
+  transition: all 0.3s ease;
+}
+
+/* === INTERACCIÓN (MOVIMIENTO) === */
+/* Al pasar el mouse, se RELLENA de luz (Fill Effect) */
+.btn-rectangular:hover {
+  background: #1ec5ff;  /* Se llena de Cyan */
+  color: #021225;       /* El texto se oscurece para leerse bien */
+  border-color: #1ec5ff;
+  
+  /* Se eleva y brilla fuerte */
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(30, 197, 255, 0.6);
+}
+
+/* Mantenemos el latido que te gustaba */
+.btn-pulse {
+  animation: btn-heartbeat 2s infinite ease-in-out;
+}
+
+.microcopy {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* === ANIMACIONES (Intactas) === */
+@keyframes rotate-border {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes btn-heartbeat {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(30, 197, 255, 0.4); }
+  50% { transform: scale(1.03); box-shadow: 0 0 20px 10px rgba(30, 197, 255, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(30, 197, 255, 0); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr; 
+  }
+  .bento-card {
+    /* En móvil las dejamos crecer un poco si hace falta */
+    min-height: auto; 
+    padding: 20px;
+  }
+}
+
+
+/* ========================================================= 
+   CONECTOR DE FUSIÓN (CORREGIDO FULL WIDTH)
+========================================================= */
+
+/* 1. Prevenir scroll horizontal (Ya lo tenías, lo mantenemos) */
+body { overflow-x: clip; }
+
+.sistemas-fade-out {
+  /* A. ROMPER LOS MÁRGENES DEL PADRE (Técnica Full Bleed) */
+  width: 100vw;  
+  margin-left: calc(50% - 50vw); 
+  margin-right: calc(50% - 50vw);
+  
+  /* B. POSICIONAMIENTO */
+  height: 250px;     /* Más alto para que la transición sea suave */
+  margin-top: -2px;  /* Solape milimétrico para evitar líneas blancas arriba */
+  position: relative;
+  z-index: 1;
+  pointer-events: none; /* Para que puedas dar click a lo que quede abajo */
+
+  /* C. EL DEGRADADO DE FUSIÓN */
+  /* Empieza en tu azul oscuro (#020617) y se va volviendo transparente */
+  background: linear-gradient(to bottom,
+      #020617 0%,           /* Azul sólido al principio (pegado a sistemas) */
+      rgba(2, 6, 23, 0.95) 20%,
+      rgba(2, 6, 23, 0.7) 45%,
+      rgba(2, 6, 23, 0.4) 65%,
+      rgba(2, 6, 23, 0.1) 85%,
+      rgba(2, 6, 23, 0.0) 100% /* Transparente al final para ver el fondo gris/blanco */
+  );
+}
+
+/* OPCIONAL: Si sientes que el título "Productos" queda muy lejos o muy tapado */
+/* Agrega esto para ajustar la distancia visual */
+.productos {
+    margin-top: -100px; /* Sube la sección productos para que entre en la zona del degradado */
+    position: relative;
+    z-index: 2; /* Asegura que el contenido quede ENCIMA de la sombra, no tapado */
+}
+
+
+/* =========================================
+   SISTEMAS (Código Completo y Corregido)
+   ========================================= */
+
+/* 1. EL CONTENEDOR PRINCIPAL (Vital para el hover) */
+.nav-item-sistemas {
+  position: relative; 
+  height: 100%;        /* Ocupa toda la altura del header */
+  display: flex;       
+  align-items: center; /* Centra verticalmente el botón dentro del header */
+}
+
+/* 2. EL BOTÓN "Sistemas" (Igual que los otros links) */
+.nav-parent {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: 550;   /* Peso de la fuente */
+  padding: 0 10px;    /* Solo padding lateral */
+  cursor: pointer;
+  opacity: .95;
+  
+  /* ALINEACIÓN EXACTA */
+  display: inline-flex;
+  align-items: center;
+  height: 40px; 
+  
+  /* TRUCO DEL ESPEJO: Borde arriba y abajo transparentes */
+  /* Esto asegura que quede a la misma altura visual que "Inicio" */
+  border-top: 3px solid transparent; 
+  border-bottom: 3px solid transparent;
+  
+  transition: all .25s ease;
+}
+
+
+/* 3. LA CAJA DEL SUBMENÚ (Desplegable) */
+.nav-submenu {
+  display: none;       /* Oculto por defecto */
+  position: absolute;
+  top: 100%;           /* Se pega justo debajo del header */
+  left: 0;
+  
+  background: #ffffff; /* Fondo Blanco */
+  min-width: 230px;    /* Ancho de la caja */
+  padding: 6px 0;
+  border-radius: 0 0 10px 10px; /* Bordes redondos solo abajo */
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+  z-index: 1500;
+  
+  flex-direction: column; /* Pone los links uno debajo del otro */
+}
+
+/* REGLA MÁGICA: Muestra el menú al pasar mouse por el contenedor */
+.nav-item-sistemas:hover .nav-submenu {
+  display: flex; 
+}
+
+/* 4. LOS ENLACES DENTRO DEL SUBMENÚ */
+.nav-submenu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  
+  /* IMPORTANTE: Color oscuro porque el fondo es blanco */
+  color: #0b2e55; /* O usa var(--azul-oscuro) si la tienes definida */
+  
+  /* Reseteamos estilos globales del header para que no se rompa */
+  border: none;
+  height: auto; 
+  margin: 0;
+}
+
+/* Efecto Hover de los links internos */
+.nav-submenu a:hover {
+  background: #062774;        /* Fondo grisaceo suave */
+  color: #ffffff;             /* Texto azul brillante */
+  /*border-left-color: #ffd76a;  Borde lateral de color */
+  box-shadow: none;
+  transform: none;            /* Evita que se mueva */
+}
+/* ============= HERO SOLTEC NUEVO ============= */
+
+:root {
+  --soltec-bg-1: #021f46;
+  --soltec-bg-2: #013a6b;
+  --soltec-accent: #1ec5ff;
+  --soltec-accent-soft: rgba(30, 197, 255, 0.2);
+  --soltec-text-main: #f5fbff;
+  --soltec-text-muted: #b7c7da;
+  --soltec-chip-bg: rgba(6, 35, 76, 0.9);
+  --soltec-radius-lg: 1.75rem;
+  --soltec-radius-full: 999px;
+  --soltec-shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.35);
+}
+
+.hero-soltec {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  background: radial-gradient(circle at top, #063a82 0, #020b1e 55%);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+ /* full-bleed: el hero se estira hasta los bordes del viewport */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.hero-soltec::before,
+.hero-soltec::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--soltec-accent-soft), transparent);
+  filter: blur(4px);
+  opacity: 0.65;
+  z-index: -1;
+}
+
+.hero-soltec::before {
+  top: -160px;
+  left: -90px;
+}
+.hero-soltec::after {
+  bottom: -160px;
+  right: -90px;
+}
+
+.hero-soltec__inner {
+  width: min(1140px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 3.5rem;
+  align-items: center;
+}
+
+/* ---- Columna texto ---- */
+
+.hero-soltec__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--soltec-radius-full);
+  border: 1px solid rgba(193, 227, 255, 0.35);
+  background: rgba(5, 32, 77, 0.8);
+  font-size: 0.82rem;
+  color: var(--soltec-text-muted);
+  margin-bottom: 1.2rem;
+}
+
+.hero-soltec__eyebrow i {
+  font-size: 0.9rem;
+  color: var(--soltec-accent);
+}
+
+.hero-soltec__title {
+  font-size: clamp(2.1rem, 3vw + 1rem, 3.15rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  color: #DEF7FF;
+}
+
+.hero-soltec__title span {
+  color: var(--soltec-accent);
+}
+
+.hero-soltec__subtitle {
+  font-size: 0.98rem;
+  color: var(--soltec-text-muted);
+  max-width: 34rem;
+  line-height: 1.6;
+  margin-bottom: 1.7rem;
+}
+
+.hero-soltec__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-soltec__pill {
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--soltec-radius-full);
+  border: 1px solid rgba(140, 185, 230, 0.4);
+  font-size: 0.8rem;
+  color: var(--soltec-text-muted);
+  background: rgba(0, 22, 56, 0.9);
+  backdrop-filter: blur(6px);
+}
+
+/* Clase NUEVA para datos informativos (No clickeables) */
+.hero-soltec__feature {
+  /* Mismas dimensiones que tenías */
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--soltec-radius-full);
+  font-size: 0.8rem;
+  
+  /* CAMBIO VISUAL CLAVE: */
+  /* 1. Quitamos el azul y ponemos un borde blanco casi invisible */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  /* 2. Fondo más oscuro/neutro para que se hunda en el diseño */
+  background: rgba(28, 36, 80, 0.2); 
+  backdrop-filter: blur(4px);
+  
+  /* 3. Texto gris perla (no blanco brillante) */
+  color: #697686; 
+  
+  /* 4. Cursor default para confirmar que no es un link */
+  cursor: default;
+  user-select: none;
+}
+
+.hero-soltec__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-soltec-primary,
+.btn-soltec-ghost {
+  border-radius: var(--soltec-radius-full);
+  padding: 0.7rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.18s ease-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+}
+
+.btn-soltec-primary {
+  background: linear-gradient(135deg, #1ec5ff, #4ad4ff);
+  color: #021225;
+  box-shadow: 0 12px 30px rgba(12, 159, 232, 0.6);
+}
+
+.btn-soltec-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(12, 159, 232, 0.75);
+}
+
+.btn-soltec-ghost {
+  background: transparent;
+  color: var(--soltec-accent);
+  border: 1px solid rgba(92, 173, 228, 0.7);
+}
+
+.btn-soltec-ghost:hover {
+  background: rgba(11, 50, 102, 0.9);
+  transform: translateY(-1px);
+}
+
+.hero-soltec__note {
+  font-size: 0.78rem;
+  color: var(--soltec-text-muted);
+  margin-top: 0.8rem;
+  opacity: 0.8;
+}
+
+/* ---- Columna gráfica ---- */
+
+.hero-soltec__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-soltec__planet-wrapper {
+  position: relative;
+  --planet-size: min(360px, 80vw);
+
+  /* --- CORRECCIÓN: Usamos el nombre original para que no falle --- */
+  /* 0.60 = 60% del tamaño. Acerca los chips hacia la línea roja */
+  --orbit-outer-radius-factor: 0.58; 
+
+  width: var(--planet-size);
+  aspect-ratio: 1 / 1;
+  filter: drop-shadow(var(--soltec-shadow-soft));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.orbit--outer {
+  /* --- AJUSTE: -10% hace que el círculo coincida con los chips --- */
+  inset: -8%;
+  
+  border-style: dashed;
+  border-width: 1px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Opcional: En móviles, reducimos un poco el radio para que no se salga de pantalla */
+@media (max-width: 540px) {
+  .hero-soltec__planet-wrapper {
+    /* En móvil los acercamos un poco más */
+    --orbit-outer-radius-factor: 0.65;
+  }
+  .orbit--outer {
+    inset: -15%;
+  }
+}
+
+
+.hero-soltec__planet-core {
+  position: absolute;
+  inset: 15%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 20% 20%, #ffffff 0, #bde8ff 18%, transparent 42%),
+    radial-gradient(circle at 80% 80%, #0f6ab8 0, #021f46 52%);
+  border: 1px solid rgba(188, 224, 255, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(30, 197, 255, 0.3),
+    0 0 30px rgba(30, 197, 255, 0.35);
+  overflow: hidden;
+}
+
+.hero-soltec__planet-core::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(1, 148, 255, 0.45) 0, transparent 55%),
+    conic-gradient(
+      from 180deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(30, 197, 255, 0.7),
+      rgba(255, 255, 255, 0.05),
+      rgba(30, 197, 255, 0.7),
+      rgba(255, 255, 255, 0.05)
+    );
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  animation: spin-slow 35s linear infinite;
+}
+
+.hero-soltec__planet-core::after {
+  content: "Soltec ERP";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  padding-bottom: 1.6rem;
+  background: radial-gradient(
+    circle at 50% 120%,
+    rgba(2, 8, 34, 0) 0,
+    rgba(2, 8, 34, 0.93) 65%
+  );
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px dashed rgba(165, 211, 255, 0.35);
+  transform-origin: center;
+  animation: spin-slow 45s linear infinite;
+}
+
+.orbit--inner {
+  inset: 8%;
+  animation-duration: 30s;
+  border-style: solid;
+  border-color: rgba(73, 179, 255, 0.6);
+}
+
+.orbit--outer {
+  inset: -6%;
+  border-style: dashed;
+}
+
+/* Cada chip se coloca en la órbita grande usando ángulo + radio */
+.sector-badge {
+  --angle: 0deg;
+  
+  /* --- IMPORTANTE: Que use el mismo nombre que definimos arriba --- */
+  --radius-factor: var(--orbit-outer-radius-factor);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0; 
+  height: 0;
+  
+  transform:
+    rotate(var(--angle))
+    translateX(calc(var(--planet-size) * var(--radius-factor)))
+    rotate(calc(var(--angle) * -1));
+    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+
+
+.sector-badge__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--soltec-chip-bg);
+  border-radius: var(--soltec-radius-full);
+  border: 1px solid rgba(154, 205, 255, 0.55);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+  font-size: 0.72rem;
+  color: var(--soltec-text-main);
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+}
+
+.sector-badge__chip i {
+  font-size: 0.8rem;
+  color: var(--soltec-accent);
+}
+
+/* Animación giro */
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .hero-soltec__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-soltec__visual {
+    order: -1;
+  }
+
+  .hero-soltec__subtitle,
+  .hero-soltec__note {
+    margin-inline: auto;
+  }
+
+  .hero-soltec__pills,
+  .hero-soltec__cta {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-soltec {
+    padding-top: 3.5rem;
+  }
+
+  .hero-soltec__planet-wrapper {
+    width: 280px;
+  }
+
+  .hero-soltec__title {
+    font-size: 1.9rem;
+  }
+
+  .hero-soltec__pills {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+  }
+}
+
+
+/* ============= SECCIÓN UBICACIÓN (CONTRASTE + MISMA ALTURA) ============= */
+.ubicacion-section {
+  /* antes: 80px 20px */
+  padding: 60px 0px;
+  background: #ebf0f5; 
+  position: relative;
+}
+
+.ubicacion-inner {
+  max-width: 1155px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 3rem;
+  align-items: stretch; 
+}
+
+/* --- Tarjeta de Info --- */
+.ubicacion-card {
+  background: #ffffff;
+  /* antes: 45px 40px */
+  padding: 30px 26px; 
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(10, 30, 60, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 2;
+
+  /* mantenemos tu height para no tocar el mapa */
+
+  height: 98%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Tag superior */
+.ubicacion-tag {
+  display: inline-block;
+  font-size: 0.72rem;      /* antes 0.75rem */
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1ec5ff;
+  margin-bottom: -15px;      /* antes 12px */
+}
+
+/* Título */
+.ubicacion-card h2 {
+  font-size: 2rem;         /* antes 2.2rem */
+  color: #0b2e55;
+  margin-bottom: 8px;      /* antes 12px */
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+/* --- BADGE RESEÑAS --- */
+.ubicacion-reseñas {
+  display: flex;
+  align-items: center;
+  gap: 8px;                /* antes 10px */
+  margin-bottom: 16px;     /* antes 24px */
+  background: #f8fafc; 
+  padding: 4px 10px;       /* antes 6px 14px */
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.ubicacion-reseñas .score {
+  font-weight: 800;
+  font-size: 1rem;         /* antes 1.1rem */
+  color: #0b2e55;
+}
+
+.ubicacion-reseñas .stars {
+  color: #ffb400;
+  font-size: 0.85rem;      /* antes 0.9rem */
+  display: flex;
+  gap: 3px;
+}
+
+.ubicacion-reseñas .opiniones-link {
+  font-size: 0.8rem;       /* antes 0.85rem */
+  color: #587998;
+  text-decoration: none;
+  border-left: 1px solid #dce4eb;
+  padding-left: 8px;       /* antes 10px */
+  margin-left: 2px;
+}
+
+.ubicacion-reseñas .opiniones-link:hover {
+  color: #1ec5ff;
+  text-decoration: underline;
+}
+
+/* --- Texto descriptivo --- */
+.ubicacion-desc {
+  color: #556987;
+  font-size: 0.96rem;      /* antes 1.05rem */
+  line-height: 1.5;        /* antes 1.65 */
+  margin-bottom: 18px;     /* antes 30px */
+}
+
+/* --- Lista de datos (dirección / horarios) --- */
+.ubicacion-datos {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 22px;     /* antes 35px */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;               /* antes 24px */
+}
+
+.ubicacion-datos li {
+  display: flex;
+  gap: 10px;               /* antes 16px */
+  align-items: flex-start;
+}
+
+/* Icono a la izquierda */
+.icono-ubicacion {
+  width: 34px;             /* antes 42px */
+  height: 34px;
+  background: #eaf6ff;
+  border-radius: 10px;     /* antes 12px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #007bff; 
+  font-size: 0.95rem;      /* antes 1.1rem */
+  flex-shrink: 0;
+}
+
+.ubicacion-datos strong {
+  display: block;
+  font-size: 0.7rem;
+  color: #92a4b9; 
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;      /* antes 4px */
+}
+
+.ubicacion-datos span {
+  display: block;
+  font-size: 0.94rem;      /* antes 1rem */
+  color: #0b2e55; 
+  font-weight: 600;
+}
+
+/* Botones */
+.ubicacion-actions {
+  display: flex;
+  gap: 8px;                /* antes 12px */
+  flex-wrap: wrap;
+}
+
+.ubicacion-actions > a,
+.ubicacion-actions > button {
+  padding: 9px 18px;       /* un poco más bajos */
+  font-size: 0.9rem;
+}
+
+.ubicacion-actions .btn-soltec-ghost {
+  border-color: #dce4eb;
+  color: #0b2e55;
+}
+.ubicacion-actions .btn-soltec-ghost:hover {
+  background: #f0f5fa;
+  border-color: #0b2e55;
+}
+
+/* --- Mapa --- */
+.ubicacion-mapa {
+  width: 101%;
+  /* CAMBIO CLAVE: 100% de altura para llenar el espacio estirado */
+  height: 98%;
+  /*min-height: 480px;*/ /* Mínimo por seguridad */
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 50px 10px rgba(0,0,0,0.08); 
+  border: 8px solid #ffffff; /* Marco estilo foto */
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ubicacion-section {
+    padding: 60px 15px;
+  }
+  .ubicacion-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  /* En celular volvemos a altura automática */
+  .ubicacion-card {
+    padding: 30px 20px;
+    height: auto; 
+  }
+  .ubicacion-mapa {
+    height: 350px;
+    min-height: auto;
+  }
+}
+
+
+
+
+
+
+/* ========================================================= 
+   PÁGINA ERP (Estilos Exclusivos - LIGTH MODE)
+========================================================= */
+
+/* --- HERO SECTION (AHORA CLARO) --- */
+.erp-hero {
+    position: relative;
+    padding: 140px 20px 100px;
+    /* Fondo Claro: Blanco con un toque de celeste muy sutil */
+    background: linear-gradient(180deg,  #004891 0%, #ffffff 100%);
+    text-align: center;
+    overflow: hidden;
+}
+
+.erp-hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+
+.erp-hero h1 {
+    font-size: 3.5rem;
+    color: #0b2e55; /* Texto Azul Oscuro (Antes blanco) */
+    line-height: 1.1;
+    margin-bottom: 24px;
+    font-weight: 800;
+}
+
+.erp-hero p {
+    font-size: 1.2rem;
+    color: #ffffff; /* Gris medio (Antes gris claro) */ /*#d8d7d7*/
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+/* Botones Hero (Ajustados para fondo claro) */
+.erp-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-primary-glow {
+    background: #1ec5ff;
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 99px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(30, 197, 255, 0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(30, 197, 255, 0.4);
+}
+
+.btn-secondary-ghost {
+    background-color: rgb(26, 35, 116);
+    /* Borde oscuro para verse en blanco */
+    border: 2px solid #e2e8f0; 
+    color: #ffffff;
+    padding: 14px 32px;
+    border-radius: 99px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-secondary-ghost:hover {
+    border-color: #0b2e55;
+    background: #0b2e55;
+    color: #00d5e4;
+}
+
+/* El horizonte de luz ahora es más sutil para no chocar con lo claro */
+.hero-horizon {
+    display: none; /* Lo quitamos en modo claro para que se vea limpio */
+}
+
+
+/* --- INTRO SECTION (CHECKLIST) --- */
+.erp-intro {
+    background: #ffffff;
+    padding: 80px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.erp-container {
+    max-width: 1200px; /* Un poco más ancho para que entren los módulos */
+    margin: 0 auto;
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.intro-text h2 {
+    font-size: 2.2rem;
+    color: #0b2e55;
+    margin-bottom: 20px;
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    color: #475569;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.check-list {
+    list-style: none;
+    padding: 0;
+}
+
+.check-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+    color: #334155;
+}
+
+.check-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #1ec5ff;
+    font-weight: 900;
+}
+
+/* Visual Abstracto */
+.glass-panel {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.stat-row { margin-bottom: 20px; }
+.stat-row span {
+    display: block;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+.bar-container {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.bar-fill {
+    height: 100%;
+    background: #1ec5ff;
+    border-radius: 10px;
+}
+.floating-badge {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #0b2e55;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 10px 20px rgba(11, 46, 85, 0.2);
+}
+
+/*OLASSSSSSSSSSSSSS*/
+
+.wave-divider{
+  line-height: 0;
+  overflow: hidden;
+}
+
+.wave-divider svg{
+  background: #ffffff;
+  display: block;
+  width: 100%;
+  height: 90px;      /* ajustá la “altura” de la ola */
+}
+
+.wave-divider--dark path{
+  fill: #07233d;     /* azul oscuro */
+}
+
+.wave-divider{
+  line-height: 0;
+  overflow: hidden;
+}
+.wave-divider svg{
+  display: block;
+  width: 100%;
+  height: 110px;
+}
+
+.wave-divider--layered .w1{ fill: #07233d; }
+.wave-divider--layered .w2{ fill: rgba(30,197,255,0.18); } /* brillo suave */
+
+
+/*linea*/
+
+/* =========================
+   LÍNEA PREMIUM (degradé)
+========================= */
+.page-erp .premium-line{
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(30,197,255,0.75),
+    rgba(11,46,85,0.18),
+    transparent
+  );
+  opacity: 0.85;
+}
+
+
+
+
+/* --- MÓDULOS (COMPACTOS PARA ENTRAR 4) --- */
+
+/* =========================================
+   TÍTULO TIPO ETIQUETA (MÓDULOS)
+========================================= */
+.page-erp #modulos .section-header{
+  text-align: center;
+}
+
+/* grupo centrado */
+.page-erp #modulos .badge-title{
+  display: inline-grid;
+  justify-items: center;     /* centra las etiquetas */
+  gap: 12px;
+  margin: 0;
+  line-height: 1;
+}
+
+/* base común: pill premium */
+.page-erp #modulos .badge-line{
+  display: inline-block;
+  width: fit-content;
+  border-radius: 999px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  padding: 10px 18px;
+
+  /* sombra sutil, no “pesada” */
+  box-shadow: 0 10px 22px rgba(2, 8, 23, 0.12);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* etiqueta superior (celeste) */
+.page-erp #modulos .badge-top{
+  background: linear-gradient(180deg, #2fd0ff 0%, #1ec5ff 100%);
+  color: #06243d;
+
+  /* MÁS GRANDE */
+  font-size: 1.10rem;
+  padding: 20px 32px;
+
+  border: 1px solid rgba(30,197,255,0.45);
+
+  /* corrimiento leve para el efecto stack */
+  transform: translateX(-10px);
+}
+
+
+/* etiqueta inferior (azul) */
+.page-erp #modulos .badge-bottom{
+  background: linear-gradient(180deg, #0b2e55 0%, #07233d 100%);
+  color: #79e6ff;
+  font-size: 1.22rem;
+  padding: 16px 32px;
+  border: 1px solid rgba(255,255,255,0.10);
+
+  /* un toque de profundidad al texto */
+  text-shadow: 0 10px 22px rgba(0,0,0,0.25);
+}
+
+/* responsive */
+@media (max-width: 520px){
+  .page-erp #modulos .badge-top{
+    font-size: 0.80rem;
+    padding: 9px 16px;
+    transform: translateX(-6px);
+  }
+  .page-erp #modulos .badge-bottom{
+    font-size: 0.95rem;
+    padding: 11px 18px;
+  }
+}
+
+
+
+.erp-modules {
+    background: #f8fafc; /* Gris muy suave */
+    padding: 80px 20px;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+}
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #0b2e55;
+    margin-bottom: 16px;
+}
+.section-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.modules-grid {
+    display: grid;
+    /* CAMBIO CLAVE: minmax reducido a 220px para forzar que entren 4 */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px; /* Gap más pequeño */
+}
+
+.module-card {
+    background: #ffffff;
+    border-radius: 16px;
+    /* CAMBIO CLAVE: Padding reducido para ahorrar espacio */
+    padding: 25px; 
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    border-color: #1ec5ff;
+}
+
+.module-card.featured-card {
+    border: 1px solid #1ec5ff; 
+    background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+.icon-box {
+    font-size: 2rem; /* Icono un poco más chico */
+    margin-bottom: 15px;
+}
+
+.module-card h3 {
+    font-size: 1.25rem; /* Título ajustado */
+    color: #0b2e55;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.module-card p {
+    color: #64748b;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.module-card ul {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 15px;
+}
+
+.module-card ul li {
+    font-size: 0.85rem; /* Texto de lista compacto */
+    color: #475569;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 12px;
+}
+.module-card ul li::before {
+    content: "•";
+    color: #1ec5ff;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+
+/* --- SEGURIDAD (AHORA CLARO) --- */
+.erp-security {
+    /* Fondo Claro */
+    background: #8183ff;
+    color: #0b2e55; /* Texto oscuro */
+    padding: 100px 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.security-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.security-content {
+    max-width: 100%;
+}
+
+.security-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #142c6e;
+}
+.security-content p {
+    color: #3f3f3f; /* Gris */
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.security-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.sec-item h4 {
+    color: #142c6e;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.sec-item p {
+    font-size: 0.95rem;
+    margin: 0;
+    color: #3f3f3f; /* Gris */
+}
+
+.page-erp .erp-cta{
+  border-top: 2px solid #002e69;
+}
+
+/* --- CTA FINAL --- */
+.erp-cta {
+    background: #ffffff;
+    padding: 100px 20px;
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+}
+
+.erp-cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.erp-cta h2 {
+    font-size: 2.5rem;
+    color: #0b2e55;
+    margin-bottom: 20px;
+}
+
+.btn-whatsapp-large {
+    display: inline-block;
+    background: #1ec5ff; 
+    color: #ffffff;
+    padding: 16px 40px;
+    border-radius: 99px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-whatsapp-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .intro-grid, .security-features {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .erp-hero h1 {
+        font-size: 2.5rem;
+    }
+    .erp-container {
+        padding: 0;
+    }
+    /* En tablet/móvil volvemos a 2 o 1 columna para que no se rompa */
+    .modules-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+
+/* =========================================================
+   ERP – Mejoras PRO (encapsulado)
+========================================================= */
+.page-erp {
+  background: #fff;
+}
+
+/* --- Subnav sticky --- */
+.page-erp .erp-subnav{
+  position: sticky;
+  top: 84px; /* ajustá si tu header es más alto */
+  z-index: 50;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e2e8f0;
+}
+.page-erp .erp-subnav-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 18px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.page-erp .erp-subnav a{
+  white-space: nowrap;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #0b2e55;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.page-erp .erp-subnav a:hover{
+  border-color: #e2e8f0;
+  background: #f8fafc;
+}
+
+/* Mejor tipografía responsive (sin tocar tu estética) */
+.page-erp .erp-hero h1{
+  font-size: clamp(2.2rem, 4.2vw, 3.5rem);
+}
+.page-erp .erp-hero{
+  padding: clamp(110px, 10vw, 140px) 20px 90px;
+}
+
+/* --- Screenshots --- */
+.page-erp .erp-screenshots{
+  background: #d4edfc;
+  padding: 80px 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.page-erp .shots-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.page-erp .shot-card{
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+}
+.page-erp .shot-card img{
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+  background: #f1f5f9;
+}
+.page-erp .shot-card figcaption{
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 4px;
+}
+.page-erp .shot-card strong{
+  color: #0b2e55;
+}
+.page-erp .shot-card span{
+  color: #64748b;
+  font-size: 0.92rem;
+}
+
+/* --- Needs section --- */
+.page-erp .erp-needs{
+  background: #f8fafc;
+  padding: 90px 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.page-erp .needs-grid{
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: start;
+}
+.page-erp .needs-text h2{
+  color: #0b2e55;
+  font-size: 2.3rem;
+  margin-bottom: 12px;
+}
+.page-erp .needs-text p{
+  color: #475569;
+  margin-bottom: 18px;
+}
+.page-erp .needs-list{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+}
+.page-erp .needs-list li{
+  padding-left: 26px;
+  position: relative;
+  margin-bottom: 10px;
+  color: #334155;
+}
+.page-erp .needs-list li::before{
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #1ec5ff;
+  font-weight: 900;
+}
+.page-erp .needs-actions{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Tarjeta diagnóstica */
+.page-erp .needs-card{
+  border: 1px solid #e2e8f0;
+  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+}
+.page-erp .needs-card h3{
+  margin: 0 0 8px;
+  color: #0b2e55;
+}
+.page-erp .muted{
+  color: #64748b;
+  font-size: 0.95rem;
+}
+.page-erp .mini-steps{
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+.page-erp .mini-steps .step{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #334155;
+  font-weight: 700;
+}
+.page-erp .mini-steps .step span{
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #0b2e55;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* --- Integración --- */
+.page-erp .erp-integration{
+  background: #c5d3eb;
+  padding: 90px 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.page-erp .integration-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+.page-erp .feature-list{
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+}
+.page-erp .feature-list li{
+  margin-bottom: 10px;
+  color: #334155;
+  padding-left: 14px;
+  position: relative;
+}
+.page-erp .feature-list li::before{
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #1ec5ff;
+  font-weight: 900;
+}
+.page-erp .integration-panel{
+  border: 1px solid #12335f;
+  border-radius: 18px;
+  padding: 22px;
+  background: #a5ccf8;
+}
+.page-erp .flow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.page-erp .node{
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: #0b2e55;
+  font-weight: 800;
+}
+.page-erp .arrow{
+  color: #ffffff;
+  font-weight: 900;
+}
+
+/* --- Personalización --- */
+.page-erp .erp-custom{
+  background: #f8fafc;
+  padding: 90px 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.page-erp .custom-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.page-erp .custom-card{
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.05);
+}
+.page-erp .custom-card h3{
+  color: #0b2e55;
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+.page-erp .custom-card p{
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* --- Clientes --- */
+.page-erp .erp-clients{
+  background: #ffffff;
+  padding: 90px 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.page-erp .clients-grid{
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+.page-erp .client-logo{
+  height: 88px;                 /* altura fija consistente */
+  padding: 12px 16px;           /* aire interno */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+
+  overflow: hidden;             /* por seguridad */
+}
+
+/* Imagen dentro (SIN deformar) */
+.client-logo img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 54px;             /* CLAVE para que ninguno “rompa” */
+  max-width: 100%;
+
+  object-fit: contain;          /* CLAVE: no se estira */
+  object-position: center;
+}
+
+/* Si querés un look más premium */
+.client-logo{
+  box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+}
+
+/* Responsive */
+@media (max-width: 1000px){
+  .clients-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 520px){
+  .clients-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.page-erp .testimonials{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.page-erp .testimonial{
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.05);
+}
+.page-erp .testimonial p{
+  margin: 0 0 10px;
+  color: #334155;
+}
+.page-erp .testimonial span{
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* --- FAQ --- */
+.page-erp .erp-faq{
+  background: #f8fafc;
+  padding: 90px 20px;
+  border-top: 1px solid #e2e8f0;
+}
+.page-erp .faq-list{
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+.page-erp .faq-item{
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #5e91ff;
+  padding: 14px 16px;
+}
+.page-erp .faq-item summary{
+  cursor: pointer;
+  font-weight: 900;
+  color: #ffffff;
+}
+.page-erp .faq-item p{
+  margin: 10px 0 0;
+  color: #d8d7d7;
+}
+
+/* Accesibilidad focus */
+.page-erp a:focus-visible,
+.page-erp button:focus-visible,
+.page-erp summary:focus-visible{
+  outline: 3px solid rgba(30,197,255,0.45);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* Responsive */
+@media (max-width: 1000px){
+  .page-erp .shots-grid{ grid-template-columns: 1fr; }
+  .page-erp .needs-grid{ grid-template-columns: 1fr; }
+  .page-erp .integration-grid{ grid-template-columns: 1fr; }
+  .page-erp .custom-grid{ grid-template-columns: repeat(2, 1fr); }
+  .page-erp .clients-grid{ grid-template-columns: repeat(3, 1fr); }
+  .page-erp .testimonials{ grid-template-columns: 1fr; }
+}
+@media (max-width: 520px){
+  .page-erp .custom-grid{ grid-template-columns: 1fr; }
+  .page-erp .erp-subnav{ top: 72px; }
+}
+
+/* =========================================================
+   SOLO ERP: fondos y layout a ancho completo (sin romper el sitio)
+========================================================= */
+
+/* Asegura que el body/page no genere márgenes laterales */
+.page-erp{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Este es el fix clave: si tu sitio limita el main, acá lo anulamos SOLO en ERP */
+.page-erp main{
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Si tu web usa algún wrapper tipo .container/.contenido/.principal, lo anulamos SOLO dentro de ERP */
+.page-erp .container,
+.page-erp .contenedor,
+.page-erp .contenido,
+.page-erp .principal,
+.page-erp .wrapper{
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Secciones full width */
+.page-erp section{
+  width: 100%;
+}
+
+/* Y el contenido lo seguís controlando con .erp-container (esto mantiene look pro) */
+.page-erp .erp-container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+

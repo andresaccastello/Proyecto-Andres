@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./layout/imagenes/Iconos/Logo_soltec-removebg-preview.png" />
+    <title>Soltec - Sistema ERP SolGest</title>
+
+    <link rel="stylesheet" href="./layout/index.css" />
+    <script src="./layout/js/index.js" type="module"></script>
+    <script src="./layout/js/header.js" type="module"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+</head>
+
+<body class="page-erp">
+
+   <header>
+      <a href="./">
+        <img src="./layout/imagenes/GrupoSoltec-removebg-preview.png" alt="logo-soltec" id="img-logo" />
+      </a>
+      <nav>
+        <ul>
+          <li><a href="./">Inicio</a></li>
+          <li class="nav-item-sistemas">
+            <a href="#sistemas-home" class="nav-parent" aria-haspopup="true">Sistemas</a>
+            <div class="nav-submenu">
+              <a href="./erp.html">Sistema ERP completo</a>
+              <a href="./modulo.html">Sistema por módulos</a>
+              <a href="./otros.html">Web, presentismo y otros</a>
+            </div>
+          </li>
+          <li><a href="./productos.html">Productos</a></li>
+          <li><a href="./about.html">Sobre nosotros</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+          <li>
+              <button id="btn-carrito" class="btn-carrito">
+                <img src="layout/imagenes/Iconos/Carrito.png" alt="Carrito">
+                <span id="carrito-cantidad">0</span>
+              </button>
+          </li>
+        </ul>
+      </nav>
+   </header>
+
+   <div id="carrito-mini" class="carrito-mini"></div>
+
+   <main>
+
+      <!-- HERO -->
+      <section class="erp-hero">
+          <div class="erp-hero-content">
+              
+              <h1>El cerebro digital que <br><span class="text-gradient">unifica tu empresa</span></h1>
+              <p>Finanzas, Stock, Ventas y RRHH en una sola plataforma. Diseñado para PyMES y grandes empresas que buscan control total, seguridad jerárquica y escalabilidad sin límites.</p>
+
+              <div class="erp-actions">
+                  <a href="#modulos" class="btn-primary-glow">Explorar funcionalidades</a>
+                  <a href="#contacto" class="btn-secondary-ghost">Solicitar Cotización</a>
+              </div>
+          </div>
+          <div class="hero-horizon"></div>
+      </section>
+
+      <!-- SUBNAV STICKY (FUERA DEL HERO PARA QUE FUNCIONE STICKY) -->
+      <nav class="erp-subnav" aria-label="Secciones del ERP">
+        <div class="erp-subnav-inner">
+          <a href="#que-es">Qué hace</a>
+          <a href="#capturas">Capturas</a>
+          <a href="#modulos">Módulos</a>
+          <a href="#necesitas">¿Lo necesitás?</a>
+          <a href="#integracion">Integración</a>
+          <a href="#personalizacion">Ajustes</a>
+          <a href="#clientes">Clientes</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </nav>
+
+      <!-- INTRO (QUE HACE) -->
+      <section class="erp-intro" id="que-es">
+          <div class="erp-container">
+              <div class="intro-grid">
+                  <div class="intro-text">
+                      <h2>¿Tu información está desconectada?</h2>
+                      <p>El mayor freno para el crecimiento es tener las ventas por un lado, el stock por otro y la contabilidad atrasada. <strong>SolGest</strong> elimina las islas de información.</p>
+                      <ul class="check-list">
+                          <li><strong>Dato Único:</strong> Una venta impacta en stock, caja, cta. cte. y contabilidad al instante.</li>
+                          <li><strong>Multi-usuario:</strong> Desde una PC hasta redes de cientos de puestos.</li>
+                          <li><strong>Seguridad:</strong> Vos decidís quién ve qué. Auditoría total por usuario.</li>
+                      </ul>
+                  </div>
+                  <div class="intro-visual">
+                      <div class="glass-panel">
+                          <div class="stat-row">
+                              <span>Ventas</span>
+                              <div class="bar-container"><div class="bar-fill" style="width: 80%"></div></div>
+                          </div>
+                          <div class="stat-row">
+                              <span>Stock Real</span>
+                              <div class="bar-container"><div class="bar-fill" style="width: 60%"></div></div>
+                          </div>
+                          <div class="stat-row">
+                              <span>Caja</span>
+                              <div class="bar-container"><div class="bar-fill" style="width: 90%"></div></div>
+                          </div>
+                          <div class="floating-badge">Actualizado en tiempo real</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <!-- CAPTURAS -->
+      <section class="erp-screenshots" id="capturas">
+        <div class="erp-container">
+          <div class="section-header">
+            <h2>Velo en acción</h2>
+            <p>Capturas reales del sistema para entender el flujo en segundos.</p>
+          </div>
+
+          <div class="shots-grid">
+            <figure class="shot-card">
+              <img loading="lazy" src="./layout/imagenes/erp/dashboard.jpg" alt="Tablero de comando del ERP">
+              <figcaption>
+                <strong>Tablero gerencial</strong>
+                <span>Indicadores clave y control en tiempo real</span>
+              </figcaption>
+            </figure>
+
+            <figure class="shot-card">
+              <img loading="lazy" src="./layout/imagenes/erp/ventas.jpg" alt="Ventas y facturación del ERP">
+              <figcaption>
+                <strong>Ventas y facturación</strong>
+                <span>Operación ágil, fiscal y segura</span>
+              </figcaption>
+            </figure>
+
+            <figure class="shot-card">
+              <img loading="lazy" src="./layout/imagenes/erp/tesoreria.jpg" alt="Tesorería, caja y bancos del ERP">
+              <figcaption>
+                <strong>Tesorería</strong>
+                <span>Caja, bancos, cheques y flujo de fondos</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ¿LO NECESITÁS? -->
+      <section class="erp-needs" id="necesitas">
+        <div class="erp-container">
+          <div class="needs-grid">
+            <div class="needs-text">
+              <h2>¿Tu empresa necesita un ERP completo?</h2>
+              <p>Si hoy tenés 3 o más de estos síntomas, ya estás perdiendo tiempo y control.</p>
+
+              <ul class="needs-list">
+                <li>Stock distinto según quién lo mire</li>
+                <li>Ventas por un lado y contabilidad por otro</li>
+                <li>Cuesta saber qué se debe y qué se cobra</li>
+                <li>Excel por todos lados / reprocesos</li>
+                <li>No hay auditoría clara de “quién hizo qué”</li>
+              </ul>
+
+              <div class="needs-actions">
+                <a href="#contacto" class="btn-primary-glow">Quiero una recomendación</a>
+                <a href="#integracion" class="btn-secondary-ghost">Ver integración</a>
+              </div>
+            </div>
+
+            <aside class="needs-card">
+              <h3>Diagnóstico rápido</h3>
+              <p class="muted">Te hacemos 6 preguntas y te decimos si SolGest aplica a tu caso.</p>
+
+              <div class="mini-steps">
+                <div class="step"><span>1</span> Relevamiento</div>
+                <div class="step"><span>2</span> Propuesta por etapas</div>
+                <div class="step"><span>3</span> Demo + plan de implementación</div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+<div class="wave-divider wave-divider--dark wave-divider--layered">
+  <svg viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
+    <path class="w1" d="M0,70 C220,120 480,120 720,86 C980,50 1210,20 1440,52 L1440,140 L0,140 Z"></path>
+    <path class="w2" d="M0,82 C260,40 520,40 760,76 C1000,112 1220,132 1440,106 L1440,140 L0,140 Z"></path>
+  </svg>
+</div>
+
+      <!-- MÓDULOS -->
+      <section class="erp-modules" id="modulos">
+          <div class="erp-container">
+              <div class="section-header">
+                  <h2 class="badge-title">
+                   <span class="badge-line badge-top">Módulos de</span>
+                   <span class="badge-line badge-bottom">Potencia Industrial</span>
+                  </h2>
+
+                  <p>SolGest cubre todas las áreas operativas. Todo integrado, todo automático.</p>
+              </div>
+
+              <div class="modules-grid">
+
+                  <div class="module-card">
+                      <div class="icon-box">💰</div>
+                      <h3>Finanzas y Contabilidad</h3>
+                      <p>El corazón administrativo.</p>
+                      <ul>
+                          <li>Contabilidad Central y Balances</li>
+                          <li>Tesorería, Caja y Bancos</li>
+                          <li>Gestión de Cheques (Propios/Terceros)</li>
+                          <li>Activos Fijos y Revalúo</li>
+                          <li>Impuestos y Retenciones Automáticas</li>
+                      </ul>
+                  </div>
+
+                  <div class="module-card">
+                      <div class="icon-box">🏭</div>
+                      <h3>Operaciones y Stock</h3>
+                      <p>Control total del flujo físico.</p>
+                      <ul>
+                          <li>Compras y Seguimiento de Órdenes</li>
+                          <li>Stock Multi-Depósito y Trazabilidad</li>
+                          <li>Producción y MRP (Planificación)</li>
+                          <li>Costos y Estadísticas de Compra</li>
+                          <li>Inventarios con Códigos de Barra</li>
+                      </ul>
+                  </div>
+
+                  <div class="module-card">
+                      <div class="icon-box">📈</div>
+                      <h3>Ventas y CRM</h3>
+                      <p>Facturación rápida y segura.</p>
+                      <ul>
+                          <li>Facturación Fiscal (A, B, C)</li>
+                          <li>Cuentas Corrientes y Cobranzas</li>
+                          <li>CRM y Gestión de Clientes</li>
+                          <li>Listas de Precios Multi-moneda</li>
+                          <li>Integración con Pedidos Web</li>
+                      </ul>
+                  </div>
+
+                  <div class="module-card">
+                      <div class="icon-box">👥</div>
+                      <h3>Capital Humano</h3>
+                      <p>Gestión eficiente del personal.</p>
+                      <ul>
+                          <li>Liquidación de Sueldos y Jornales</li>
+                          <li>Multi-Convenio</li>
+                          <li>Control de Presentismo y Horarios</li>
+                          <li>Libro de Sueldos Digital</li>
+                          <li>Gestión de legajos</li>
+                      </ul>
+                  </div>
+
+              </div>
+          </div>
+      </section>
+
+
+      <!-- INTEGRACIÓN -->
+      <section class="erp-integration" id="integracion">
+        <div class="erp-container">
+          <div class="integration-grid">
+            <div>
+              <h2>Integración con otros sistemas</h2>
+              <p>SolGest puede integrarse para que tu operación no se corte: importación/exportación de datos, circuitos definidos y conexión con sistemas existentes según la necesidad.</p>
+              <ul class="feature-list">
+                <li><strong>Importación/Exportación:</strong> clientes, productos, listas y movimientos</li>
+                <li><strong>Escenarios típicos:</strong> e-commerce, BI/reporting, migración desde Excel</li>
+                <li><strong>Implementación planificada:</strong> sin frenar la operación</li>
+              </ul>
+            </div>
+
+            <div class="integration-panel">
+              <div class="flow">
+                <div class="node">Ventas</div>
+                <div class="arrow">→</div>
+                <div class="node">Stock</div>
+                <div class="arrow">→</div>
+                <div class="node">Caja/Bancos</div>
+                <div class="arrow">→</div>
+                <div class="node">Contabilidad</div>
+              </div>
+              <p class="muted">Dato único: un movimiento impacta en el resto al instante.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- PERSONALIZACIÓN -->
+      <section class="erp-custom" id="personalizacion">
+        <div class="erp-container">
+          <div class="section-header">
+            <h2>Ajustes y personalización</h2>
+            <p>Adaptamos SolGest a tu circuito y a tu forma de trabajar.</p>
+          </div>
+
+          <div class="custom-grid">
+            <div class="custom-card">
+              <h3>Perfiles y seguridad</h3>
+              <p>Definí qué ve y qué hace cada rol. Auditoría por usuario.</p>
+            </div>
+
+            <div class="custom-card">
+              <h3>Informes parametrizables</h3>
+              <p>Consultas y reportes adaptados a tus indicadores.</p>
+            </div>
+
+            <div class="custom-card">
+              <h3>Implementación por etapas</h3>
+              <p>Arrancá por lo crítico y escalá sin re-trabajo.</p>
+            </div>
+
+            <div class="custom-card">
+              <h3>Escalabilidad</h3>
+              <p>Desde 1 PC hasta redes grandes de puestos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+<div class="wave-divider wave-divider--dark wave-divider--layered">
+  <svg viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
+    <path class="w1" d="M0,70 C220,120 480,120 720,86 C980,50 1210,20 1440,52 L1440,140 L0,140 Z"></path>
+    <path class="w2" d="M0,82 C260,40 520,40 760,76 C1000,112 1220,132 1440,106 L1440,140 L0,140 Z"></path>
+  </svg>
+</div>
+      <!-- CLIENTES -->
+      <section class="erp-clients" id="clientes">
+        <div class="erp-container">
+          <div class="section-header">
+            <h2>Empresas que ya trabajan con SolGest</h2>
+            <p></p>
+          </div>
+
+          <div class="clients-grid">
+            <div class="client-logo"><img src="./layout/imagenes/Iconos/Logo-Sobrero.webp" alt="Logo Sobrero"></div>
+            <div class="client-logo"><img src="./layout/imagenes/Iconos/Coop-Monte-Maiz.png" alt="Logo Comercial"></div>
+            <div class="client-logo"><img src="./layout/imagenes/Iconos/Coop-Posse.png" alt="Logo Industrial"></div>
+            <div class="client-logo"><img src="./layout/imagenes/Iconos/Trento.png" alt="Logo Textil"></div>
+            <div class="client-logo"><img src="./layout/imagenes/Iconos/Massio.png" alt="Logo Transporte"></div>
+            <div class="client-logo"><img src="./layout/imagenes/Iconos/Finanpass.webp" alt="Logo Agrícola"></div>
+          </div>
+
+          <div class="testimonials">
+            <article class="testimonial">
+              <p>“Ordenamos stock y tesorería. Hoy sabemos exactamente qué entra y qué sale.”</p>
+              <span><strong></strong> · Sobrero y Cagnolo</span>
+            </article>
+            <article class="testimonial">
+              <p>“Cerramos contabilidad más rápido y con auditoría clara por usuario.”</p>
+              <span><strong></strong> · Coop-Monte-Maiz</span>
+            </article>
+          </div>
+        </div>
+      </section>
+<div class="premium-line"></div>
+
+      <!-- FAQ -->
+      <section class="erp-faq" id="faq">
+        <div class="erp-container">
+          <div class="section-header">
+            <h2>Preguntas frecuentes</h2>
+            <p>Las dudas típicas antes de implementar un ERP.</p>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>¿Se puede implementar por etapas?</summary>
+              <p>Sí. Se arma un plan por prioridades (ventas/stock/tesorería, etc.) y se escala.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>¿Se puede migrar desde Excel o un sistema anterior?</summary>
+              <p>Sí. Se define qué información se migra (maestros y/o históricos) y se valida.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>¿Hay multi-sucursal y multi-depósito?</summary>
+              <p>Sí. Se configura según tu estructura y reglas de operación.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>¿Qué incluye la implementación?</summary>
+              <p>Relevamiento, instalación, capacitación y soporte para puesta en marcha.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEGURIDAD -->
+      <section class="erp-security">
+          <div class="erp-container">
+              <div class="security-wrapper">
+                  <div class="security-content">
+                      <h2>Control Gerencial y Seguridad</h2>
+                      <p>SolGest no solo opera, también controla. Accedé a un <strong>Tablero de Comando</strong> con informes gerenciales para la toma de decisiones.</p>
+
+                      <div class="security-features">
+                          <div class="sec-item">
+                              <h4>🛡️ Perfiles de Usuario</h4>
+                              <p>Definí accesos por jerarquía. Un vendedor no ve el balance; un operario no ve costos.</p>
+                          </div>
+                          <div class="sec-item">
+                              <h4>👁️ Auditoría Total</h4>
+                              <p>Registro de cada movimiento: quién lo hizo, cuándo y desde qué terminal.</p>
+                          </div>
+                          <div class="sec-item">
+                              <h4>🔗 Licencias Ilimitadas</h4>
+                              <p>Olvidate de pagar por usuario. Instalación en red sin límite de puestos de trabajo.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <!-- CTA FINAL -->
+      <section class="erp-cta">
+          <div class="erp-cta-content">
+              <h2>¿Tu empresa está lista para el siguiente nivel?</h2>
+              <p>Implementación remota, capacitación incluida y soporte local experto.</p>
+              <div class="cta-buttons">
+                  <a href="https://wa.me/5493472581774" target="_blank" class="btn-whatsapp-large">
+                      Hablar con un consultor ERP
+                  </a>
+              </div>
+          </div>
+      </section>
+
+   </main>
+
+   <footer class="pie-principal" id="contacto">
+  <div class="footer-gradient-bar"></div>
+
+  <div class="footer-container">
+    
+    <section class="footer-cta">
+      <div class="footer-cta-text">
+        <p class="footer-cta-kicker">Soluciones ERP & Tecnología</p>
+        <h3>¿Listo para llevar tu gestión al próximo nivel?</h3>
+        <p class="footer-cta-subtitle">
+          Integramos producción, stock, ventas, sucursales y más en un solo software,
+          con soporte local en Marcos Juárez.
+        </p>
+      </div>
+
+      <div class="footer-cta-actions">
+        <a href="https://wa.me/5493472581774"
+           target="_blank"
+           class="btn-footer-primary btn-equal-width">
+          Hablar con un asesor
+        </a>
+        <a href="./productos.html" class="btn-footer-secondary btn-equal-width">
+          Ver catálogo de productos
+        </a>
+      </div>
+    </section>
+
+    <div class="footer-main">
+      
+      <div class="footer-brand">
+        <img 
+          src="./layout/imagenes/GrupoSoltec-removebg-preview.png" 
+          alt="Grupo Soltec"
+          class="img-logo-footer"
+        >
+        
+        <div class="social-icons brand-socials">
+          <a href="https://instagram.com/soltec_msjz" target="_blank" aria-label="Instagram" class="social-circle">
+            <img src="./layout/imagenes/instagram.png" alt="IG">
+          </a>
+          <a href="https://wa.me/5493472581774" target="_blank" aria-label="WhatsApp" class="social-circle">
+             <img src="./layout/imagenes/whatsapp.png" alt="WA" onerror="this.style.display='none'"> 
+          </a>
+          <a href="https://www.facebook.com/share/1C6ftRdUWu/?mibextid=wwXIfr" target="_blank" aria-label="Facebook" class="social-circle">
+            <img src="./layout/imagenes/Iconos/facebook_logo_icon_147291.png" alt="FB" onerror="this.style.display='none'">
+          </a>
+          <a href="https://www.linkedin.com/in/daniel-accastello-a1347a2a/" target="_blank" aria-label="LinkedIn" class="social-circle">
+             <img src="./layout/imagenes/Iconos/linkedin.png" alt="IN" onerror="this.style.display='none'">
+          </a>
+          <a href="mailto:andres.soltec2@gmail.com" aria-label="Email" class="social-circle">
+             <img src="./layout/imagenes/Iconos/Gmail.ico" alt="Mail" onerror="this.style.display='none'">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-columns">
+        
+        <div class="footer-col">
+          <h4>Soluciones</h4>
+          <ul class="footer-links">
+            <li><a href="./erp.html">Sistemas ERP</a></li>
+            <li><a href="./modulo.html">Soluciones por rubro</a></li>
+            <li><a href="./productos.html">Productos tecnológicos</a></li>
+            <li><a href="./about.html">Sobre nosotros</a></li>
+            <li><a href="./otros.html">Web, presentismo y otros</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul class="datos-lista">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:andres.soltec2@gmail.com">andres.soltec2@gmail.com</a>
+            </li>
+            <li>
+              <strong>WhatsApp:</strong>
+              <a href="https://wa.me/5493472581774" target="_blank">+54 9 3472 581774</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ubicación & horarios</h4>
+          <address>
+            Roque Sáenz Peña 65<br>
+            Marcos Juárez<br>
+            Córdoba, Argentina
+          </address>
+          <a href="https://www.google.com/maps/place/SOLTEC/@-32.6951798,-62.091767,19.54z/data=!4m6!3m5!1s0x95c97f4f442dd5cd:0x99019fb175f4568c!8m2!3d-32.6952141!4d-62.0918288!16s%2Fg%2F11h0r3j__?entry=ttu&g_ep=EgoyMDI1MTIwNy4wIKXMDSoASAFQAw%3D%3D"
+             target="_blank"
+             class="ver-mapa-link">
+            Ver en mapa
+          </a>
+
+          <div class="footer-horarios" style="margin-top: 15px;">
+            <p><strong>Lun - Vie:</strong> 8–12 hs & 15–19 hs</p>
+            <p><strong>Sáb:</strong> 8–13 hs</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 – Soltec. Córdoba, Argentina.</p>
+      <p class="footer-bottom-claim">
+        Tecnología & ERP para negocios reales.
+      </p>
+    </div>
+  </div>
+</footer>
+
+   <a class="btn-wsp" href="https://wa.me/5493472581774" target="_blank">
+     <img src="./layout/imagenes/whatsapp.png" alt="WhatsApp">
+   </a>
+
+</body>
+</html>

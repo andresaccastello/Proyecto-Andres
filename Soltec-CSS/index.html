@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./layout/imagenes/Iconos/Logo_soltec-removebg-preview.png" />
+    <title>Grupo Soltec</title>
+    <!-- Estilos generales (incluye ahora también el CSS del hero nuevo) -->
+    <link rel="stylesheet" href="./layout/index.css" />
+
+    <!-- Iconos Font Awesome (para los íconos del hero) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- JS general de la página -->
+    <script src="./layout/js/index.js" type="module"></script>
+    <script src="./layout/js/header.js" type="module"></script>
+
+    <!--LINKS DE FUNTES-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    
+    <header>
+      <a href="./">
+        <img
+          src="./layout/imagenes/GrupoSoltec-removebg-preview.png"
+          alt="logo-soltec"
+          id="img-logo"
+        />
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="./">Inicio</a></li>
+
+          <li class="nav-item-sistemas">
+          <a href="#sistemas-home" class="nav-parent" aria-haspopup="true">
+          Sistemas
+          </a>
+
+         <div class="nav-submenu">
+         <a href="./erp.html">Sistema ERP completo</a>
+         <a href="./modulo.html">Sistema por módulos</a>
+         <a href="./otros.html">Web, presentismo y otros</a>
+         </div>
+        </li>
+
+          <li><a href="./productos.html">Productos</a></li>
+          <li><a href="./about.html">Sobre nosotros</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+
+          <li>
+            <button id="btn-carrito" class="btn-carrito">
+            <img src="layout/imagenes/Iconos/Carrito.png" alt="Carrito">
+    
+            <span id="carrito-cantidad">0</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="carrito-mini" class="carrito-mini">
+      <!-- JS va a rellenar esto -->
+    </div>
+
+    <main>
+      <!-- ================= HERO VIEJO (COMENTADO) ================= -->
+      <!--
+      <section class="hero">
+        <h1>Bienvenidos</h1>
+        <img
+          src="./layout/imagenes/imagen hero provisoria.jpg"
+          alt="imagen-hero"
+        />
+        <p class="sistemas-intro">
+          Líderes en sistemas de gestión en la zona, con más de 30 años desarrollando software
+          y equipando negocios con tecnología. Unimos sistemas, productos y soporte profesional
+          para que tu empresa trabaje mejor y pueda seguir creciendo.
+        </p>
+      </section>
+      -->
+
+      <!-- ================= NUEVO HERO SOLTEC ================= -->
+      <section class="hero-soltec">
+        <div class="hero-soltec__inner">
+          <!-- Columna izquierda: texto -->
+          <div>
+            <div class="hero-soltec__eyebrow">
+              <i class="fa-solid fa-circle-nodes"></i>
+              <span>Soluciones ERP para industrias, comercios y servicios</span>
+            </div>
+
+            <h1 class="hero-soltec__title">
+              Integramos tu gestión en un solo
+              <span>software ERP</span>
+            </h1>
+
+            <p class="hero-soltec__subtitle">
+              Soltec digitaliza los procesos clave de tu organización: producción,
+              stock, contabilidad, presentismo, ventas, sucursales y más.
+              Pensado para fábricas, pequeños comercios, mutuales, cooperativas,
+              corralones y empresas de servicios.
+            </p>
+
+            <div class="hero-soltec__pills">
+              <span class="hero-soltec__feature">Producción & trazabilidad</span>
+              <span class="hero-soltec__feature">Gestión de stock en tiempo real</span>
+              <span class="hero-soltec__feature">Presentismo & RRHH</span>
+              <span class="hero-soltec__feature">Módulo contable integrado</span>
+              <span class="hero-soltec__feature">Paneles web y reportes</span>
+            </div>
+
+            <div class="hero-soltec__cta">
+              <a href="#contacto" class="btn-soltec-primary">
+                Hablar con un asesor
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+              <a href="#sistemas-home" class="btn-soltec-ghost">
+                Ver soluciones por rubro
+              </a>
+            </div>
+
+            <p class="hero-soltec__note">
+              Implementaciones a medida, soporte local y acompañamiento en todo el proceso.
+            </p>
+          </div>
+
+          <!-- Columna derecha: planeta y sectores -->
+          <div class="hero-soltec__visual">
+            <div class="hero-soltec__planet-wrapper">
+              <div class="hero-soltec__planet-core"></div>
+
+              <!-- Órbitas -->
+              <div class="orbit orbit--inner"></div>
+              <div class="orbit orbit--outer"></div>
+
+              <!-- Sectores alrededor del “planeta” en la órbita grande -->
+              <div class="sector-badge" style="--angle: -90deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-industry"></i>
+                  <span>Fábricas</span>
+                </div>
+              </div>
+
+              <div class="sector-badge" style="--angle: -45deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-store"></i>
+                  <span>Comercios</span>
+                </div>
+              </div>
+
+              <div class="sector-badge" style="--angle: 0deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-tractor"></i>
+                  <span>Agro</span>
+                </div>
+              </div>
+
+              <div class="sector-badge" style="--angle: 45deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-truck-front"></i>
+                  <span>Logística</span>
+                </div>
+              </div>
+
+              <div class="sector-badge" style="--angle: 90deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-people-group"></i>
+                  <span>Mutuales</span>
+                </div>
+              </div>
+
+              <div class="sector-badge" style="--angle: 135deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-handshake-angle"></i>
+                  <span>Cooperativas</span>
+                </div>
+              </div>
+
+              <div class="sector-badge" style="--angle: 180deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-cubes-stacked"></i>
+                  <span>Corralones</span>
+                </div>
+              </div>
+
+              <div class="sector-badge" style="--angle: 225deg;">
+                <div class="sector-badge__chip">
+                  <i class="fa-solid fa-building"></i>
+                  <span>Servicios</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="hero-fade">
+          
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,70 C200,120 420,120 720,85 C980,55 1180,30 1440,55 L1440,120 L0,120 Z"></path>
+  </svg>
+        </div>
+      </section>
+
+<div class="hero-bridge" aria-hidden="false">
+  <div class="hero-bridge__inner">
+    <span class="hero-bridge__pill">Para pequeños negocios</span>
+    <p class="hero-bridge__text">Planes accesibles, implementación rápida y soporte local.</p>
+  </div>
+</div>
+
+
+    <section class="sistemas-section">
+  <div class="container-sistemas">
+    
+    <div class="sistemas-header">
+      <h2>Llevá tu facturación al <span class="text-gradient">siguiente nivel</span></h2>
+      <p>La solución integral para pequeños negocios que buscan control, seguridad y una contabilidad precisa. Buscando el crecimiento continuo.</p>
+    </div>
+
+    <div class="bento-grid">
+      
+      <div class="bento-card card-control border-cyan">
+        <div class="card-bg-mask"></div> <div class="card-content">
+          <h3>Caja Blindada <br>y Stock Real.</h3>
+          <div class="card-image-wrapper">
+             <img src="./layout/imagenes/render-caja.png"  alt="Control de Caja">
+          </div>
+        </div>
+        <div class="glow-internal cyan"></div>
+      </div>
+
+      <div class="bento-card card-contabilidad border-green">
+        <div class="card-bg-mask"></div> <div class="card-content">
+          <h3>Software de <br>contabilidad.</h3>
+          <div class="card-image-wrapper">
+             <img src="./layout/imagenes/render-grafico.png" alt="Gráfico Rentabilidad">
+          </div>
+        </div>
+        <div class="glow-internal green"></div>
+      </div>
+
+    </div>
+
+    <div class="sistemas-cta">
+      <a href="#contacto" class="btn-rectangular btn-pulse">Ver planes para mi negocio</a>
+      <span class="microcopy">Planes accesibles desde $40.000/mes.</span>
+    </div>
+
+  </div>
+</section>
+<div class="sistemas-fade-out"></div>
+      <section class="productos">
+        <h2>Nuestros productos destacados</h2>
+        <div id="productos-grid" class="catalogo__contenedor">
+          <!-- JS mete los productos acá -->
+        </div>
+      </section>
+
+      <section class="ubicacion-section">
+        <div class="ubicacion-inner">
+          
+          <div class="ubicacion-card">
+            <span class="ubicacion-tag">Nuestras Oficinas</span>
+            <h2>Vení a conocer Soltec</h2>
+            
+            <div class="ubicacion-reseñas">
+              <span class="score">4.7</span>
+              <div class="stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+              </div>
+              <a href="https://www.google.com/maps/place/SOLTEC/@-32.6952141,-62.0918288,17z/data=!4m8!3m7!1s0x95cc7f4f442dd5cd:0x99019fb175f4548c!8m2!3d-32.6952141!4d-62.0918288!9m1!1b1!16s%2Fg%2F11c5sz4z_k?entry=ttu" target="_blank" class="opiniones-link">
+                35 opiniones en Google
+              </a>
+            </div>
+
+            <p class="ubicacion-desc">
+              Te esperamos para asesorarte personalmente sobre el sistema ideal para tu negocio.
+            </p>
+
+            <ul class="ubicacion-datos">
+              <li>
+                <div class="icono-ubicacion"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <strong>Dirección</strong>
+                  <span>Roque Sáenz Peña 65, Marcos Juárez</span>
+                </div>
+              </li>
+              <li>
+                <div class="icono-ubicacion"><i class="fa-solid fa-clock"></i></div>
+                <div>
+                  <strong>Horarios</strong>
+                  <span>Lu a Vi: 8-12 y 15-19 hs • Sáb: 8-13 hs</span>
+                </div>
+              </li>
+            </ul>
+
+            <div class="ubicacion-actions">
+                <a href="https://www.google.com/maps/place/SOLTEC/@-32.6951609,-62.0914515,19z/data=!4m6!3m5!1s0x95c97f4f442dd5cd:0x99019fb175f4568c!8m2!3d-32.6952141!4d-62.0918288!16s%2Fg%2F11h0r3j__?entry=ttu&g_ep=EgoyMDI1MTIwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-soltec-primary btn-mapa">
+                  Cómo llegar
+                  <i class="fa-solid fa-location-arrow"></i>
+                </a>
+                <a href="tel:+5493472581774" class="btn-soltec-ghost btn-tel">
+                  <i class="fa-solid fa-phone"></i> Llamar
+                </a>
+            </div>
+          </div>
+
+          <div class="ubicacion-mapa">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d839.4142923835478!2d-62.091451546406404!3d-32.695160885531266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95c97f4f442dd5cd%3A0x99019fb175f4568c!2sSOLTEC!5e0!3m2!1ses-419!2sar!4v1765298352343!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie-principal" id="contacto">
+  <div class="footer-gradient-bar"></div>
+
+  <div class="footer-container">
+    
+    <section class="footer-cta">
+      <div class="footer-cta-text">
+        <p class="footer-cta-kicker">Soluciones ERP & Tecnología</p>
+        <h3>¿Listo para llevar tu gestión al próximo nivel?</h3>
+        <p class="footer-cta-subtitle">
+          Integramos producción, stock, ventas, sucursales y más en un solo software,
+          con soporte local en Marcos Juárez.
+        </p>
+      </div>
+
+      <div class="footer-cta-actions">
+        <a href="https://wa.me/5493472581774"
+           target="_blank"
+           class="btn-footer-primary btn-equal-width">
+          Hablar con un asesor
+        </a>
+        <a href="./productos.html" class="btn-footer-secondary btn-equal-width">
+          Ver catálogo de productos
+        </a>
+      </div>
+    </section>
+
+    <div class="footer-main">
+      
+      <div class="footer-brand">
+        <img 
+          src="./layout/imagenes/GrupoSoltec-removebg-preview.png" 
+          alt="Grupo Soltec"
+          class="img-logo-footer"
+        >
+        
+        <div class="social-icons brand-socials">
+          <a href="https://instagram.com/soltec_msjz" target="_blank" aria-label="Instagram" class="social-circle">
+            <img src="./layout/imagenes/instagram.png" alt="IG">
+          </a>
+          <a href="https://wa.me/5493472581774" target="_blank" aria-label="WhatsApp" class="social-circle">
+             <img src="./layout/imagenes/whatsapp.png" alt="WA" onerror="this.style.display='none'"> 
+          </a>
+          <a href="https://www.facebook.com/share/1C6ftRdUWu/?mibextid=wwXIfr" target="_blank" aria-label="Facebook" class="social-circle">
+            <img src="./layout/imagenes/Iconos/facebook_logo_icon_147291.png" alt="FB" onerror="this.style.display='none'">
+          </a>
+          <a href="https://www.linkedin.com/in/daniel-accastello-a1347a2a/" target="_blank" aria-label="LinkedIn" class="social-circle">
+             <img src="./layout/imagenes/Iconos/linkedin.png" alt="IN" onerror="this.style.display='none'">
+          </a>
+          <a href="mailto:andres.soltec2@gmail.com" aria-label="Email" class="social-circle">
+             <img src="./layout/imagenes/Iconos/Gmail.ico" alt="Mail" onerror="this.style.display='none'">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-columns">
+        
+        <div class="footer-col">
+          <h4>Soluciones</h4>
+          <ul class="footer-links">
+            <li><a href="./erp.html">Sistemas ERP</a></li>
+            <li><a href="./modulo.html">Soluciones por rubro</a></li>
+            <li><a href="./productos.html">Productos tecnológicos</a></li>
+            <li><a href="./about.html">Sobre nosotros</a></li>
+            <li><a href="./otros.html">Web, presentismo y otros</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul class="datos-lista">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:andres.soltec2@gmail.com">andres.soltec2@gmail.com</a>
+            </li>
+            <li>
+              <strong>WhatsApp:</strong>
+              <a href="https://wa.me/5493472581774" target="_blank">+54 9 3472 581774</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ubicación & horarios</h4>
+          <address>
+            Roque Sáenz Peña 65<br>
+            Marcos Juárez<br>
+            Córdoba, Argentina
+          </address>
+          <a href="https://www.google.com/maps/place/SOLTEC/@-32.6951798,-62.091767,19.54z/data=!4m6!3m5!1s0x95c97f4f442dd5cd:0x99019fb175f4568c!8m2!3d-32.6952141!4d-62.0918288!16s%2Fg%2F11h0r3j__?entry=ttu&g_ep=EgoyMDI1MTIwNy4wIKXMDSoASAFQAw%3D%3D"
+             target="_blank"
+             class="ver-mapa-link">
+            Ver en mapa
+          </a>
+
+          <div class="footer-horarios" style="margin-top: 15px;">
+            <p><strong>Lun - Vie:</strong> 8–12 hs & 15–19 hs</p>
+            <p><strong>Sáb:</strong> 8–13 hs</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 – Soltec. Córdoba, Argentina.</p>
+      <p class="footer-bottom-claim">
+        Tecnología & ERP para negocios reales.
+      </p>
+    </div>
+  </div>
+</footer>
+
+    <a class="btn-wsp"
+       href="https://wa.me/5493472581774"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="WhatsApp">
+      <img src="./layout/imagenes/whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <!-- JS del hero (animación de entrada) -->
+    <script src="./layout/js/hero.js"></script>
+
+  </body>
+</html>
+
+

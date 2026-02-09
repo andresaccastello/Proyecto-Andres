@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./layout/imagenes/Iconos/Logo_soltec-removebg-preview.png" />
+    <title>Soltec - Contacto</title>
+    <link rel="stylesheet" href="./layout/index.css" />
+    <script src="./layout/js/index.js" type="module"></script>
+    <script src="./layout/js/header.js" type="module"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+  <a href="./">
+    <img
+      src="./layout/imagenes/GrupoSoltec-removebg-preview.png"
+      alt="logo-soltec"
+      id="img-logo"
+    />
+  </a>
+
+  <nav>
+    <ul>
+      <li><a href="./">Inicio</a></li>
+
+      <!-- SISTEMAS con submenú -->
+      <li class="nav-item-sistemas">
+        
+        <a href="#sistemas-home" class="nav-parent" aria-haspopup="true">
+          Sistemas 
+        </a>
+
+        <div class="nav-submenu">
+          <a href="./erp.html">Sistema ERP completo</a>
+          <a href="./modulo.html">Sistema por módulos</a>
+          <a href="./otros.html">Web, presentismo y otros</a>
+        </div>
+      </li>
+
+      <li><a href="./productos.html">Productos</a></li>
+      <li><a href="./about.html">Sobre nosotros</a></li>
+      <li><a href="./contacto.html">Contacto</a></li>
+
+          <li>
+            <button id="btn-carrito" class="btn-carrito">
+            <img src="layout/imagenes/Iconos/Carrito.png" alt="Carrito">
+    
+            <span id="carrito-cantidad">0</span>
+            </button>
+          </li>
+    </ul>
+  </nav>
+</header>
+
+<div id="carrito-mini" class="carrito-mini"></div>
+
+<main class="contacto-page">
+
+  <div class="bg-collage">
+    <img src="./layout/imagenes/Contacto.webp" alt="Oficina izquierda">
+    
+    <img src="./layout/imagenes/footer.jpg" alt="Oficina derecha">
+  </div>
+
+  <div class="bg-overlay"></div>
+  <div class="contacto-card">
+    
+    <div class="contacto-header">
+      <h1>Contacta con Soltec</h1>
+      <p>Déjanos tus datos y un asesor de Soltec te contactará.</p>
+    </div>
+
+    <form action="https://formsubmit.co/andres.soltec2@gmail.com" method="POST">
+
+      <input type="hidden" name="_next" value="http://127.0.0.1:5500/Soltec-CSS/index.html">
+      <input type="hidden" name="_subject" value="NUEVO CONTACTO DESDE LA WEB DE SOLTEC">
+      <input type="hidden" name="_captcha" value="false">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="id-nombre">Nombre completo</label>
+          <input type="text" name="nombre" id="id-nombre" placeholder="Juan Pérez" required />
+        </div>
+        <div class="form-group">
+          <label for="id-telefono">Teléfono</label>
+          <input type="tel" name="telefono" id="id-telefono" placeholder="+54 ..." required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="id-email">Email corporativo</label>
+          <input type="email" name="email" id="id-email" placeholder="nombre@empresa.com" required />
+        </div>
+        <div class="form-group">
+          <label for="id-tipologia">Interés</label>
+          <select name="tipologia" id="id-tipologia" required>
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="computacion">Computación</option>
+            <option value="telefonia">Telefonía</option>
+            <option value="software">Software / ERP</option>
+            <option value="redes">Redes</option>
+            <option value="soporte">Soporte Técnico</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="id-mensaje">Mensaje</label>
+        <textarea name="mensaje" id="id-mensaje" rows="3" placeholder="Cuéntanos brevemente tu necesidad..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Enviar consulta</button>
+    </form>
+    
+
+  </div>
+</main>
+    <footer class="pie-principal" id="contacto">
+  <div class="footer-gradient-bar"></div>
+
+  <div class="footer-container">
+    
+    <section class="footer-cta">
+      <div class="footer-cta-text">
+        <p class="footer-cta-kicker">Soluciones ERP & Tecnología</p>
+        <h3>¿Listo para llevar tu gestión al próximo nivel?</h3>
+        <p class="footer-cta-subtitle">
+          Integramos producción, stock, ventas, sucursales y más en un solo software,
+          con soporte local en Marcos Juárez.
+        </p>
+      </div>
+
+      <div class="footer-cta-actions">
+        <a href="https://wa.me/5493472581774"
+           target="_blank"
+           class="btn-footer-primary btn-equal-width">
+          Hablar con un asesor
+        </a>
+        <a href="./productos.html" class="btn-footer-secondary btn-equal-width">
+          Ver catálogo de productos
+        </a>
+      </div>
+    </section>
+
+    <div class="footer-main">
+      
+      <div class="footer-brand">
+        <img 
+          src="./layout/imagenes/GrupoSoltec-removebg-preview.png" 
+          alt="Grupo Soltec"
+          class="img-logo-footer"
+        >
+        
+        <div class="social-icons brand-socials">
+          <a href="https://instagram.com/soltec_msjz" target="_blank" aria-label="Instagram" class="social-circle">
+            <img src="./layout/imagenes/instagram.png" alt="IG">
+          </a>
+          <a href="https://wa.me/5493472581774" target="_blank" aria-label="WhatsApp" class="social-circle">
+             <img src="./layout/imagenes/whatsapp.png" alt="WA" onerror="this.style.display='none'"> 
+          </a>
+          <a href="https://www.facebook.com/share/1C6ftRdUWu/?mibextid=wwXIfr" target="_blank" aria-label="Facebook" class="social-circle">
+            <img src="./layout/imagenes/Iconos/facebook_logo_icon_147291.png" alt="FB" onerror="this.style.display='none'">
+          </a>
+          <a href="https://www.linkedin.com/in/daniel-accastello-a1347a2a/" target="_blank" aria-label="LinkedIn" class="social-circle">
+             <img src="./layout/imagenes/Iconos/linkedin.png" alt="IN" onerror="this.style.display='none'">
+          </a>
+          <a href="mailto:andres.soltec2@gmail.com" aria-label="Email" class="social-circle">
+             <img src="./layout/imagenes/Iconos/Gmail.ico" alt="Mail" onerror="this.style.display='none'">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-columns">
+        
+        <div class="footer-col">
+          <h4>Soluciones</h4>
+          <ul class="footer-links">
+            <li><a href="./erp.html">Sistemas ERP</a></li>
+            <li><a href="./modulo.html">Soluciones por rubro</a></li>
+            <li><a href="./productos.html">Productos tecnológicos</a></li>
+            <li><a href="./about.html">Sobre nosotros</a></li>
+            <li><a href="./otros.html">Web, presentismo y otros</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul class="datos-lista">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:andres.soltec2@gmail.com">andres.soltec2@gmail.com</a>
+            </li>
+            <li>
+              <strong>WhatsApp:</strong>
+              <a href="https://wa.me/5493472581774" target="_blank">+54 9 3472 581774</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ubicación & horarios</h4>
+          <address>
+            Roque Sáenz Peña 65<br>
+            Marcos Juárez<br>
+            Córdoba, Argentina
+          </address>
+          <a href="https://www.google.com/maps/place/SOLTEC/@-32.6951798,-62.091767,19.54z/data=!4m6!3m5!1s0x95c97f4f442dd5cd:0x99019fb175f4568c!8m2!3d-32.6952141!4d-62.0918288!16s%2Fg%2F11h0r3j__?entry=ttu&g_ep=EgoyMDI1MTIwNy4wIKXMDSoASAFQAw%3D%3D"
+             target="_blank"
+             class="ver-mapa-link">
+            Ver en mapa
+          </a>
+
+          <div class="footer-horarios" style="margin-top: 15px;">
+            <p><strong>Lun - Vie:</strong> 8–12 hs & 15–19 hs</p>
+            <p><strong>Sáb:</strong> 8–13 hs</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 – Soltec. Córdoba, Argentina.</p>
+      <p class="footer-bottom-claim">
+        Tecnología & ERP para negocios reales.
+      </p>
+    </div>
+  </div>
+</footer>
+
+     <a class="btn-wsp"
+   href="https://wa.me/5493472581774"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="WhatsApp">
+  <img src="./layout/imagenes/whatsapp.png" alt="WhatsApp">
+    </a>
+  </body>
+</html>
