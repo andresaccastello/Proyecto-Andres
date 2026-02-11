@@ -13,6 +13,17 @@ body {
     font-family: var(--font-cuerpo);
     font-weight: 400;
 }
+/* Agrega esto justo debajo de tus variables :root */
+
+button, 
+input[type="submit"], 
+input[type="button"], 
+.btn, 
+[class*="btn-"],    /* Cualquier clase que empiece con btn- */
+[class*="boton-"]   /* Cualquier clase que empiece con boton- */
+{
+    font-family: var(--font-botones) !important;
+}
 
 /* 2. TITULARES -> Zalando Sans ExtraBold (800) */
 /* Agregamos tus clases de títulos específicos también */
@@ -40,8 +51,8 @@ input[type="button"],
 .nav-parent,
 .btn-footer-primary,
 .btn-footer-secondary {
-    font-family: var(--font-botones);
-    font-weight: 400;
+font-family: var(--font-botones); /* <--- ESTO FALTA */
+              /* Asegura que sean negrita */
 }
 
 /* ========================================================= 
@@ -433,6 +444,7 @@ main h2 {
 
 /* Botones tipo “control” */
 .control-btn{
+  font-family: var(--font-botones); /* Faltaba esto */
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.14);
   border-radius: 12px;
@@ -703,6 +715,7 @@ main h2 {
    (pill más largo)
 ============================== */
 .boton-consulta{
+  font-family: var(--font-botones); /* Faltaba esto */
   background: var(--azul);
   color: #fff;
   border: none;
@@ -756,7 +769,12 @@ main h2 {
 /* =========================================
    CONTACTO - FONDO DOBLE + FORM ENCIMA
    ========================================= */
+.contacto-header h1 {
+  /* 1. Tu variable y color solicitado */
+  font-family: var(--font-titulos, sans-serif);
+  color: #051931;
 
+}
    
 main.contacto-page {
   position: relative;
@@ -778,29 +796,38 @@ main.contacto-page {
 }
 
 /* ===== Collage de fondo (2 imágenes APILADAS) ===== */
-.bg-collage {
-position: absolute;
+/* ===== Collage de fondo (2 imágenes APILADAS) ===== */
+.bg-collage{
+  position: absolute;
   inset: 0;
   z-index: 1;
 
-  /* USAMOS FLEXBOX: Es más estricto para dividir alturas */
   display: flex;
-  flex-direction: column; /* Una arriba, otra abajo */
-  height: 100%; /* Asegura que ocupe todo el alto */
+  flex-direction: column;
+  height: 100%;
   overflow: hidden;
 }
 
-.bg-collage img {
-width: 100%;
-  
-  /* ESTA ES LA CLAVE: */
-  height: 50%; /* Cada imagen ocupa EXACTAMENTE la mitad de la altura */
-  
+/* Cada mitad (ventana) */
+.bg-slice{
+  height: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Imagen parallax (más grande para permitir movimiento) */
+.bg-img{
+  width: 100%;
+  height: 120%;          /* CLAVE: más alta que la ventana */
   object-fit: cover;
   object-position: center;
-  transform: scale(1.04);
-  display: block; /* Evita espacios fantasma */
+
+  transform: translate3d(0, 0, 0) scale(1.06);
+  will-change: transform;
+  display: block;
 }
+main.contacto-page{ min-height: 140vh; }
+
 
 /* Ajuste de encuadre vertical */
 .bg-collage img:first-child { object-position: center 50%; } /* Foto de Arriba */
@@ -845,128 +872,172 @@ width: 100%;
   );
 }
 
-/* ===== Tarjeta del formulario ===== */
-.contacto-card{
+/* =========================================
+   TARJETA Y FORMULARIO (OPTIMIZADO)
+   ========================================= */
+
+/* 1. La Tarjeta: Más aire y mejor sombra */
+.contacto-card {
   position: relative;
   z-index: 3;
-  background: rgba(255,255,255,0.96);
+  background: rgba(255, 255, 255, 0.98); /* Un poco más sólido para legibilidad */
+  
   width: 100%;
-  max-width: 480px;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(6px);
+  max-width: 520px; /* Un pelín más ancho para que respire */
+  
+  /* CLAVE: Mucho más padding. Esto "organiza" la vista */
+  padding: 40px 25px; 
+  
+  border-radius: 16px; /* Bordes más modernos */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Sombra más difusa y elegante */
+  backdrop-filter: blur(10px);
 }
 
-/* ===== FORM: tu HTML usa .form-row, así que lo armamos así ===== */
-form{
+
+
+/* Opcional: Si tienes un título dentro del form (h2, h3) */
+.contacto-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1e293b;
+  font-family: var(--font-cuerpo);
+}
+
+/* 2. El Contenedor del Form */
+form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
-  max-width: none;
+  /* CLAVE: Este gap controla la distancia vertical entre grupos */
+  gap: 20px; 
 }
 
-.form-row{
+/* 3. Filas de dos columnas (Nombre/Apellido) */
+.form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  /* CLAVE: El gap horizontal debe ser igual o cercano al vertical */
+  gap: 20px; 
 }
 
-.form-group{
-  display:flex;
+.form-group {
+  display: flex;
   flex-direction: column;
+  gap: 6px; /* Distancia pequeña entre Label e Input (agrupamiento) */
 }
 
-.form-group.full-width{
-  width: 100%;
-}
-
-/* Inputs (lo tuyo está bien, lo dejo igual si ya lo tenés) */
-label{
+/* 4. Labels (Etiquetas) */
+label {
   font-family: var(--font-cuerpo);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: #475569;
-  margin-bottom: 3px;
+  color: #334155;
+  letter-spacing: 0.5px;
 }
 
+/* 5. Inputs, Selects y Textareas */
 form input,
 form select,
-form textarea{
+form textarea {
   width: 100%;
-  padding: 8px;
+  /* CLAVE: Más relleno interno para que el texto no toque los bordes */
+  padding: 12px 15px; 
+  
   border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  border-radius: 8px;
   font-family: var(--font-cuerpo);
-  font-size: 0.9rem;
-  background-color: #f8fafc;
-  transition: all 0.2s;
-  outline: none;
-  box-sizing: border-box;
-}
-
-form textarea{
-  height: 60px;
-  resize: none;
-}
-
-.btn-submit{
-  background-color: var(--azul);
-  color: white;
-  font-family: var(--font-botones, sans-serif);
-  font-weight: 700;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
   font-size: 0.95rem;
-  transition: background 0.3s, transform 0.2s;
-  margin-top: 5px;
+  color: #1e293b;
+  background-color: #f8fafc;
+  
+  /* Transición suave para el foco */
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+/* Estado Focus: Indispensable para UX */
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: var(--azul); /* Tu color de marca */
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(2, 31, 70, 0.1); /* Anillo sutil */
+}
+
+form textarea {
+  height: 120px; /* Un poco más alto por defecto */
+  resize: vertical; /* Permite estirar solo hacia abajo */
+}
+
+/* 6. Botón de Enviar */
+/* =========================================
+   BOTÓN GHOST (Estilo Soltec adaptado al Form)
+   ========================================= */
+
+.btn-submit {
+  /* 1. Estructura y Espaciado */
   width: 100%;
+  
+  /* --- EL CAMBIO CLAVE --- */
+  /* Debe coincidir con el padding-bottom de .contacto-card */
+  margin-top: 15px; 
+  /* ----------------------- */
+
+  padding: 12px 20px; 
+  
+  /* 2. Tipografía y Forma */
+  font-family: var(--font-botones, sans-serif);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 9999px; 
+  
+  /* 3. Estilo Visual */
+  background-color: #051931; 
+  color: #0ea5e9; 
+  border: 2px solid rgba(14, 165, 233, 0.5); 
+  
+  /* 4. Comportamiento Flex */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* --- ESTADO HOVER (Al pasar el mouse) --- */
+.btn-submit:hover {
+  /* Fondo sutil azulado */
+  background: rgba(14, 165, 233, 0.1); 
+  /* El borde se vuelve sólido y brillante */
+  border-color: #0ea5e9; 
+  /* Pequeña elevación y resplandor */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.25);
 }
 
-.btn-submit:hover{
-  background-color: #0f172a;
-  transform: translateY(-1px);
+/* --- ESTADO ACTIVE (Al hacer clic) --- */
+.btn-submit:active {
+  transform: translateY(0);
+  background: rgba(14, 165, 233, 0.2);
+  box-shadow: none;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 700px){
-  /* Mantenemos las dos fotos visibles */
-  .bg-collage {
-    /* En móvil aseguramos que sigan apiladas */
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .contacto-card {
+    padding: 25px; /* Reducimos padding en móvil para ganar espacio */
+    width: 90%; /* Que no toque los bordes de la pantalla */
+  }
+
+  .form-row {
+    grid-template-columns: 1fr; /* Todo a 1 columna */
+    gap: 15px;
   }
   
-  /* Quitamos el display:none que tenías antes */
-  .bg-collage img:last-child {
-    display: block; 
-  }
-
-  main.contacto-page{
-    height: auto;
-    padding-top: 100px;
-    display: block;
-  }
-
-  .contacto-card{
-    margin: 0 auto;
-    max-width: 100%;
-    padding: 20px;
-  }
-
-  .form-row{
-    grid-template-columns: 1fr;
+  form {
+    gap: 15px;
   }
 }
-
 
 /* =========================================================
    FOOTER TECNOLÓGICO SOLTEC (Optimizado)
@@ -1086,25 +1157,40 @@ footer.pie-principal {
   align-items: flex-end; /* Alineados a la derecha */
 }
 
-/* NUEVO: Clase para igualar el ancho de los botones */
+/* CORRECCIÓN FINAL BOTONES FOOTER (MISMAS MÉTRICAS QUE HERO) */
+
 .btn-equal-width {
   box-sizing: border-box;
   width: 100%;
-  min-width: 260px; /* Ancho fijo mínimo para que sean iguales */
+  min-width: 260px;
   text-align: center;
   justify-content: center;
 }
 
+/* CORRECCIÓN FINAL: TIPOGRAFÍA Y ALTURAS IDÉNTICAS */
+
+/* 1. CLASE PRIMARIA (Cyan) */
 .btn-footer-primary {
   display: inline-flex;
-  padding: 10px 22px;
+  align-items: center;
+  justify-content: center;
+  
+  /* MÉTRICAS */
+  padding: 0.7rem 1.6rem; 
+  font-size: 0.9rem;
+  
+  /* TIPOGRAFÍA IGUALADA */
+  font-weight: 600;        /* Antes 600 (Mantenemos este peso) */
+  line-height: 1; 
+  font-family: var(--font-botones);
+
+  /* TRUCO DE ALTURA: Borde invisible para igualar al secundario */
+  border: 1px solid transparent; 
+
   border-radius: var(--soltec-radius-full, 999px);
   background: var(--soltec-accent, #1ec5ff);
   color: #02111f;
-  font-weight:400;
-  font-size: 0.95rem;
   text-decoration: none;
-  border: none;
   box-shadow: 0 12px 30px rgba(10, 130, 190, 0.55);
   transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
@@ -1115,17 +1201,39 @@ footer.pie-principal {
   box-shadow: 0 18px 38px rgba(10, 130, 190, 0.7);
 }
 
+/* 2. CLASE SECUNDARIA (Borde) */
 .btn-footer-secondary {
   display: inline-flex;
-  padding: 8px 18px;
+  align-items: center;
+  justify-content: center;
+  
+  /* MÉTRICAS */
+  padding: 0.7rem 1.6rem; 
+  font-size: 0.9rem;
+  
+  /* AJUSTE ÓPTICO: Bajamos a 500 para compensar el blanco sobre oscuro */
+  font-weight: 500;       
+  
+  /* AJUSTE DE RENDERIZADO: Hace que la letra blanca se vea más fina y nítida */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  line-height: 1; 
+  font-family: var(--font-botones);
+
   border-radius: var(--soltec-radius-full, 999px);
   border: 1px solid rgba(148, 163, 184, 0.6);
   color: var(--soltec-text-main, #f5fbff);
-  font-size: 0.9rem;
   text-decoration: none;
   background: transparent;
   backdrop-filter: blur(6px);
   transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.btn-footer-secondary:hover {
+  border-color: var(--soltec-accent, #1ec5ff);
+  background: rgba(15, 23, 42, 0.8);
+  /* Al hacer hover, si quieres que resalte más, puedes devolverlo a 600 o dejarlo así */
 }
 
 .btn-footer-secondary:hover {
@@ -1717,6 +1825,7 @@ footer.pie-principal {
 /* === Botón del carrito en el header === */
 /* === Botón del carrito en el header === */
 .btn-carrito {
+  font-family: var(--font-botones); /* Faltaba esto */
   /* ESTADO NORMAL: Oscuro para seguir la línea del menú */
   background: linear-gradient(135deg, #032d5c, #03465a);
   
@@ -1778,6 +1887,7 @@ footer.pie-principal {
 
 /* === Botón "Agregar al carrito" === */
 .boton-agregar-carrito {
+  font-family: var(--font-botones); /* Faltaba esto */
   background: #006eff;
   color: #fff;
   border: none;
@@ -3150,6 +3260,7 @@ footer.pie-principal {
 }
 
 .btn-rectangular {
+  font-family: var(--font-botones); /* Faltaba esto */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3495,6 +3606,7 @@ body { overflow-x: clip; }
 
 .btn-soltec-primary,
 .btn-soltec-ghost {
+  font-family: var(--font-botones); /* Faltaba esto */
   border-radius: var(--soltec-radius-full);
   padding: 0.7rem 1.6rem;
   font-size: 0.9rem;
@@ -3977,7 +4089,7 @@ body { overflow-x: clip; }
     position: relative;
     padding: 140px 20px 100px;
     /* Fondo Claro: Blanco con un toque de celeste muy sutil */
-    background: linear-gradient(180deg,  #004891 0%, #ffffff 100%);
+    background: linear-gradient(180deg,  #004891 25%, #ffffff 100%);
     text-align: center;
     overflow: hidden;
 }
@@ -3992,10 +4104,13 @@ body { overflow-x: clip; }
 
 .erp-hero h1 {
     font-size: 3.5rem;
-    color: #0b2e55; /* Texto Azul Oscuro (Antes blanco) */
+    color: #051931; /* Texto Azul Oscuro (Antes blanco) */
     line-height: 1.1;
     margin-bottom: 24px;
     font-weight: 800;
+  span {
+        color: #00f7ff; /* Resalta "Soltec ERP" con el cyan brillante */
+    }
 }
 
 .erp-hero p {
@@ -4014,38 +4129,56 @@ body { overflow-x: clip; }
     flex-wrap: wrap;
 }
 
+.btn-primary-glow,
+.btn-secondary-ghost {
+  /* La fuente correcta */
+  font-family: var(--font-botones);
+  
+  /* Geometría exacta del Hero Soltec */
+  border-radius: var(--soltec-radius-full, 999px);
+  padding: 0.7rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1; /* Evita que se inflen verticalmente */
+  
+  /* Comportamiento Flex */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  
+  /* Reset */
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease-out;
+}
+
+/* 2. Botón Principal (Cyan Degradado) */
 .btn-primary-glow {
-    background: #1ec5ff;
-    color: #fff;
-    padding: 14px 32px;
-    border-radius: 99px;
-    font-weight: 700;
-    text-decoration: none;
-    box-shadow: 0 10px 25px rgba(30, 197, 255, 0.25);
-    transition: transform 0.2s, box-shadow 0.2s;
+  background: linear-gradient(135deg, #1ec5ff, #4ad4ff);
+  color: #051931; /* Texto oscuro para contraste moderno */
+  box-shadow: 0 12px 30px rgba(12, 159, 232, 0.6);
+  border: 1px solid transparent; /* Para igualar altura con el ghost */
 }
 
 .btn-primary-glow:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(30, 197, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(12, 159, 232, 0.75);
 }
 
+/* 3. Botón Secundario (Ghost / Transparente) */
 .btn-secondary-ghost {
-    background-color: rgb(26, 35, 116);
-    /* Borde oscuro para verse en blanco */
-    border: 2px solid #e2e8f0; 
-    color: #ffffff;
-    padding: 14px 32px;
-    border-radius: 99px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.2s;
+  background-color: #1a1168; /* Fondo oscuro para destacar en el fondo claro */
+  color: #1ec5ff; /* Color Cyan (var(--soltec-accent)) */
+  border: 1px solid rgba(92, 173, 228, 0.7);
 }
 
 .btn-secondary-ghost:hover {
-    border-color: #0b2e55;
-    background: #0b2e55;
-    color: #00d5e4;
+  background: rgba(11, 50, 102, 0.9); /* Fondo oscuro al pasar el mouse */
+  color: #ffffff;
+  transform: translateY(-1px);
+  border-color: transparent;
 }
 
 /* El horizonte de luz ahora es más sutil para no chocar con lo claro */
@@ -4370,7 +4503,7 @@ body { overflow-x: clip; }
 /* --- SEGURIDAD (AHORA CLARO) --- */
 .erp-security {
     /* Fondo Claro */
-    background: #8183ff;
+    background: #babbf5;
     color: #0b2e55; /* Texto oscuro */
     padding: 100px 20px;
     border-top: 1px solid #e2e8f0;
@@ -4392,7 +4525,7 @@ body { overflow-x: clip; }
     color: #142c6e;
 }
 .security-content p {
-    color: #3f3f3f; /* Gris */
+    color: #2c2c2c; /* Gris */
     margin-bottom: 50px;
     font-size: 1.1rem;
 }
@@ -4439,22 +4572,38 @@ body { overflow-x: clip; }
 }
 
 .btn-whatsapp-large {
-    display: inline-block;
-    background: #1ec5ff; 
-    color: #ffffff;
-    padding: 16px 40px;
-    border-radius: 99px;
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 1.1rem;
-    margin-top: 20px;
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-    transition: transform 0.2s;
+  /* 1. Tipografía y Geometría (Exacta al Hero) */
+  font-family: var(--font-botones);
+  border-radius: var(--soltec-radius-full, 999px);
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1; /* Evita que se infle */
+  
+  /* 2. Comportamiento Flex */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  
+  /* 3. Estilo Visual (Cyan Degradado) */
+  background: linear-gradient(135deg, #1ec5ff, #4ad4ff);
+  color: #021225; /* Texto oscuro para contraste moderno */
+  box-shadow: 0 12px 30px rgba(12, 159, 232, 0.6);
+  border: 1px solid transparent; 
+  
+  /* 4. Reset y Transiciones */
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease-out;
+
+  /* Mantengo tu margen original para no romper el espaciado del layout */
+  margin-top: 20px;
 }
 
 .btn-whatsapp-large:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(12, 159, 232, 0.75);
 }
 
 
@@ -4487,7 +4636,7 @@ body { overflow-x: clip; }
 /* --- Subnav sticky --- */
 .page-erp .erp-subnav{
   position: sticky;
-  top: 84px; /* ajustá si tu header es más alto */
+  top: 55px; /* ajustá si tu header es más alto */
   z-index: 50;
   background: rgba(255,255,255,0.8);
   backdrop-filter: blur(10px);
@@ -4820,7 +4969,7 @@ body { overflow-x: clip; }
 .page-erp .faq-item{
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-  background: #5e91ff;
+  background: #0b2e55;
   padding: 14px 16px;
 }
 .page-erp .faq-item summary{
@@ -4830,7 +4979,7 @@ body { overflow-x: clip; }
 }
 .page-erp .faq-item p{
   margin: 10px 0 0;
-  color: #d8d7d7;
+  color: #ffffff;
 }
 
 /* Accesibilidad focus */

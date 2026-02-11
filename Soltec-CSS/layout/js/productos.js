@@ -3,12 +3,12 @@ const productos = [
     id: 1,
     categoria: "auriculares",
     imagen: {
-      src: './layout/imagenes/jbl 520 bt.jpg',
+      src: './layout/imagenes/jbl-520-bt.webp',
       alt: 'Auriculares inalámbricos JBL 520BT'
     },
     imagenesExtra: [
-      { src: './layout/imagenes/jbl 520 bt3.jpg', alt: 'Auriculares JBL 520BT vista lateral' },
-      { src: './layout/imagenes/jbl 520 bt2.jpg', alt: 'Detalle de diadema y almohadillas JBL 520BT' },
+      { src: './layout/imagenes/jbl-520-bt3.webp', alt: 'Auriculares JBL 520BT vista lateral' },
+      { src: './layout/imagenes/jbl-520-bt2.webp', alt: 'Detalle de diadema y almohadillas JBL 520BT' },
     ],
     nombre: 'Auriculares JBL 520BT',
     descripcion: 'Sonido JBL Pure Bass, hasta 57 horas de batería y Bluetooth 5.3 estable.',

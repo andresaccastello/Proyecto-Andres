@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./layout/index.css" />
     <script src="./layout/js/index.js" type="module"></script>
     <script src="./layout/js/header.js" type="module"></script>
+    <script src="./layout/js/contacto-parallax.js" type="module"></script>
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,11 +62,28 @@
 
 <main class="contacto-page">
 
-  <div class="bg-collage">
-    <img src="./layout/imagenes/Contacto.webp" alt="Oficina izquierda">
-    
-    <img src="./layout/imagenes/footer.jpg" alt="Oficina derecha">
+<div class="bg-collage">
+  <div class="bg-slice">
+    <img
+      src="./layout/imagenes/Contacto.webp"
+      alt="Oficina izquierda"
+      class="bg-img bg-parallax"
+      data-speed="0.18"
+      data-max="70"
+    >
   </div>
+
+  <div class="bg-slice">
+    <img
+      src="./layout/imagenes/footer.jpg"
+      alt="Oficina derecha"
+      class="bg-img bg-parallax"
+      data-speed="0.10"
+      data-max="55"
+    >
+  </div>
+</div>
+
 
   <div class="bg-overlay"></div>
   <div class="contacto-card">
