@@ -3,12 +3,12 @@ const productos = [
     id: 1,
     categoria: "auriculares",
     imagen: {
-      src: './layout/imagenes/jbl-520-bt.webp',
+      src: './layout/imagenes/jbl 520 bt.webp',
       alt: 'Auriculares inalámbricos JBL 520BT'
     },
     imagenesExtra: [
-      { src: './layout/imagenes/jbl-520-bt3.webp', alt: 'Auriculares JBL 520BT vista lateral' },
-      { src: './layout/imagenes/jbl-520-bt2.webp', alt: 'Detalle de diadema y almohadillas JBL 520BT' },
+      { src: './layout/imagenes/jbl 520 bt3.webp', alt: 'Auriculares JBL 520BT vista lateral' },
+      { src: './layout/imagenes/jbl 520 bt2.webp', alt: 'Detalle de diadema y almohadillas JBL 520BT' },
     ],
     nombre: 'Auriculares JBL 520BT',
     descripcion: 'Sonido JBL Pure Bass, hasta 57 horas de batería y Bluetooth 5.3 estable.',
@@ -27,12 +27,12 @@ const productos = [
     id: 2,
     categoria: "parlantes",
     imagen: {
-      src: './layout/imagenes/JBL_GO_4_HERO_BLUE_48170_x6.png',
+      src: './layout/imagenes/JBL_GO_4_HERO_BLUE_48170_x6.webp',
       alt: 'Parlante portátil JBL GO4 azul'
     },
     imagenesExtra: [
-      { src: './layout/imagenes/jbl go4_2.png', alt: 'Parlante JBL GO4 vista frontal' },
-      { src: './layout/imagenes/jbl go4_3.png', alt: 'Parlante JBL GO4 detalle lateral' },
+      { src: './layout/imagenes/jbl go4_2.webp', alt: 'Parlante JBL GO4 vista frontal' },
+      { src: './layout/imagenes/jbl go4_3.webp', alt: 'Parlante JBL GO4 detalle lateral' },
     ],
     nombre: 'Parlante JBL GO4',
     descripcion: 'Compacto, resistente al agua y con sonido claro y potente.',

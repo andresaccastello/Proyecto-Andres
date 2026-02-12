@@ -781,7 +781,7 @@ main.contacto-page {
   
   /* CAMBIO FUERTE: 200vh hará que la página sea MUY alta (doble pantalla) */
   /* Si aún te parece poco, prueba con 250vh */
-  min-height: 100vh; 
+  min-height: 480vh; 
   
   width: 100%;
   display: flex;
@@ -1188,17 +1188,17 @@ footer.pie-principal {
   border: 1px solid transparent; 
 
   border-radius: var(--soltec-radius-full, 999px);
-  background: var(--soltec-accent, #1ec5ff);
+  background: var(--soltec-accent, #00f7ff);
   color: #02111f;
   text-decoration: none;
-  box-shadow: 0 12px 30px rgba(10, 130, 190, 0.55);
+  box-shadow: 0 12px 12px rgba(10, 130, 190, 0.55);
   transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .btn-footer-primary:hover {
   transform: translateY(-1px);
   background: #4ad6ff;
-  box-shadow: 0 18px 38px rgba(10, 130, 190, 0.7);
+  box-shadow: 0 12px 30px rgba(10, 130, 190, 0.7);
 }
 
 /* 2. CLASE SECUNDARIA (Borde) */
@@ -4089,7 +4089,7 @@ body { overflow-x: clip; }
     position: relative;
     padding: 140px 20px 100px;
     /* Fondo Claro: Blanco con un toque de celeste muy sutil */
-    background: linear-gradient(180deg,  #004891 25%, #ffffff 100%);
+    background: linear-gradient(180deg,  #004891 30%, #ffffff 100%);
     text-align: center;
     overflow: hidden;
 }
@@ -4156,15 +4156,16 @@ body { overflow-x: clip; }
 
 /* 2. Botón Principal (Cyan Degradado) */
 .btn-primary-glow {
-  background: linear-gradient(135deg, #1ec5ff, #4ad4ff);
+  /*background: linear-gradient(135deg, #1ec5ff, #4ad4ff);*/
+  background-color: #00f7ff;
   color: #051931; /* Texto oscuro para contraste moderno */
-  box-shadow: 0 12px 30px rgba(12, 159, 232, 0.6);
+  box-shadow: 0 12px 12px rgba(12, 159, 232, 0.6);
   border: 1px solid transparent; /* Para igualar altura con el ghost */
 }
 
 .btn-primary-glow:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 40px rgba(12, 159, 232, 0.75);
+  box-shadow: 0 16px 30px rgba(12, 159, 232, 0.75);
 }
 
 /* 3. Botón Secundario (Ghost / Transparente) */
@@ -4172,6 +4173,7 @@ body { overflow-x: clip; }
   background-color: #1a1168; /* Fondo oscuro para destacar en el fondo claro */
   color: #1ec5ff; /* Color Cyan (var(--soltec-accent)) */
   border: 1px solid rgba(92, 173, 228, 0.7);
+  box-shadow: 0 12px 12px rgba(12, 159, 232, 0.6);
 }
 
 .btn-secondary-ghost:hover {
@@ -4179,6 +4181,7 @@ body { overflow-x: clip; }
   color: #ffffff;
   transform: translateY(-1px);
   border-color: transparent;
+   box-shadow: 0 16px 30px rgba(9, 65, 94, 0.75);
 }
 
 /* El horizonte de luz ahora es más sutil para no chocar con lo claro */
@@ -4587,9 +4590,10 @@ body { overflow-x: clip; }
   gap: 0.45rem;
   
   /* 3. Estilo Visual (Cyan Degradado) */
-  background: linear-gradient(135deg, #1ec5ff, #4ad4ff);
+  /*background: linear-gradient(135deg, #1ec5ff, #4ad4ff);*/
+  background-color: #00f7ff;
   color: #021225; /* Texto oscuro para contraste moderno */
-  box-shadow: 0 12px 30px rgba(12, 159, 232, 0.6);
+  box-shadow: 0 12px 12px rgba(12, 159, 232, 0.6);
   border: 1px solid transparent; 
   
   /* 4. Reset y Transiciones */
@@ -4603,7 +4607,7 @@ body { overflow-x: clip; }
 
 .btn-whatsapp-large:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 40px rgba(12, 159, 232, 0.75);
+  box-shadow: 0 16px 30px rgba(12, 159, 232, 0.75);
 }
 
 
