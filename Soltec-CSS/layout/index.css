@@ -279,14 +279,14 @@ button, .btn-carrito {
 ========================================================= */
 
 header.compact {
-  height: 55px;
+  height: 50px; /* ANTES: 55px. Ahora se nota más el cambio */
   padding: 0 4%;
-  background: rgba(14, 28, 54, 0.95);
+  background: rgba(14, 28, 54, 0.98); /* Un poco más sólido para leer mejor */
 }
 
-/* Logo: control por height (no width) */
+/* Logo: un poco más chico para entrar en 50px */
 header.compact #img-logo {
-  height: 50px;
+  height: 40px; /* ANTES: 50px. Ajustado a la nueva altura */
   width: auto;
   filter: drop-shadow(0 0 4px rgba(0,0,0,.3));
 }
@@ -306,58 +306,168 @@ header.compact .nav-parent::after {
 }
 
 /* Botón carrito en compacto */
-header.compact button,
+/* --- CORRECCIÓN AQUÍ --- */
+/* Usamos :not(.menu-toggle) para que NO afecte a las 3 rayitas */
+header.compact button:not(.menu-toggle), 
 header.compact .btn-carrito {
   transform: scale(0.85);
   padding: 6px 12px;
   font-size: 0.9rem;
 }
 
+
 /* =========================================================
    MENU RESPONSIVE
 ========================================================= */
-
-@media (max-width: 768px) {
-  header {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 8px 4%;
-    row-gap: 6px;
-  }
-
-  header nav {
-    width: 100%;
-  }
-
-  header nav ul {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    justify-content: flex-end;
-    margin-top: 0;
-    padding-bottom: 0;
-  }
-
-  header nav a {
-    padding: 4px 8px;
-    font-size: 0.9rem;
-  }
-
-  #img-logo {
-    height: 60px;
-    filter: drop-shadow(0 0 6px rgba(0,0,0,.35));
-  }
-
-  /* Evitamos que el compact rompa el header en móvil (por el wrap) */
-  header.compact {
-    height: auto;
-    padding: 8px 4%;
-  }
-
-  header.compact #img-logo {
-    height: 54px;
-  }
+/* Botón Hamburguesa (Oculto en escritorio) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100; /* Por encima del menú desplegado */
+    padding: 0;
 }
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Animación cuando está abierto (se convierte en X) */
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+
+/* =========================================
+   RESPONSIVE HEADER (CORREGIDO)
+   ========================================= */
+@media (max-width: 900px) {
+
+    /* 1. Header en Móvil */
+    header, header.compact {
+      
+        padding: 0 5%;       /* Márgenes laterales seguros */
+        height: 60px;        /* Altura base móvil */
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* 2. Logo Móvil */
+    #img-logo, header.compact #img-logo {
+        height: 42px;        /* Tamaño equilibrado */
+        width: auto;
+        /* Aseguramos que no tenga margen inferior que parezca una línea */
+        margin-bottom: 0 !important; 
+    }
+
+    /* 3. Botón Hamburguesa (El interruptor) */
+    .menu-toggle {
+        display: flex;
+        /* Asegura que la X no se corte al girar */
+        overflow: visible; 
+        z-index: 1100;
+        /* Reseteamos transformaciones previas */
+        transform: none; 
+    }
+    
+    /* ESTADO COMPACTO (AL HACER SCROLL) */
+    /* Aquí es donde se achica suavemente */
+    header.compact .menu-toggle {
+        /* CORRECCIÓN: Usamos 0.8 para achicar (no 2) */
+        transform: scale(0.8);
+        transform-origin: center right; /* Se achica hacia la derecha para mantener alineación */
+        transition: transform 0.3s ease;
+    }
+
+    /* 4. Menú Desplegable */
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #04152d;
+
+        
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    
+    /* Cuando scrolleas, el menú debe subir para pegarse al header fino */
+    header.compact nav {
+        top: 50px; /* Coincide con la altura visual del header compacto */
+    }
+
+    nav.active {
+        max-height: 100vh; /* Se abre */
+    }
+
+    /* 5. Lista de enlaces */
+    header nav ul {
+        flex-direction: column;
+        padding: 30px 0;
+        gap: 0;
+    }
+
+    header nav a, .nav-parent {
+        font-size: 1.1rem;
+        padding: 15px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+        border: none !important; /* Asegura que no haya líneas en los items */
+    }
+    
+    /* Carrito en el menú móvil */
+    .btn-carrito {
+        margin-top: 15px;
+        transform: scale(1.1); /* Un poco más grande para el dedo */
+    }
+
+
+    /* =================================================
+       AJUSTES PARA MODO COMPACTO (AL HACER SCROLL) - MÓVIL
+       ================================================= */
+
+    /* 1. EL BOTÓN (Linitas/Cruz): Se achica PROPORCIONALMENTE */
+    header.compact .menu-toggle {
+        /* CORRECCIÓN: Estaba en scale(2). Lo pasamos a 0.8 para achicarlo. */
+        transform: scale(0.8); 
+        
+        /* Aseguramos que el origen de la transformación sea el centro para que no se corte */
+        transform-origin: center center;
+        
+        margin: 0; 
+        transition: transform 0.3s ease;
+    }
+
+    /* 2. EL MENÚ DESPLEGABLE: Se ajusta a la nueva altura de 50px */
+    header.compact nav {
+        /* IMPORTANTE: Debe coincidir con el height de header.compact */
+        top: 50px; 
+        background: rgba(4, 21, 45, 0.98);
+
+    }
+
+    /* 3. LOS ENLACES: Se hacen un poco más compactos */
+    header.compact nav a, 
+    header.compact .nav-parent {
+        padding: 8px 0; 
+        font-size: 1rem; 
+    }
+}
+
 
 
 /* ========================================================= 
@@ -2670,6 +2780,67 @@ footer.pie-principal {
 
 }
 
+
+/* =========================================
+   RESPONSIVE CARRITO MINI (VERSIÓN COMPACTA)
+   ========================================= */
+@media (max-width: 600px) {
+  .carrito-mini {
+    /* 1. ANCHO: 85% para que deje márgenes a los lados */
+    width: 85%; 
+    left: 7.5%; /* Centrado (100% - 85% = 15% / 2 = 7.5%) */
+    right: auto;
+    
+    /* 2. POSICIÓN: Baja un poco más */
+    top: 80px; 
+    
+    /* 3. ALTURA: Solo ocupa el 60% de la pantalla para no ser invasivo */
+    max-height: 70vh; 
+    
+    /* 4. RELLENO: Menos aire interno */
+    padding: 15px; 
+  }
+
+  /* Ajuste cuando scrolleas (Header fino) */
+  header.compact ~ .carrito-mini {
+    top: 60px; 
+  }
+
+  /* === ACHICAR TEXTOS INTERNOS EN MÓVIL === */
+  
+  /* Título "Tu Carrito" más chico */
+  .carrito-mini h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  /* Items más pegaditos */
+  .carrito-item {
+    padding: 8px 0;
+  }
+
+  /* Texto del producto más pequeño */
+  .carrito-item-info strong {
+    font-size: 0.85rem;
+  }
+  .carrito-item-info span {
+    font-size: 0.75rem;
+  }
+
+  /* Botones de cantidad (+ -) más compactos */
+  .carrito-item-controles {
+    padding: 0 6px;
+  }
+  .carrito-item-controles button {
+    width: 18px;
+    height: 18px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
 /* ===== DETALLE PRODUCTO ===== */
 .detalle-wrap{
   max-width: var(--max);
@@ -3338,6 +3509,53 @@ footer.pie-principal {
 /* 1. Prevenir scroll horizontal (Ya lo tenías, lo mantenemos) */
 body { overflow-x: clip; }
 
+/* =========================================
+   AJUSTE MARGENES LATERALES SOLO EN MOBILE
+   ========================================= */
+@media (max-width: 600px) {
+  /* Quitamos padding lateral global para que el contenido
+     pueda usar todo el ancho disponible en teléfonos */
+  main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Secciones full-bleed que usaban 100vw: en mobile
+     las llevamos a 100% para evitar desplazamiento lateral */
+  .hero-bridge,
+  .sistemas-section,
+  .sistemas-fade-out {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Hero Soltec: planeta primero y botones apilados */
+  .hero-soltec__visual {
+    order: -1;
+    margin-bottom: 0.9rem;
+  }
+
+  /* Chips alrededor del planeta un poco más compactos
+     y con altura uniforme en mobile */
+  .sector-badge__chip {
+    padding: 0.32rem 0.7rem;
+    line-height: 1.2;
+
+    /* Truco de máscara: fondo sólido igual al fondo base
+       para que los chips tapen las líneas internas sin ruido visual */
+    background-color: #020b1e;
+    border-radius: var(--soltec-radius-full);
+  }
+
+  /* Texto central dentro del planeta ("Soltec ERP") más discreto
+     para no dominar tanto en pantallas chicas */
+  .hero-soltec__planet-core::after {
+    font-size: 0.78rem;
+    padding-bottom: 1.3rem;
+  }
+}
+
 .sistemas-fade-out {
   /* A. ROMPER LOS MÁRGENES DEL PADRE (Técnica Full Bleed) */
   width: 100vw;  
@@ -3471,27 +3689,28 @@ body { overflow-x: clip; }
 }
 
 .hero-soltec {
-  min-height: 90vh;
+  /* Mobile-first: altura automática y padding más contenido */
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem;
+  padding: 5.5rem 1.5rem 3.5rem;
   background: radial-gradient(circle at top, #063a82 0, #020b1e 55%);
   position: relative;
   overflow: hidden;
   isolation: isolate;
 
- /* full-bleed: el hero se estira hasta los bordes del viewport */
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  /* En mobile no usamos full-bleed; se aplica en desktop via @media (min-width) */
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .hero-soltec::before,
 .hero-soltec::after {
   content: "";
   position: absolute;
-  width: 520px;
-  height: 520px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--soltec-accent-soft), transparent);
   filter: blur(4px);
@@ -3511,9 +3730,10 @@ body { overflow-x: clip; }
 .hero-soltec__inner {
   width: min(1140px, 100%);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 3.5rem;
+  /* Mobile-first: una sola columna apilada */
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
   align-items: center;
 }
 
@@ -3538,7 +3758,7 @@ body { overflow-x: clip; }
 }
 
 .hero-soltec__title {
-  font-size: clamp(2.1rem, 3vw + 1rem, 3.15rem);
+  font-size: clamp(1.8rem, 3vw + 0.8rem, 3.15rem);
   line-height: 1.1;
   margin-bottom: 1rem;
   letter-spacing: 0.02em;
@@ -3554,14 +3774,14 @@ body { overflow-x: clip; }
   color: var(--soltec-text-muted);
   max-width: 34rem;
   line-height: 1.6;
-  margin-bottom: 1.7rem;
+  margin-bottom: 1.3rem;
 }
 
 .hero-soltec__pills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
 .hero-soltec__pill {
@@ -3599,9 +3819,10 @@ body { overflow-x: clip; }
 
 .hero-soltec__cta {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+  width: 100%;
 }
 
 .btn-soltec-primary,
@@ -3616,8 +3837,10 @@ body { overflow-x: clip; }
   transition: all 0.18s ease-out;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
   text-decoration: none;
+  width: 100%;
 }
 
 .btn-soltec-primary {
@@ -3659,10 +3882,10 @@ body { overflow-x: clip; }
 
 .hero-soltec__planet-wrapper {
   position: relative;
-  --planet-size: min(360px, 80vw);
+  /* Mobile-first: planeta más chico para que entre cómodo */
+  --planet-size: min(220px, 70vw);
 
-  /* --- CORRECCIÓN: Usamos el nombre original para que no falle --- */
-  /* 0.60 = 60% del tamaño. Acerca los chips hacia la línea roja */
+  /* Radio base usado por los chips (ajustado en mobile via media query) */
   --orbit-outer-radius-factor: 0.58; 
 
   width: var(--planet-size);
@@ -3682,14 +3905,39 @@ body { overflow-x: clip; }
   pointer-events: none;
 }
 
-/* Opcional: En móviles, reducimos un poco el radio para que no se salga de pantalla */
-@media (max-width: 540px) {
-  .hero-soltec__planet-wrapper {
-    /* En móvil los acercamos un poco más */
-    --orbit-outer-radius-factor: 0.65;
+/* FIX ÓRBITA MOBILE: todos los chips apoyan en la línea exterior
+   sin tocar internas ni salirse del viewport */
+@media (max-width: 580px) {
+  .hero-soltec {
+    overflow: hidden;
   }
+
+  .hero-soltec__planet-wrapper {
+    /* Planeta contenido respecto al ancho disponible */
+    --planet-size: clamp(150px, 52vw, 190px);
+    /* Radio adaptativo: distancia desde el centro hasta el centro del chip */
+    --orbit-outer-radius-factor: 0.60;
+    margin-bottom: 28px;
+  }
+
   .orbit--outer {
-    inset: -15%;
+    /* Ajuste fino: el anillo exterior pasa por la misma zona donde
+       se ubican los centros de los chips, de modo que su borde toca la línea */
+    inset: -6%;
+  }
+
+  /* Líneas internas muy sutiles para que no parezca que el chip toca dos rieles */
+  .orbit--inner {
+    border-color: rgba(73, 179, 255, 0.2);
+  }
+
+  /* Chips más compactos pero legibles;
+     max-width evita que se desborden en horizontales muy chicas */
+  .sector-badge__chip {
+    font-size: 0.62rem;
+    padding: 0.26rem 0.6rem;
+    max-width: 96px;
+    white-space: normal;
   }
 }
 
@@ -3756,10 +4004,10 @@ body { overflow-x: clip; }
 }
 
 .orbit--inner {
-  inset: 8%;
+  inset: 10%;
   animation-duration: 30s;
   border-style: solid;
-  border-color: rgba(73, 179, 255, 0.6);
+  border-color: rgba(73, 179, 255, 0.35);
 }
 
 .orbit--outer {
@@ -3802,9 +4050,10 @@ body { overflow-x: clip; }
   border-radius: var(--soltec-radius-full);
   border: 1px solid rgba(154, 205, 255, 0.55);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--soltec-text-main);
-  white-space: nowrap;
+  /* En mobile permitimos que el texto baje a 2 líneas si hace falta */
+  white-space: normal;
   backdrop-filter: blur(12px);
 }
 
@@ -3824,49 +4073,81 @@ body { overflow-x: clip; }
   }
 }
 
-/* Responsive */
+/* Responsive (mobile-first, escalando hacia desktop) */
 
-@media (max-width: 900px) {
-  .hero-soltec__inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
+/* Base: mobile (ya definido en las reglas normales) */
 
-  .hero-soltec__visual {
-    order: -1;
-  }
-
-  .hero-soltec__subtitle,
-  .hero-soltec__note {
-    margin-inline: auto;
-  }
-
-  .hero-soltec__pills,
-  .hero-soltec__cta {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 540px) {
+/* Tablet: acomodamos un poco más el espacio */
+@media (min-width: 768px) {
   .hero-soltec {
-    padding-top: 3.5rem;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .hero-soltec__inner {
+    align-items: center;
   }
 
   .hero-soltec__planet-wrapper {
-    width: 280px;
+    --planet-size: min(260px, 45vw);
   }
 
-  .hero-soltec__title {
-    font-size: 1.9rem;
+  .hero-soltec__cta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    flex-wrap: wrap;
   }
 
-  .hero-soltec__pills {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
+  .btn-soltec-primary,
+  .btn-soltec-ghost {
+    width: auto;
+  }
+
+  .hero-bridge {
+    height: 130px;
+  }
+
+  .erp-hero {
+    padding: 140px 32px 90px;
   }
 }
 
+/* Desktop: 2 columnas y full-bleed para el hero principal */
+@media (min-width: 1200px) {
+  .hero-soltec {
+    min-height: 90vh;
+    padding: 4rem 1.5rem;
+
+    /* full-bleed solo en pantallas grandes */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .hero-soltec__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .hero-soltec__planet-wrapper {
+    --planet-size: min(360px, 80vw);
+  }
+
+  .sector-badge__chip {
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  .hero-bridge {
+    height: 140px;
+  }
+
+  .erp-hero {
+    padding: 160px 40px 110px;
+  }
+}
 
 /* ============= SECCIÓN UBICACIÓN (CONTRASTE + MISMA ALTURA) ============= */
 .ubicacion-section {
