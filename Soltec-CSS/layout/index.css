@@ -3815,6 +3815,53 @@ footer.pie-principal {
 /* 1. Prevenir scroll horizontal (Ya lo tenías, lo mantenemos) */
 body { overflow-x: clip; }
 
+/* =========================================
+   AJUSTE MARGENES LATERALES SOLO EN MOBILE
+   ========================================= */
+@media (max-width: 600px) {
+  /* Quitamos padding lateral global para que el contenido
+     pueda usar todo el ancho disponible en teléfonos */
+  main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Secciones full-bleed que usaban 100vw: en mobile
+     las llevamos a 100% para evitar desplazamiento lateral */
+  .hero-bridge,
+  .sistemas-section,
+  .sistemas-fade-out {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Hero Soltec: planeta primero y botones apilados */
+  .hero-soltec__visual {
+    order: -1;
+    margin-bottom: 0.9rem;
+  }
+
+  /* Chips alrededor del planeta un poco más compactos
+     y con altura uniforme en mobile */
+  .sector-badge__chip {
+    padding: 0.32rem 0.7rem;
+    line-height: 1.2;
+
+    /* Truco de máscara: fondo sólido igual al fondo base
+       para que los chips tapen las líneas internas sin ruido visual */
+    background-color: #020b1e;
+    border-radius: var(--soltec-radius-full);
+  }
+
+  /* Texto central dentro del planeta ("Soltec ERP") más discreto
+     para no dominar tanto en pantallas chicas */
+  .hero-soltec__planet-core::after {
+    font-size: 0.78rem;
+    padding-bottom: 1.3rem;
+  }
+}
+
 .sistemas-fade-out {
   /* A. ROMPER LOS MÁRGENES DEL PADRE (Técnica Full Bleed) */
   width: 100vw;  
@@ -4118,27 +4165,28 @@ body { overflow-x: clip; }
 }
 
 .hero-soltec {
-  min-height: 90vh;
+  /* Mobile-first: altura automática y padding más contenido */
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem;
+  padding: 5.5rem 1.5rem 3.5rem;
   background: radial-gradient(circle at top, #063a82 0, #020b1e 55%);
   position: relative;
   overflow: hidden;
   isolation: isolate;
 
- /* full-bleed: el hero se estira hasta los bordes del viewport */
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  /* En mobile no usamos full-bleed; se aplica en desktop via @media (min-width) */
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .hero-soltec::before,
 .hero-soltec::after {
   content: "";
   position: absolute;
-  width: 520px;
-  height: 520px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--soltec-accent-soft), transparent);
   filter: blur(4px);
@@ -4158,9 +4206,10 @@ body { overflow-x: clip; }
 .hero-soltec__inner {
   width: min(1140px, 100%);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 3.5rem;
+  /* Mobile-first: una sola columna apilada */
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
   align-items: center;
 }
 
@@ -4185,7 +4234,7 @@ body { overflow-x: clip; }
 }
 
 .hero-soltec__title {
-  font-size: clamp(2.1rem, 3vw + 1rem, 3.15rem);
+  font-size: clamp(1.8rem, 3vw + 0.8rem, 3.15rem);
   line-height: 1.1;
   margin-bottom: 1rem;
   letter-spacing: 0.02em;
@@ -4201,14 +4250,14 @@ body { overflow-x: clip; }
   color: var(--soltec-text-muted);
   max-width: 34rem;
   line-height: 1.6;
-  margin-bottom: 1.7rem;
+  margin-bottom: 1.3rem;
 }
 
 .hero-soltec__pills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
 .hero-soltec__pill {
@@ -4246,9 +4295,10 @@ body { overflow-x: clip; }
 
 .hero-soltec__cta {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+  width: 100%;
 }
 
 .btn-soltec-primary,
@@ -4263,8 +4313,10 @@ body { overflow-x: clip; }
   transition: all 0.18s ease-out;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
   text-decoration: none;
+  width: 100%;
 }
 
 .btn-soltec-primary {
@@ -4306,10 +4358,10 @@ body { overflow-x: clip; }
 
 .hero-soltec__planet-wrapper {
   position: relative;
-  --planet-size: min(360px, 80vw);
+  /* Mobile-first: planeta más chico para que entre cómodo */
+  --planet-size: min(220px, 70vw);
 
-  /* --- CORRECCIÓN: Usamos el nombre original para que no falle --- */
-  /* 0.60 = 60% del tamaño. Acerca los chips hacia la línea roja */
+  /* Radio base usado por los chips (ajustado en mobile via media query) */
   --orbit-outer-radius-factor: 0.58; 
 
   width: var(--planet-size);
@@ -4329,14 +4381,39 @@ body { overflow-x: clip; }
   pointer-events: none;
 }
 
-/* Opcional: En móviles, reducimos un poco el radio para que no se salga de pantalla */
-@media (max-width: 540px) {
-  .hero-soltec__planet-wrapper {
-    /* En móvil los acercamos un poco más */
-    --orbit-outer-radius-factor: 0.65;
+/* FIX ÓRBITA MOBILE: todos los chips apoyan en la línea exterior
+   sin tocar internas ni salirse del viewport */
+@media (max-width: 580px) {
+  .hero-soltec {
+    overflow: hidden;
   }
+
+  .hero-soltec__planet-wrapper {
+    /* Planeta contenido respecto al ancho disponible */
+    --planet-size: clamp(150px, 52vw, 190px);
+    /* Radio adaptativo: distancia desde el centro hasta el centro del chip */
+    --orbit-outer-radius-factor: 0.60;
+    margin-bottom: 28px;
+  }
+
   .orbit--outer {
-    inset: -15%;
+    /* Ajuste fino: el anillo exterior pasa por la misma zona donde
+       se ubican los centros de los chips, de modo que su borde toca la línea */
+    inset: -6%;
+  }
+
+  /* Líneas internas muy sutiles para que no parezca que el chip toca dos rieles */
+  .orbit--inner {
+    border-color: rgba(73, 179, 255, 0.2);
+  }
+
+  /* Chips más compactos pero legibles;
+     max-width evita que se desborden en horizontales muy chicas */
+  .sector-badge__chip {
+    font-size: 0.62rem;
+    padding: 0.26rem 0.6rem;
+    max-width: 96px;
+    white-space: normal;
   }
 }
 
@@ -4403,10 +4480,10 @@ body { overflow-x: clip; }
 }
 
 .orbit--inner {
-  inset: 8%;
+  inset: 10%;
   animation-duration: 30s;
   border-style: solid;
-  border-color: rgba(73, 179, 255, 0.6);
+  border-color: rgba(73, 179, 255, 0.35);
 }
 
 .orbit--outer {
@@ -4449,9 +4526,10 @@ body { overflow-x: clip; }
   border-radius: var(--soltec-radius-full);
   border: 1px solid rgba(154, 205, 255, 0.55);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--soltec-text-main);
-  white-space: nowrap;
+  /* En mobile permitimos que el texto baje a 2 líneas si hace falta */
+  white-space: normal;
   backdrop-filter: blur(12px);
 }
 
@@ -4471,233 +4549,48 @@ body { overflow-x: clip; }
   }
 }
 
-/* =========================================================
-   HERO SOLTEC — RESPONSIVE (SOLO MOBILE/TABLET)
-   Jerarquía: Título > Subtítulo > Planeta > Botones
-   Oculta: eyebrow + pills + note
-   ========================================================= */
+/* Responsive */
 
-/* --------- Tablet y abajo (<= 992px) --------- */
-@media (max-width: 992px) {
-
-  .hero-soltec{
-    min-height: auto !important;
-    padding: 78px 16px 30px !important;
-    display: block !important;
+@media (max-width: 900px) {
+  .hero-soltec__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .hero-soltec::before,
-  .hero-soltec::after{
-    width: 360px !important;
-    height: 360px !important;
-    opacity: 0.52 !important;
+  .hero-soltec__visual {
+    order: -1;
   }
 
-  /* Layout base: columna */
-  .hero-soltec__inner{
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    align-items: stretch !important;
-    text-align: left !important;
+  .hero-soltec__subtitle,
+  .hero-soltec__note {
+    margin-inline: auto;
   }
 
-  /* Aplanamos el contenedor de texto para poder reordenar:
-     título/subtítulo/planeta/botones sin tocar HTML */
-  .hero-soltec__inner > div:first-child{
-    display: contents !important;
-  }
-
-  /* Ocultar lo acordado en mobile */
-  .hero-soltec__eyebrow,
   .hero-soltec__pills,
-  .hero-soltec__note{
-    display: none !important;
-  }
-
-  /* 1) TÍTULO */
-  .hero-soltec__title{
-    order: 1 !important;
-    font-size: clamp(1.95rem, 6.2vw, 2.45rem) !important;
-    line-height: 1.08 !important;
-    margin: 0 !important;
-    max-width: 24ch !important;
-    letter-spacing: 0.01em !important;
-    align-self: flex-start !important;
-  }
-
-  /* 2) SUBTÍTULO (NO SE CORTA) */
-  .hero-soltec__subtitle{
-    order: 2 !important;
-    font-size: 0.96rem !important;
-    line-height: 1.55 !important;
-    margin: 20px 0 0 !important;
-    max-width: 62ch !important;
-
-    /* CLAVE: nada de clamp/overflow */
-    display: block !important;
-    overflow: visible !important;
-    -webkit-line-clamp: unset !important;
-    line-clamp: unset !important;
-    -webkit-box-orient: unset !important;
-  }
-
-/* 3) PLANETA */
-    .hero-soltec__visual{
-    order: 3 !important;
-    width: 100% !important;
-    margin: 70px 0 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-    overflow: visible !important;
-  }
-
-  .hero-soltec__planet-wrapper{
-    --planet-size: min(250px, 74vw) !important;
-    --orbit-outer-radius-factor: 0.60 !important;
-    filter: drop-shadow(0 18px 34px rgba(0,0,0,0.33)) !important;
-  }
-
-  .orbit--outer{
-    inset: -10% !important;
-    opacity: 0.50 !important;
-  }
-
-  .orbit--inner{
-    inset: 10% !important;
-    opacity: 0.62 !important;
-  }
-
-  /* CHIPS: (Mantenemos la mejora para que el texto NO se corte) */
-  .sector-badge__chip{
-    font-size: 0.75rem !important;
-    padding: 0.4rem 0.9rem !important;
-    gap: 0.4rem !important;
-
-    /* Liberamos el ancho para que palabras como "Cooperativas" entren perfectas */
-    width: auto !important;
-    max-width: none !important; 
-    min-width: max-content !important; 
-    
-    white-space: nowrap !important;
-    border-radius: 999px !important;
-  }
-
-  .sector-badge__chip i{
-    font-size: 0.85rem !important;
-  }
-
-  /* 4) BOTONES (DESBLOQUEADOS) */
-  .hero-soltec__cta{
-    order: 4 !important;
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 12px !important;
-    margin: 80px 0 0 !important;
-  }
-
-  .btn-soltec-primary,
-  .btn-soltec-ghost{
-    /* SOLUCIÓN AL "ALGO LE HACE FUERZA": */
-    /* 1. width: auto hace que el botón mida SOLO lo que mide el texto */
-    width: auto !important; 
-    max-width: none !important;
-    
-    /* 2. Matamos cualquier ancho mínimo heredado */
-    min-width: 0 !important; 
-    
-    display: inline-flex !important;
-    justify-content: center !important;
-    
-    /* 3. Ajuste fino de tamaño */
-    padding: 10px 24px !important;
-    font-size: 0.85rem !important;
-    line-height: 1 !important;
+  .hero-soltec__cta {
+    justify-content: center;
   }
 }
 
-
-/* --------- Mobile real (<= 580px) --------- */
-@media (max-width: 580px) {
-
-  .hero-soltec{
-    padding: 72px 14px 28px !important;
+@media (max-width: 540px) {
+  .hero-soltec {
+    padding-top: 3.5rem;
   }
 
-  .hero-soltec__title{
-    font-size: clamp(1.85rem, 7vw, 2.22rem) !important;
-    max-width: 23ch !important;
+  .hero-soltec__planet-wrapper {
+    width: 280px;
   }
 
-  .hero-soltec__subtitle{
-    font-size: 0.94rem !important;
-    line-height: 1.52 !important;
-    max-width: 58ch !important;
+  .hero-soltec__title {
+    font-size: 1.9rem;
   }
 
-  /* Planeta un toque más compacto, órbita consistente */
-  .hero-soltec__planet-wrapper{
-    --planet-size: min(235px, 80vw) !important;
-    --orbit-outer-radius-factor: 0.60 !important;
-  }
-
-  .orbit--outer{
-    inset: -10% !important;
-  }
-
-  /* Chips: permitimos 2 líneas si hace falta (sin ellipsis) */
-  .sector-badge__chip{
-    font-size: 0.66rem !important;
-    padding: 0.30rem 0.62rem !important;
-    max-width: 86px !important;
-
-    white-space: normal !important;
-    text-align: center !important;
-    line-height: 1.1 !important;
-  }
-
-  .sector-badge__chip i{
-    font-size: 0.72rem !important;
-  }
-
-  .btn-soltec-primary,
-  .btn-soltec-ghost{
-    width: min(320px, 100%) !important;
-    padding: 0.70rem 0.95rem !important;
-    font-size: 0.91rem !important;
+  .hero-soltec__pills {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
   }
 }
-
-
-/* --------- Phones chicos (<= 420px) --------- */
-@media (max-width: 420px) {
-
-  .hero-soltec{
-    padding: 68px 12px 26px !important;
-  }
-
-  .hero-soltec__planet-wrapper{
-    --planet-size: min(220px, 84vw) !important;
-    --orbit-outer-radius-factor: 0.60 !important;
-  }
-
-  /* Chips aún más finos para que entren sin deformar órbita */
-  .sector-badge__chip{
-    font-size: 0.62rem !important;
-    padding: 0.26rem 0.56rem !important;
-    max-width: 78px !important;
-  }
-
-  .btn-soltec-primary,
-  .btn-soltec-ghost{
-    width: min(300px, 100%) !important;
-    padding: 0.68rem 0.92rem !important;
-    font-size: 0.90rem !important;
-  }
-}
-
 
 
 /* ============= SECCIÓN UBICACIÓN (CONTRASTE + MISMA ALTURA) ============= */
