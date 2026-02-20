@@ -16,36 +16,38 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header>
-  <a href="./">
-    <img
-      src="./layout/imagenes/GrupoSoltec-removebg-preview.png"
-      alt="logo-soltec"
-      id="img-logo"
-    />
-  </a>
+   <header>
+      <a href="./">
+        <img
+          src="./layout/imagenes/GrupoSoltec-removebg-preview.png"
+          alt="logo-soltec"
+          id="img-logo"
+        />
+      </a>
+<button class="menu-toggle" aria-label="Abrir menú">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+      <nav>
+        <ul>
+          <li><a href="./">Inicio</a></li>
 
-  <nav>
-    <ul>
-      <li><a href="./">Inicio</a></li>
+          <li class="nav-item-sistemas">
+          <a href="#sistemas-home" class="nav-parent" aria-haspopup="true">
+          Sistemas
+          </a>
 
-      <!-- SISTEMAS con submenú -->
-      <li class="nav-item-sistemas">
-        
-        <a href="#sistemas-home" class="nav-parent" aria-haspopup="true">
-          Sistemas 
-        </a>
+         <div class="nav-submenu">
+         <a href="./erp.html">Sistema ERP completo</a>
+         <a href="./modulo.html">Sistema por módulos</a>
+         <a href="./otros.html">Web, presentismo y otros</a>
+         </div>
+        </li>
 
-        <div class="nav-submenu">
-          <a href="./erp.html">Sistema ERP completo</a>
-          <a href="./modulo.html">Sistema por módulos</a>
-          <a href="./otros.html">Web, presentismo y otros</a>
-        </div>
-      </li>
-
-      <li><a href="./productos.html">Productos</a></li>
-      <li><a href="./about.html">Sobre nosotros</a></li>
-      <li><a href="./contacto.html">Contacto</a></li>
+          <li><a href="./productos.html">Productos</a></li>
+          <li><a href="./about.html">Sobre nosotros</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
 
           <li>
             <button id="btn-carrito" class="btn-carrito">
@@ -54,9 +56,10 @@
             <span id="carrito-cantidad">0</span>
             </button>
           </li>
-    </ul>
-  </nav>
-</header>
+        </ul>
+      </nav>
+    </header>
+
 
 <div id="carrito-mini" class="carrito-mini"></div>
 

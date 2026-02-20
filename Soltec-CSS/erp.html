@@ -17,33 +17,50 @@
 
 <body class="page-erp">
 
-   <header>
+    <header>
       <a href="./">
-        <img src="./layout/imagenes/GrupoSoltec-removebg-preview.png" alt="logo-soltec" id="img-logo" />
+        <img
+          src="./layout/imagenes/GrupoSoltec-removebg-preview.png"
+          alt="logo-soltec"
+          id="img-logo"
+        />
       </a>
+<button class="menu-toggle" aria-label="Abrir menú">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
       <nav>
         <ul>
           <li><a href="./">Inicio</a></li>
+
           <li class="nav-item-sistemas">
-            <a href="#sistemas-home" class="nav-parent" aria-haspopup="true">Sistemas</a>
-            <div class="nav-submenu">
-              <a href="./erp.html">Sistema ERP completo</a>
-              <a href="./modulo.html">Sistema por módulos</a>
-              <a href="./otros.html">Web, presentismo y otros</a>
-            </div>
-          </li>
+          <a href="#sistemas-home" class="nav-parent" aria-haspopup="true">
+          Sistemas
+          </a>
+
+         <div class="nav-submenu">
+         <a href="./erp.html">Sistema ERP completo</a>
+         <a href="./modulo.html">Sistema por módulos</a>
+         <a href="./otros.html">Web, presentismo y otros</a>
+         </div>
+        </li>
+
           <li><a href="./productos.html">Productos</a></li>
           <li><a href="./about.html">Sobre nosotros</a></li>
           <li><a href="./contacto.html">Contacto</a></li>
+
           <li>
-              <button id="btn-carrito" class="btn-carrito">
-                <img src="layout/imagenes/Iconos/Carrito.png" alt="Carrito">
-                <span id="carrito-cantidad">0</span>
-              </button>
+            <button id="btn-carrito" class="btn-carrito">
+            <img src="layout/imagenes/Iconos/Carrito.png" alt="Carrito">
+    
+            <span id="carrito-cantidad">0</span>
+            </button>
           </li>
         </ul>
       </nav>
-   </header>
+    </header>
+
 
    <div id="carrito-mini" class="carrito-mini"></div>
 

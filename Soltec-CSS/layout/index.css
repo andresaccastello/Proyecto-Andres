@@ -279,14 +279,14 @@ button, .btn-carrito {
 ========================================================= */
 
 header.compact {
-  height: 55px;
+  height: 50px; /* ANTES: 55px. Ahora se nota más el cambio */
   padding: 0 4%;
-  background: rgba(14, 28, 54, 0.95);
+  background: rgba(14, 28, 54, 0.98); /* Un poco más sólido para leer mejor */
 }
 
-/* Logo: control por height (no width) */
+/* Logo: un poco más chico para entrar en 50px */
 header.compact #img-logo {
-  height: 50px;
+  height: 40px; /* ANTES: 50px. Ajustado a la nueva altura */
   width: auto;
   filter: drop-shadow(0 0 4px rgba(0,0,0,.3));
 }
@@ -306,58 +306,168 @@ header.compact .nav-parent::after {
 }
 
 /* Botón carrito en compacto */
-header.compact button,
+/* --- CORRECCIÓN AQUÍ --- */
+/* Usamos :not(.menu-toggle) para que NO afecte a las 3 rayitas */
+header.compact button:not(.menu-toggle), 
 header.compact .btn-carrito {
   transform: scale(0.85);
   padding: 6px 12px;
   font-size: 0.9rem;
 }
 
+
 /* =========================================================
    MENU RESPONSIVE
 ========================================================= */
-
-@media (max-width: 768px) {
-  header {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 8px 4%;
-    row-gap: 6px;
-  }
-
-  header nav {
-    width: 100%;
-  }
-
-  header nav ul {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    justify-content: flex-end;
-    margin-top: 0;
-    padding-bottom: 0;
-  }
-
-  header nav a {
-    padding: 4px 8px;
-    font-size: 0.9rem;
-  }
-
-  #img-logo {
-    height: 60px;
-    filter: drop-shadow(0 0 6px rgba(0,0,0,.35));
-  }
-
-  /* Evitamos que el compact rompa el header en móvil (por el wrap) */
-  header.compact {
-    height: auto;
-    padding: 8px 4%;
-  }
-
-  header.compact #img-logo {
-    height: 54px;
-  }
+/* Botón Hamburguesa (Oculto en escritorio) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100; /* Por encima del menú desplegado */
+    padding: 0;
 }
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Animación cuando está abierto (se convierte en X) */
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+
+/* =========================================
+   RESPONSIVE HEADER (CORREGIDO)
+   ========================================= */
+@media (max-width: 900px) {
+
+    /* 1. Header en Móvil */
+    header, header.compact {
+      
+        padding: 0 5%;       /* Márgenes laterales seguros */
+        height: 60px;        /* Altura base móvil */
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* 2. Logo Móvil */
+    #img-logo, header.compact #img-logo {
+        height: 42px;        /* Tamaño equilibrado */
+        width: auto;
+        /* Aseguramos que no tenga margen inferior que parezca una línea */
+        margin-bottom: 0 !important; 
+    }
+
+    /* 3. Botón Hamburguesa (El interruptor) */
+    .menu-toggle {
+        display: flex;
+        /* Asegura que la X no se corte al girar */
+        overflow: visible; 
+        z-index: 1100;
+        /* Reseteamos transformaciones previas */
+        transform: none; 
+    }
+    
+    /* ESTADO COMPACTO (AL HACER SCROLL) */
+    /* Aquí es donde se achica suavemente */
+    header.compact .menu-toggle {
+        /* CORRECCIÓN: Usamos 0.8 para achicar (no 2) */
+        transform: scale(0.8);
+        transform-origin: center right; /* Se achica hacia la derecha para mantener alineación */
+        transition: transform 0.3s ease;
+    }
+
+    /* 4. Menú Desplegable */
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #04152d;
+
+        
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    
+    /* Cuando scrolleas, el menú debe subir para pegarse al header fino */
+    header.compact nav {
+        top: 50px; /* Coincide con la altura visual del header compacto */
+    }
+
+    nav.active {
+        max-height: 100vh; /* Se abre */
+    }
+
+    /* 5. Lista de enlaces */
+    header nav ul {
+        flex-direction: column;
+        padding: 30px 0;
+        gap: 0;
+    }
+
+    header nav a, .nav-parent {
+        font-size: 1.1rem;
+        padding: 15px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+        border: none !important; /* Asegura que no haya líneas en los items */
+    }
+    
+    /* Carrito en el menú móvil */
+    .btn-carrito {
+        margin-top: 15px;
+        transform: scale(1.1); /* Un poco más grande para el dedo */
+    }
+
+
+    /* =================================================
+       AJUSTES PARA MODO COMPACTO (AL HACER SCROLL) - MÓVIL
+       ================================================= */
+
+    /* 1. EL BOTÓN (Linitas/Cruz): Se achica PROPORCIONALMENTE */
+    header.compact .menu-toggle {
+        /* CORRECCIÓN: Estaba en scale(2). Lo pasamos a 0.8 para achicarlo. */
+        transform: scale(0.8); 
+        
+        /* Aseguramos que el origen de la transformación sea el centro para que no se corte */
+        transform-origin: center center;
+        
+        margin: 0; 
+        transition: transform 0.3s ease;
+    }
+
+    /* 2. EL MENÚ DESPLEGABLE: Se ajusta a la nueva altura de 50px */
+    header.compact nav {
+        /* IMPORTANTE: Debe coincidir con el height de header.compact */
+        top: 50px; 
+        background: rgba(4, 21, 45, 0.98);
+
+    }
+
+    /* 3. LOS ENLACES: Se hacen un poco más compactos */
+    header.compact nav a, 
+    header.compact .nav-parent {
+        padding: 8px 0; 
+        font-size: 1rem; 
+    }
+}
+
 
 
 /* ========================================================= 
@@ -709,6 +819,163 @@ main h2 {
     font-size: 1.05rem;
     margin-top: auto;
 }
+
+
+/* =========================================================
+   PRODUCTOS DESTACADOS — RESPONSIVE (solo media queries)
+   Objetivos:
+   - Desktop: 3 visibles
+   - Mobile: 4 visibles (2x2)
+   - Cards más compactas, sin cansar
+   ========================================================= */
+
+/* ====== Desktop y grandes: asegurar 3 visibles si el JS trae más ====== */
+
+/* ====== Mobile/Tablet chica: 4 visibles y 2 columnas ====== */
+@media (max-width: 768px) {
+
+  /* Título: saca el margen enorme de desktop */
+  .productos h2{
+    margin-top: 70px !important;
+    font-size: 1.55rem !important;
+    margin-bottom: 18px !important;
+    line-height: 1.15 !important;
+  }
+
+  /* Grid: 2 columnas (2x2 = 4 productos) */
+  #productos-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    padding: 0 14px 18px !important; /* menos padding para que no “achique” */
+  }
+
+
+  /* Card compacta */
+  .producto{
+    border-radius: 14px !important;
+    overflow: hidden !important;
+  }
+
+  /* Imagen más baja para que no coma pantalla */
+  .producto img{
+    height: 140px !important;
+    padding: 10px !important;
+  }
+
+  /* Título: 2 líneas máximo, prolijo */
+.producto h3{
+  font-size: 0.48rem !important;
+  line-height: 0.85 !important;
+  margin: 10px 10px 6px !important;
+
+  /* estándar */
+  line-clamp: 2 !important;
+
+  /* clamp real (soporte actual) */
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+
+  overflow: hidden !important;
+}
+
+
+.producto .descripcion{
+  font-size: 0.82rem !important;
+  line-height: 1.25 !important;
+  padding: 0 10px !important;
+  min-height: auto !important;
+
+  /* estándar */
+  line-clamp: 2 !important;
+
+  /* clamp real (soporte actual) */
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+
+  overflow: hidden !important;
+}
+
+
+  /* Si tu JS mete <ul>, en mobile lo escondemos para que no sea un bloque eterno */
+  .producto ul{
+    display: none !important;
+  }
+
+  /* Precio: más bajo */
+  .producto .precio{
+    padding: 10px 0 !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Botón: más compacto (si existe dentro de .producto) */
+  .producto button,
+  .producto .btn,
+  .producto .btn-agregar,
+  .producto a.btn,
+  .producto a.boton{
+    padding: 10px 10px !important;
+    font-size: 0.88rem !important;
+  }
+  
+  .boton-agregar-carrito{
+    width: auto !important;
+    padding: 5px 8px !important;
+    font-size: 0.28rem !important;
+    font-weight: 700 !important;
+  }
+
+   #productos-grid .producto .boton-agregar-carrito{
+    padding: 6px 10px !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+
+    /* Tu border-radius de desktop tiene "0 px" (inválido).
+       No tocamos desktop, pero en mobile lo dejamos bien. */
+    border-radius: 0 0 12px 12px !important;
+
+    /* Que no se agrande por layout */
+    width: 100% !important;
+    display: block !important;
+  }
+}
+
+/* ====== Phones chicos: mantenemos 2 columnas pero más compacto todavía ====== */
+@media (max-width: 420px) {
+
+  .productos h2{
+    margin-top: 60px !important;
+    font-size: 1.45rem !important;
+  }
+
+  #productos-grid{
+    gap: 12px !important;
+    padding: 0 12px 16px !important;
+  }
+
+  .producto img{
+    height: 125px !important;
+    padding: 8px !important;
+  }
+
+  .producto h3{
+    font-size: 0.94rem !important;
+  }
+
+  .producto .descripcion{
+    font-size: 0.80rem !important;
+  }
+
+  .producto .precio{
+    padding: 9px 0 !important;
+    font-size: 0.92rem !important;
+  }
+
+  
+}
+
+
 
 /* ==============================
    BOTÓN CONSULTAR WHATSAPP
@@ -1370,19 +1637,263 @@ footer.pie-principal {
 }
 
 
-/* RESPONSIVE */
-@media (max-width: 960px) {
-  .footer-cta { flex-direction: column; align-items: flex-start; }
-  .footer-cta-actions { align-items: stretch; width: 100%; }
-  .btn-equal-width { width: 100%; min-width: auto; }
-  .footer-main { flex-direction: column; }
-  .footer-brand { margin-bottom: 30px; }
+/* =========================================================
+   FOOTER — FIX MOBILE COMPLETO
+   - CTA: Texto arriba / Botones abajo (evita columna angosta)
+   - MAIN: Brand arriba + redes en 1 línea + columnas ordenadas
+   - BOTTOM: 2 frases en fila como desktop (achicando)
+   Pegar AL FINAL para que pise lo anterior
+   ========================================================= */
+
+@media (max-width: 760px){
+
+  /* =======================
+     1) CTA (TU FIX)
+     ======================= */
+
+  .footer-cta{
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 14px !important;
+
+    padding: 18px 14px !important;
+    margin-bottom: 26px !important;
+  }
+
+  .footer-cta-text{
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .footer-cta-kicker{
+    font-size: 0.64rem !important;
+    letter-spacing: 0.14em !important;
+    margin-bottom: 15px !important;
+    white-space: nowrap !important;
+  }
+
+  .footer-cta h3{
+    font-size: 1.22rem !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.02em !important;
+    margin: 0 0 12px !important;
+  }
+
+  .footer-cta-subtitle{
+    font-size: 0.86rem !important;
+    line-height: 1.45 !important;
+    margin: 0 0 10px !important;
+  }
+
+  .footer-cta-actions{
+    width: 100% !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .btn-equal-width{
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .btn-footer-primary,
+  .btn-footer-secondary{
+    width: 100% !important;
+    padding: 0.50rem 0.90rem !important;
+    font-size: 0.80rem !important;
+  }
+
+
+  /* =======================
+     2) MAIN (ORDENAR ABAJO)
+     ======================= */
+
+ .footer-main{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .footer-columns{
+        margin-top: 25px !important;   /* subilo/bajalo si querés más/menos aire */
+
+    order: 1 !important;          /* PRIMERO: columnas */
+  }
+
+  .footer-brand{
+    order: 2 !important;          /* DESPUÉS: logo + redes */
+    margin-top: 18px !important;  /* aire entre columnas y brand */
+    align-items: center !important;  /* centra el logo + redes */
+    text-align: center !important;
+  }
+
+  .brand-socials{
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    gap: 0px !important;
+  }
+
+  .social-circle{
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .social-circle img{
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  /* Columnas en 2 para que se vea ordenado */
+  .footer-columns{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 18px 18px !important;
+    align-items: start !important;
+  }
+
+  .footer-col h4{
+    font-size: 0.86rem !important;
+    margin: 0 0 10px !important;
+  }
+
+  .footer-col p,
+  .footer-col address,
+  .footer-col li,
+  .footer-col a{
+    font-size: 0.78rem !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Email/WhatsApp: que pueda partir sin romper */
+  .datos-lista a{
+    word-break: break-word !important;
+  }
+
+  .footer-horarios p{
+    margin: 2px 0 !important;
+  }
+
+
+  /* =======================
+     3) BOTTOM (COMO DESKTOP)
+     ======================= */
+
+  .footer-bottom{
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .footer-bottom p{
+    white-space: nowrap !important;
+    margin: 0 !important;
+     font-size: 0.54rem !important;
+  }
+
+  
+  .img-logo-footer{
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;  /* asegura centrado aunque haya reglas previas */
+  }
+
+    /* CLAVE: en column, si queda align-items:flex-start, todo se “pega” a la izquierda */
+  .footer-main{
+    align-items: stretch !important; /* que los bloques ocupen todo el ancho */
+  }
+
+  /* Brand ocupa todo el ancho y recién ahí centrar funciona de verdad */
+  .footer-brand{
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .img-logo-footer{
+    display: block !important;
+    margin: 0 auto 5px !important; /* centrado real */
+  }
+
+  .brand-socials{
+    justify-content: center !important;
+  }
+
 }
 
-@media (max-width: 640px) {
-  .footer-columns { grid-template-columns: 1fr; gap: 40px; }
-  .footer-bottom { flex-direction: column; gap: 10px; }
+
+/* Phones chicos: compacto sin romper */
+@media (max-width: 420px){
+
+  /* CTA aún más compacto */
+  .footer-cta{
+    padding: 16px 12px !important;
+  }
+
+  .footer-cta-kicker{
+    font-size: 0.62rem !important;
+  }
+
+  .footer-cta h3{
+    font-size: 1.16rem !important;
+  }
+
+  .footer-cta-subtitle{
+    font-size: 0.84rem !important;
+  }
+
+  .btn-footer-primary,
+  .btn-footer-secondary{
+    font-size: 0.78rem !important;
+    padding: 0.46rem 0.84rem !important;
+  }
+
+  /* Redes más chicas para entrar 1 línea */
+  .brand-socials{
+    gap: 7px !important;
+  }
+
+  .social-circle{
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .social-circle img{
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  /* Columnas a 1 col para no aplastar */
+  .footer-columns{
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+  }
+
+  .footer-col h4{
+    font-size: 0.84rem !important;
+  }
+
+  .footer-col p,
+  .footer-col address,
+  .footer-col li,
+  .footer-col a{
+    font-size: 0.77rem !important;
+  }
+
+  /* Bottom sigue en fila, aún más chico */
+  .footer-bottom{
+    gap: 8px !important;
+  }
+
+  .footer-bottom p{
+    white-space: nowrap !important;
+         font-size: 0.54rem !important;
+  }
 }
+
+
 
 /* ========================================================= 
    BOTÓN WHATSAPP 
@@ -2670,6 +3181,67 @@ footer.pie-principal {
 
 }
 
+
+/* =========================================
+   RESPONSIVE CARRITO MINI (VERSIÓN COMPACTA)
+   ========================================= */
+@media (max-width: 600px) {
+  .carrito-mini {
+    /* 1. ANCHO: 85% para que deje márgenes a los lados */
+    width: 85%; 
+    left: 7.5%; /* Centrado (100% - 85% = 15% / 2 = 7.5%) */
+    right: auto;
+    
+    /* 2. POSICIÓN: Baja un poco más */
+    top: 80px; 
+    
+    /* 3. ALTURA: Solo ocupa el 60% de la pantalla para no ser invasivo */
+    max-height: 70vh; 
+    
+    /* 4. RELLENO: Menos aire interno */
+    padding: 15px; 
+  }
+
+  /* Ajuste cuando scrolleas (Header fino) */
+  header.compact ~ .carrito-mini {
+    top: 60px; 
+  }
+
+  /* === ACHICAR TEXTOS INTERNOS EN MÓVIL === */
+  
+  /* Título "Tu Carrito" más chico */
+  .carrito-mini h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  /* Items más pegaditos */
+  .carrito-item {
+    padding: 8px 0;
+  }
+
+  /* Texto del producto más pequeño */
+  .carrito-item-info strong {
+    font-size: 0.85rem;
+  }
+  .carrito-item-info span {
+    font-size: 0.75rem;
+  }
+
+  /* Botones de cantidad (+ -) más compactos */
+  .carrito-item-controles {
+    padding: 0 6px;
+  }
+  .carrito-item-controles button {
+    width: 18px;
+    height: 18px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
 /* ===== DETALLE PRODUCTO ===== */
 .detalle-wrap{
   max-width: var(--max);
@@ -2914,101 +3486,6 @@ footer.pie-principal {
   .detalle-botones .boton-consulta{
     min-width: 0;
  }
-
-
-/*LINEA DIVISORIA*/
-
-/* =========================
-   BRIDGE: separa “ERP integral” vs “pequeños negocios”
-========================= */
-/* =========================
-   BRIDGE PRO: sin franja blanca, tipo “horizonte”
-========================= */
-.hero-bridge{
-  display:block;
-  height: 140px; /* más compacto */
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  position: relative;
-  overflow: hidden;
-
-  /* base oscura (continúa el hero) */
-  background: linear-gradient(180deg, #07233d 0%, #061a2e 100%);
-}
-
-/* horizonte (glow) suave, NO una franja blanca */
-.hero-bridge::before{
-  content:"";
-  position:absolute;
-  left: -10%;
-  right: -10%;
-  top: 50%;
-  height: 140px;
-  transform: translateY(-50%);
-  pointer-events:none;
-
-  background: radial-gradient(
-    60% 65% at 50% 50%,
-    rgba(255,255,255,0.18) 0%,
-    rgba(30,197,255,0.18) 22%,
-    rgba(30,197,255,0.08) 40%,
-    transparent 65%
-  );
-  filter: blur(1px);
-  opacity: 1;
-}
-
-/* oscurece un toque arriba y abajo para que el centro no “reviente” */
-.hero-bridge::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: linear-gradient(
-    180deg,
-    rgba(7,35,61,0.65) 0%,
-    transparent 45%,
-    transparent 55%,
-    rgba(7,35,61,0.65) 100%
-  );
-}
-
-/* Texto siempre legible */
-.hero-bridge__inner{
-  position:absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align:center;
-  width: min(900px, calc(100% - 40px));
-  z-index: 2;
-}
-
-.hero-bridge__pill{
-  display:inline-block;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-weight: 900;
-  letter-spacing: .10em;
-  text-transform: uppercase;
-
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.92);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 14px 30px rgba(2,8,23,0.35);
-}
-
-.hero-bridge__text{
-  margin: 10px 0 0;
-  color: rgba(255,255,255,0.80);
-  font-weight: 700;
-  font-size: 0.98rem;
-}
-
-
-
-
 
 
 
@@ -3362,6 +3839,176 @@ body { overflow-x: clip; }
       rgba(2, 6, 23, 0.0) 100% /* Transparente al final para ver el fondo gris/blanco */
   );
 }
+
+
+/* =========================================================
+   SISTEMAS SECTION — RESPONSIVE FIX (solo mobile/tablet)
+   Objetivos:
+   - Sin marco blanco (full-bleed real + sin márgenes)
+   - Título estilo desktop pero más chico
+   - Botón más chico
+   - Cards más compactas
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  /* 1) FULL BLEED REAL + eliminar márgenes que mostraban fondo blanco */
+  .sistemas-section{
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+
+    padding: 64px 0 110px 0 !important;
+    background-color: #020617 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* 2) Curva/glow: más baja para que no ocupe tanta pantalla */
+  .sistemas-section::after{
+    width: 160% !important;
+    height: 320px !important;
+    bottom: -265px !important;
+    opacity: 0.9 !important;
+  }
+
+  /* 3) Container: mantené aire interno, pero sin “achicar” el fondo */
+  .container-sistemas{
+    padding: 0 16px !important;
+    max-width: 1200px !important;
+  }
+
+  /* 4) Header: mismo estilo desktop, escalado */
+.sistemas-header{
+  margin-bottom: 36px !important;
+}
+
+.sistemas-header h2{
+  font-size: clamp(1.55rem, 5.8vw, 1.95rem) !important;
+  line-height: 1.12 !important;
+  margin-bottom: 30px !important;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+}
+
+/* Texto descriptivo: MÁS CHICO */
+.sistemas-header p{
+  font-size: 0.84rem !important;   /* antes 0.92rem */
+  line-height: 1.42 !important;    /* un poco más compacto */
+  max-width: 32rem !important;     /* un toque más angosto para mejor lectura */
+}
+
+
+  /* 5) Grid: 1 columna, menos gap, menos “bloque infinito” */
+  .bento-grid{
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 22px !important;
+  }
+
+  /* 6) Cards: MÁS chicas (ojo: tu media anterior las agrandaba con padding:20px) */
+  .bento-card{
+    min-height: 150px !important;
+    padding: 2px !important;          /* mantiene el borde neon */
+    border-radius: 14px !important;
+  }
+
+  .card-bg-mask{
+    border-radius: 13px !important;
+  }
+
+  .card-content{
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+
+  .card-content h3{
+    font-size: 1.05rem !important;
+    line-height: 1.2 !important;
+    flex-basis: 52% !important;
+  }
+
+  .card-image-wrapper{
+    flex-basis: 48% !important;
+  }
+
+  .card-image-wrapper img{
+    width: 118% !important;
+    max-width: none !important;
+    transform: scale(1) !important;
+  }
+
+  /* 7) CTA: botón MÁS CHICO (real) */
+  .sistemas-cta{
+    margin-top: 70px !important;
+    gap: 10px !important;
+  }
+
+  .btn-rectangular{
+    padding: 9px 22px !important;
+    font-size: 0.90rem !important;
+    font-weight: 700 !important;
+    border-width: 1px !important;
+
+    /* que no se estire gigante */
+    width: fit-content !important;
+    max-width: 280px !important;
+  }
+
+  .microcopy{
+    font-size: 0.78rem !important;
+  }
+
+  /* 8) Fade-out (si lo usás debajo del bloque): más bajo en mobile */
+  .sistemas-fade-out{
+    height: 180px !important;
+    margin-top: 0px !important;
+    margin-bottom: 110px !important;
+  }
+}
+
+
+/* Ajuste extra para phones chicos */
+@media (max-width: 420px) {
+
+  .sistemas-section{
+    padding: 58px 0 100px 0 !important;
+  }
+
+  .sistemas-header h2{
+    font-size: clamp(1.45rem, 6.4vw, 1.80rem) !important;
+  }
+
+  .card-content{
+    padding: 14px !important;
+  }
+
+  .card-content h3{
+    font-size: 1.00rem !important;
+  }
+
+  .card-image-wrapper img{
+    width: 112% !important;
+  }
+
+  .btn-rectangular{
+    padding: 8px 18px !important;
+    font-size: 0.86rem !important;
+    max-width: 260px !important;
+  }
+
+  .sistemas-section::after{
+    height: 300px !important;
+    bottom: -250px !important;
+  }
+}
+
+
+
+
+
 
 /* OPCIONAL: Si sientes que el título "Productos" queda muy lejos o muy tapado */
 /* Agrega esto para ajustar la distancia visual */
@@ -3824,48 +4471,233 @@ body { overflow-x: clip; }
   }
 }
 
-/* Responsive */
+/* =========================================================
+   HERO SOLTEC — RESPONSIVE (SOLO MOBILE/TABLET)
+   Jerarquía: Título > Subtítulo > Planeta > Botones
+   Oculta: eyebrow + pills + note
+   ========================================================= */
 
-@media (max-width: 900px) {
-  .hero-soltec__inner {
-    grid-template-columns: 1fr;
-    text-align: center;
+/* --------- Tablet y abajo (<= 992px) --------- */
+@media (max-width: 992px) {
+
+  .hero-soltec{
+    min-height: auto !important;
+    padding: 78px 16px 30px !important;
+    display: block !important;
   }
 
-  .hero-soltec__visual {
-    order: -1;
+  .hero-soltec::before,
+  .hero-soltec::after{
+    width: 360px !important;
+    height: 360px !important;
+    opacity: 0.52 !important;
   }
 
-  .hero-soltec__subtitle,
-  .hero-soltec__note {
-    margin-inline: auto;
+  /* Layout base: columna */
+  .hero-soltec__inner{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: stretch !important;
+    text-align: left !important;
   }
 
+  /* Aplanamos el contenedor de texto para poder reordenar:
+     título/subtítulo/planeta/botones sin tocar HTML */
+  .hero-soltec__inner > div:first-child{
+    display: contents !important;
+  }
+
+  /* Ocultar lo acordado en mobile */
+  .hero-soltec__eyebrow,
   .hero-soltec__pills,
-  .hero-soltec__cta {
-    justify-content: center;
+  .hero-soltec__note{
+    display: none !important;
+  }
+
+  /* 1) TÍTULO */
+  .hero-soltec__title{
+    order: 1 !important;
+    font-size: clamp(1.95rem, 6.2vw, 2.45rem) !important;
+    line-height: 1.08 !important;
+    margin: 0 !important;
+    max-width: 24ch !important;
+    letter-spacing: 0.01em !important;
+    align-self: flex-start !important;
+  }
+
+  /* 2) SUBTÍTULO (NO SE CORTA) */
+  .hero-soltec__subtitle{
+    order: 2 !important;
+    font-size: 0.96rem !important;
+    line-height: 1.55 !important;
+    margin: 20px 0 0 !important;
+    max-width: 62ch !important;
+
+    /* CLAVE: nada de clamp/overflow */
+    display: block !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+  }
+
+/* 3) PLANETA */
+    .hero-soltec__visual{
+    order: 3 !important;
+    width: 100% !important;
+    margin: 70px 0 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+
+  .hero-soltec__planet-wrapper{
+    --planet-size: min(250px, 74vw) !important;
+    --orbit-outer-radius-factor: 0.60 !important;
+    filter: drop-shadow(0 18px 34px rgba(0,0,0,0.33)) !important;
+  }
+
+  .orbit--outer{
+    inset: -10% !important;
+    opacity: 0.50 !important;
+  }
+
+  .orbit--inner{
+    inset: 10% !important;
+    opacity: 0.62 !important;
+  }
+
+  /* CHIPS: (Mantenemos la mejora para que el texto NO se corte) */
+  .sector-badge__chip{
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.9rem !important;
+    gap: 0.4rem !important;
+
+    /* Liberamos el ancho para que palabras como "Cooperativas" entren perfectas */
+    width: auto !important;
+    max-width: none !important; 
+    min-width: max-content !important; 
+    
+    white-space: nowrap !important;
+    border-radius: 999px !important;
+  }
+
+  .sector-badge__chip i{
+    font-size: 0.85rem !important;
+  }
+
+  /* 4) BOTONES (DESBLOQUEADOS) */
+  .hero-soltec__cta{
+    order: 4 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin: 80px 0 0 !important;
+  }
+
+  .btn-soltec-primary,
+  .btn-soltec-ghost{
+    /* SOLUCIÓN AL "ALGO LE HACE FUERZA": */
+    /* 1. width: auto hace que el botón mida SOLO lo que mide el texto */
+    width: auto !important; 
+    max-width: none !important;
+    
+    /* 2. Matamos cualquier ancho mínimo heredado */
+    min-width: 0 !important; 
+    
+    display: inline-flex !important;
+    justify-content: center !important;
+    
+    /* 3. Ajuste fino de tamaño */
+    padding: 10px 24px !important;
+    font-size: 0.85rem !important;
+    line-height: 1 !important;
   }
 }
 
-@media (max-width: 540px) {
-  .hero-soltec {
-    padding-top: 3.5rem;
+
+/* --------- Mobile real (<= 580px) --------- */
+@media (max-width: 580px) {
+
+  .hero-soltec{
+    padding: 72px 14px 28px !important;
   }
 
-  .hero-soltec__planet-wrapper {
-    width: 280px;
+  .hero-soltec__title{
+    font-size: clamp(1.85rem, 7vw, 2.22rem) !important;
+    max-width: 23ch !important;
   }
 
-  .hero-soltec__title {
-    font-size: 1.9rem;
+  .hero-soltec__subtitle{
+    font-size: 0.94rem !important;
+    line-height: 1.52 !important;
+    max-width: 58ch !important;
   }
 
-  .hero-soltec__pills {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
+  /* Planeta un toque más compacto, órbita consistente */
+  .hero-soltec__planet-wrapper{
+    --planet-size: min(235px, 80vw) !important;
+    --orbit-outer-radius-factor: 0.60 !important;
+  }
+
+  .orbit--outer{
+    inset: -10% !important;
+  }
+
+  /* Chips: permitimos 2 líneas si hace falta (sin ellipsis) */
+  .sector-badge__chip{
+    font-size: 0.66rem !important;
+    padding: 0.30rem 0.62rem !important;
+    max-width: 86px !important;
+
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.1 !important;
+  }
+
+  .sector-badge__chip i{
+    font-size: 0.72rem !important;
+  }
+
+  .btn-soltec-primary,
+  .btn-soltec-ghost{
+    width: min(320px, 100%) !important;
+    padding: 0.70rem 0.95rem !important;
+    font-size: 0.91rem !important;
   }
 }
+
+
+/* --------- Phones chicos (<= 420px) --------- */
+@media (max-width: 420px) {
+
+  .hero-soltec{
+    padding: 68px 12px 26px !important;
+  }
+
+  .hero-soltec__planet-wrapper{
+    --planet-size: min(220px, 84vw) !important;
+    --orbit-outer-radius-factor: 0.60 !important;
+  }
+
+  /* Chips aún más finos para que entren sin deformar órbita */
+  .sector-badge__chip{
+    font-size: 0.62rem !important;
+    padding: 0.26rem 0.56rem !important;
+    max-width: 78px !important;
+  }
+
+  .btn-soltec-primary,
+  .btn-soltec-ghost{
+    width: min(300px, 100%) !important;
+    padding: 0.68rem 0.92rem !important;
+    font-size: 0.90rem !important;
+  }
+}
+
 
 
 /* ============= SECCIÓN UBICACIÓN (CONTRASTE + MISMA ALTURA) ============= */
@@ -3887,6 +4719,7 @@ body { overflow-x: clip; }
 
 /* --- Tarjeta de Info --- */
 .ubicacion-card {
+  margin-top: 100px;
   background: #ffffff;
   /* antes: 45px 40px */
   padding: 30px 26px; 
@@ -3897,8 +4730,8 @@ body { overflow-x: clip; }
   z-index: 2;
 
   /* mantenemos tu height para no tocar el mapa */
-
-  height: 98%;
+  height: 80%;
+margin-bottom: 60px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -4043,9 +4876,10 @@ body { overflow-x: clip; }
 
 /* --- Mapa --- */
 .ubicacion-mapa {
+    margin-top: 100px;
   width: 101%;
   /* CAMBIO CLAVE: 100% de altura para llenar el espacio estirado */
-  height: 98%;
+  height: 80%;
   /*min-height: 480px;*/ /* Mínimo por seguridad */
   background: #fff;
   border-radius: 24px;
@@ -4054,27 +4888,175 @@ body { overflow-x: clip; }
   border: 8px solid #ffffff; /* Marco estilo foto */
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .ubicacion-section {
-    padding: 60px 15px;
+/* =========================================================
+   UBICACIÓN — REDISEÑO MOBILE (OPCIÓN 1)
+   "Hero Card" arriba + "Mapa teaser" abajo (más bajo y liviano)
+   - Card primero, mapa después (orden natural del HTML)
+   - Sacar márgenes/alturas de desktop que rompen mobile
+   - Mapa más bajo + overlay sutil de “preview”
+   - Botones apilados, más chicos y prolijos
+   ========================================================= */
+
+@media (max-width: 900px){
+
+  .ubicacion-section{
+    padding: 46px 14px !important;
   }
-  .ubicacion-inner {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+
+  .ubicacion-inner{
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    align-items: start !important;
   }
-  
-  /* En celular volvemos a altura automática */
-  .ubicacion-card {
-    padding: 30px 20px;
-    height: auto; 
+
+  /* --- HERO CARD (compacta, sin espacio gigante de arriba) --- */
+  .ubicacion-card{
+    margin-top: 0 !important;        /* era 100px */
+    margin-bottom: 0 !important;     /* era 60px */
+    height: auto !important;         /* era 80% */
+    padding: 24px 18px !important;
+    border-radius: 22px !important;
+    justify-content: flex-start !important;
   }
-  .ubicacion-mapa {
-    height: 350px;
-    min-height: auto;
+
+  .ubicacion-tag{
+    margin-bottom: 10px !important;  /* en desktop estaba negativo */
+  }
+
+  .ubicacion-card h2{
+    font-size: clamp(1.55rem, 6vw, 1.85rem) !important;
+    line-height: 1.08 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .ubicacion-reseñas{
+    width: 100% !important;          /* que no quede mini-badge perdido */
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    row-gap: 6px !important;
+    padding: 6px 10px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ubicacion-reseñas .opiniones-link{
+    white-space: normal !important;
+  }
+
+  .ubicacion-desc{
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ubicacion-datos{
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .icono-ubicacion{
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 10px !important;
+    font-size: 0.92rem !important;
+  }
+
+  .ubicacion-datos span{
+    font-size: 0.92rem !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Botones: uno abajo del otro, más chicos */
+  .ubicacion-actions{
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .ubicacion-actions > a,
+  .ubicacion-actions > button{
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 8px 14px !important;     /* más chicos */
+    font-size: 0.86rem !important;    /* más chicos */
+  }
+
+  /* --- MAPA TEASER (más bajo + preview) --- */
+  .ubicacion-mapa{
+    margin-top: 0 !important;         /* era 100px */
+    width: 100% !important;           /* era 101% */
+    height: 240px !important;         /* teaser, no gigante */
+    border-radius: 22px !important;
+    border-width: 6px !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .ubicacion-mapa iframe{
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  /* Overlay sutil para “teaser / preview” (no clickeable, solo visual) */
+  .ubicacion-mapa::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to top,
+        rgba(2, 6, 23, 0.18) 0%,
+        rgba(2, 6, 23, 0.00) 55%
+      );
+  }
+
+  /* Etiqueta visual (solo estética) */
+  .ubicacion-mapa::before{
+    content: "Mapa (preview)";
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 2;
+    pointer-events: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #0b2e55;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(11,46,85,0.10);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.10);
   }
 }
 
+/* Ajuste extra: phones más chicos */
+@media (max-width: 420px){
+
+  .ubicacion-section{
+    padding: 40px 12px !important;
+  }
+
+  .ubicacion-card{
+    padding: 22px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .ubicacion-card h2{
+    font-size: 1.55rem !important;
+  }
+
+  .ubicacion-mapa{
+    height: 220px !important;
+    border-radius: 20px !important;
+    border-width: 5px !important;
+  }
+
+  .ubicacion-actions > a,
+  .ubicacion-actions > button{
+    padding: 7px 12px !important;
+    font-size: 0.84rem !important;
+  }
+}
 
 
 

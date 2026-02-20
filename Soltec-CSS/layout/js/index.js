@@ -48,10 +48,21 @@ async function iniciarApp() {
     iniciarDetalle();
 
   } else {
-    // CORRECCIÓN: Como ahora el inicio ("index.html" o "") cae en este ELSE...
-    // ...se ejecuta esto y muestra solo los primeros 3.
-    renderizarProductos(productos.slice(0, 3));
-  }
+  // HOME: 3 en escritorio, 4 en mobile
+  const mq = window.matchMedia("(max-width: 768px)");
+
+  const renderHomeDestacados = () => {
+    const limite = mq.matches ? 4 : 3;
+    renderizarProductos(productos.slice(0, limite));
+  };
+
+  renderHomeDestacados();
+
+  // Por si el usuario rota el celu o cambia tamaño de ventana
+  if (mq.addEventListener) mq.addEventListener("change", renderHomeDestacados);
+  else mq.addListener(renderHomeDestacados); // fallback viejo
+}
+
 
   // 4. Inicializamos UI del carrito (si tienes esas funciones en index.js)
   if (typeof actualizarCantidadCarrito === 'function') {
